@@ -7,11 +7,8 @@
       "fragment": "Fragment",
       "version": "detect",
       "flowVersion": "0.53"
-    },    
-    "linkComponents": [      
-      "Hyperlink",
-      {"name": "Link", "linkAttribute": "to"}
-    ]
+    },
+    "linkComponents": ["Hyperlink", { "name": "Link", "linkAttribute": "to" }]
   },
   "plugins": ["@typescript-eslint"],
   "extends": [
