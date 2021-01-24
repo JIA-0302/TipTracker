@@ -21,3 +21,11 @@ If you have Adobe XD installed, you can download the XD file from [here](https:/
 
 The website should now be accessible at `http://localhost:3000`.
 
+## Instructions for Docker Image
+1. Run `docker save -o <path to copied image file> mysql`
+    <sub><sup>This saves after local changes made</sup><sub>
+
+2. Run `docker load -i <path to copied image file>`
+    <sub><sup>This loads the docker image after downloading it</sup><sub>
+    
+    
