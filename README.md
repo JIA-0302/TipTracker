@@ -27,5 +27,7 @@ The website should now be accessible at `http://localhost:3000`.
 
 2. Run `docker load -i <path to copied image file>`
     <sub><sup>This loads the docker image after downloading it</sup><sub>
-    
+
+3. Run `docker run --name=<name for container> -e MYSQL_ROOT_PASSWORD=<replace with MYSQL PASS> -d mysql`
+    <sub><sup>This runs the docker image as a container after loading it</su
     
