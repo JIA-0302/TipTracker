@@ -1,0 +1,22 @@
+.iconContainer {
+  height: 200px;
+  width: 200px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4em;
+  background-color: white;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.iconContainer:hover {
+  box-shadow: 0px 10px 30px rgba(172, 172, 172, 0.3);
+  transition: all 0.25s ease-in-out;
+}
+
+.active {
+  background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
+}
