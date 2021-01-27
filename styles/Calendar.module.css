@@ -52,13 +52,13 @@
 /* Calendar */
 .calendar {
     display: block;
+    position: relative;
     width: 90%;
     background: white;
     border: 1px solid lightgray;
     height: auto;
     margin:0 auto;
     box-sizing: border-box;
-    position: relative;
 }
 .calendar .header {
     text-transform: uppercase;
