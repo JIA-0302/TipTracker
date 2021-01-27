@@ -1,11 +1,6 @@
 import NavbarIcon from "./navbar-icon"
 
-import {
-  RiHome5Line,
-  RiCalendar2Line,
-  RiLineChartLine,
-  RiUser2Line,
-} from "react-icons/ri"
+import { RiHome5Line, RiCalendar2Line } from "react-icons/ri"
 import styles from "./styles.module.css"
 import { displayMobileView } from "utils/screen"
 import MobileNavbarIcon from "./mobile-navbar-icon"
@@ -16,8 +11,8 @@ const Navbar: React.FunctionComponent = () => {
   const routes = {
     "/home": <RiHome5Line />,
     "/calendar": <RiCalendar2Line />,
-    "/analytics": <RiLineChartLine />,
-    "/profile": <RiUser2Line />,
+    // "/analytics": <RiLineChartLine />,
+    // "/profile": <RiUser2Line />,
   }
 
   if (isMobileView) {
