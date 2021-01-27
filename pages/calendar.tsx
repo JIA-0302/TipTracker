@@ -6,10 +6,10 @@ const Home: React.FunctionComponent = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Calendar Test</title>
+        <title>Calendar</title>
       </Head>
 
-      <WorkCalendar selectedDate={new Date().toLocaleString()} />
+      <WorkCalendar />
     </div>
   )
 }
