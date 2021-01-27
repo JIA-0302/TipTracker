@@ -31,3 +31,7 @@ The website should now be accessible at `http://localhost:3000`.
 3. Run `docker run --name=<name for container> -e MYSQL_ROOT_PASSWORD=<replace with MYSQL PASS> -d mysql`
     <sub><sup>This runs the docker image as a container after loading it</su
     
+## Two ways to view Mobile app version on Desktop
+1. Use chrome devtools to view in different devices (https://developers.google.com/web/tools/chrome-devtools/device-mode)
+
+2. The nice thing about integrating with Vercel is it creates a preview of the PR changes. For this PR, the URL is https://tiptracker-git-frontend-add-website-layout.nepal-6d48a0.vercel.app/ You can open that link from any device you want
