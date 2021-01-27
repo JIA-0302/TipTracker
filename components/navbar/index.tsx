@@ -8,19 +8,34 @@ import {
 } from "react-icons/ri"
 import styles from "./styles.module.css"
 import { displayMobileView } from "utils/screen"
+import MobileNavbarIcon from "./mobile-navbar-icon"
 
 const Navbar: React.FunctionComponent = () => {
   const isMobileView = displayMobileView()
 
+  const routes = {
+    "/home": <RiHome5Line />,
+    "/calendar": <RiCalendar2Line />,
+    "/analytics": <RiLineChartLine />,
+    "/profile": <RiUser2Line />,
+  }
+
   if (isMobileView) {
-    return <div className={styles.mobileContainer}>TODO - Mobile Navbar</div>
+    return (
+      <div className={styles.mobileContainer}>
+        {Object.keys(routes).map((route) => {
+          return (
+            <MobileNavbarIcon link={route} icon={routes[route]} key={route} />
+          )
+        })}
+      </div>
+    )
   } else {
     return (
       <div className={styles.container}>
-        <NavbarIcon link="/home" icon={<RiHome5Line />} />
-        <NavbarIcon link="/calendar" icon={<RiCalendar2Line />} />
-        <NavbarIcon link="/analytics" icon={<RiLineChartLine />} />
-        <NavbarIcon link="/profile" icon={<RiUser2Line />} />
+        {Object.keys(routes).map((route) => {
+          return <NavbarIcon link={route} icon={routes[route]} key={route} />
+        })}
       </div>
     )
   }
