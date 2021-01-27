@@ -9,7 +9,7 @@ const Home: React.FunctionComponent = () => {
         <title>Calendar</title>
       </Head>
 
-      <WorkCalendar selectedDate={new Date().toLocaleString()} />
+      <WorkCalendar/>
     </div>
   )
 }
