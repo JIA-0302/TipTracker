@@ -18,5 +18,5 @@
 }
 
 .active {
-  background: linear-gradient(#ffb7b7, #9fc6ff);
+  background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
 }
