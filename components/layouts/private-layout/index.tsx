@@ -4,7 +4,7 @@ const PrivateLayout: React.FunctionComponent = ({ children }) => {
   return (
     <div className="d-flex">
       <Navbar />
-      {children}
+      <div style={{ width: "100%" }}>{children}</div>
     </div>
   )
 }
