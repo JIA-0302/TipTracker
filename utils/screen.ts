@@ -37,5 +37,5 @@ export function getWindowSize(): WindowSizeType {
  * This can be used to help build components specific to smaller screen sizes.
  */
 export function displayMobileView(): boolean {
-  return getWindowSize().width < 768
+  return getWindowSize().width <= 768
 }
