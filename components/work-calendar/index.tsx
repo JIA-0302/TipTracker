@@ -53,7 +53,7 @@ const WorkCalendar: React.FunctionComponent = () => {
     const startDate = startOfWeek(currentDate)
     for (let i = 0; i < 7; i++) {
       days.push(
-          <div className={`${styles.column} ${styles.colCenter}`} key={i}>
+          <div className={`${styles.column} ${styles.colCenter} ${styles.daysOfTheWeek}`} key={i}>
             {format(addDays(startDate, i), dateFormat)}
           </div>
       )
@@ -94,7 +94,6 @@ const WorkCalendar: React.FunctionComponent = () => {
                 onClick={() => onDateClick(toDate(cloneDay))}
             >
               <span className={styles.number}>{formattedDate}</span>
-              <span className={styles.bg}>{formattedDate}</span>
             </div>
         )
         day = addDays(day, 1)

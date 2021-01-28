@@ -29,7 +29,6 @@
     display: block;
     width: 100%;
     padding: 1.75em 0;
-    border-bottom: 1px solid lightgray;
     background: white;
 }
 /* GRID */
@@ -52,10 +51,10 @@
 /* Calendar */
 .calendar {
     display: block;
-    position: relative;
-    width: 90%;
+    position: fixed;
+    top: 10px;
+    width: 70%;
     background: white;
-    border: 1px solid lightgray;
     height: auto;
     margin:0 auto;
     box-sizing: border-box;
@@ -65,7 +64,7 @@
     font-weight: 700;
     font-size: 115%;
     padding: 1.5em 0;
-    border-bottom: 1px solid lightgray;
+    width: 50%;
 }
 .calendar .header .icon {
     cursor: pointer;
@@ -88,12 +87,16 @@
     color: gray;
     font-size: 70%;
     padding: .75em 0;
-    border-bottom: 1px solid lightgray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    background-color: #eaeaea;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
 }
 .calendar .body .cell {
     position: relative;
-    height: 6em;
-    border-right: 1px solid lightgray;
+    height: 8em;
+    border-right: 1px solid gray;
     overflow: hidden;
     cursor: pointer;
     background: white;
@@ -103,16 +106,14 @@
     background: whitesmoke;
     transition: 0.5s ease-out;
 }
-.calendar .body .selected {
-    border-left: 10px solid transparent;
-    border-image: linear-gradient(45deg, #1affa0 0%,#cff153 40%);
-    border-image-slice: 1;
-}
+
 .calendar .body .row {
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
 }
 .calendar .body .row:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid gray;
 }
 .calendar .body .cell:last-child {
     border-right: none;
@@ -122,15 +123,14 @@
     font-size: 82.5%;
     line-height: 1;
     top: .75em;
-    right: .75em;
+    left: .75em;
     font-weight: 700;
 }
-.calendar .body .cell:hover .number, .calendar .body .selected .number   {
-    visibility:hidden;
-}
+
 .calendar .body .disabled {
-    color: lightgray;
+    color: gray;
     pointer-events: none;
+    background-color: lightgrey;
 }
 .calendar .body .cell .bg {
     font-weight: 700;
@@ -168,3 +168,9 @@
     justify-content: flex-end;
     text-align: right;
 }
+
+.daysOfTheWeek {
+    color: black;
+    font-weight: bold;
+}
+
