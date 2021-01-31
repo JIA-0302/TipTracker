@@ -26,24 +26,32 @@ const WorkCalendar: React.FunctionComponent = () => {
     setCurrentDate(subMonths(currentDate, 1))
   }
 
+  const mainHeader = () => {
+    return (
+      <div className={` ${styles.mainHeader} `}>
+        <span>Work Calendar</span>
+      </div>
+    )
+  }
+
   const header = () => {
     const dateFormat = "MMMM yyyy"
     return (
-        <div className={` ${styles.header} ${styles.row} `}>
-          <div className={` ${styles.column} ${styles.row}`}>
-            <div className={styles.icon} onClick={prevMonth}>
-              chevron_left
-            </div>
-          </div>
-          <div className={` ${styles.column} ${styles.colCenter} `}>
-            <span>{format(currentDate, dateFormat)}</span>
-          </div>
-          <div className={` ${styles.column} ${styles.colEnd}`}>
-            <div className={styles.icon} onClick={nextMonth}>
-              chevron_right
-            </div>
+      <div className={` ${styles.header} ${styles.row} `}>
+        <div className={` ${styles.column} ${styles.row}`}>
+          <div className={styles.icon} onClick={prevMonth}>
+            chevron_left
           </div>
         </div>
+        <div className={` ${styles.column} ${styles.colCenter} `}>
+          <span>{format(currentDate, dateFormat)}</span>
+        </div>
+        <div className={` ${styles.column} ${styles.colEnd}`}>
+          <div className={styles.icon} onClick={nextMonth}>
+            chevron_right
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -53,9 +61,12 @@ const WorkCalendar: React.FunctionComponent = () => {
     const startDate = startOfWeek(currentDate)
     for (let i = 0; i < 7; i++) {
       days.push(
-          <div className={`${styles.column} ${styles.colCenter} ${styles.daysOfTheWeek}`} key={i}>
-            {format(addDays(startDate, i), dateFormat)}
-          </div>
+        <div
+          className={`${styles.column} ${styles.colCenter} ${styles.daysOfTheWeek}`}
+          key={i}
+        >
+          {format(addDays(startDate, i), dateFormat)}
+        </div>
       )
     }
     return <div className={`${styles.days} ${styles.row}`}>{days}</div>
@@ -82,27 +93,27 @@ const WorkCalendar: React.FunctionComponent = () => {
         const cloneDay = day
 
         days.push(
-            <div
-                className={`${styles.column} ${styles.cell} ${
-                    !isSameMonth(day, monthStart)
-                        ? styles.disabled
-                        : isSameDay(day, selectedDate)
-                        ? styles.selected
-                        : ""
-                }`}
-                key={day.toDateString()}
-                onClick={() => onDateClick(toDate(cloneDay))}
-            >
-              <span className={styles.number}>{formattedDate}</span>
-            </div>
+          <div
+            className={`${styles.column} ${styles.cell} ${
+              !isSameMonth(day, monthStart)
+                ? styles.disabled
+                : isSameDay(day, selectedDate)
+                ? styles.selected
+                : ""
+            }`}
+            key={day.toDateString()}
+            onClick={() => onDateClick(toDate(cloneDay))}
+          >
+            <span className={styles.number}>{formattedDate}</span>
+          </div>
         )
         day = addDays(day, 1)
       }
       rows.push(
-          <div className={styles.row} key={day.toDateString()}>
-            {" "}
-            {days}{" "}
-          </div>
+        <div className={styles.row} key={day.toDateString()}>
+          {" "}
+          {days}{" "}
+        </div>
       )
       days = []
     }
@@ -110,11 +121,12 @@ const WorkCalendar: React.FunctionComponent = () => {
   }
 
   return (
-      <div className={styles.calendar}>
-        <div>{header()}</div>
-        {<div>{daysOfWeek()}</div>}
-        {<div>{cells()}</div>}
-      </div>
+    <div className={styles.calendar}>
+      <div>{mainHeader()}</div>
+      <div>{header()}</div>
+      {<div>{daysOfWeek()}</div>}
+      {<div>{cells()}</div>}
+    </div>
   )
 }
 

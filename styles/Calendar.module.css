@@ -19,17 +19,49 @@
 /* GENERAL */
 
 .body {
-    font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    font-size: 1em;
-    font-weight: 300;
-    line-height: 1.5;
-    position: relative;
+
+    top: 0px;
+    left: 200px;
+    width: 950px;
+    height: 1000px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
 }
+
+.mainHeader {
+    top: 31px;
+    left: 336px;
+    width: 503px;
+    height: 50px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 72px/95px var(--unnamed-font-family-roboto-slab);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 40px/40px Roboto Slab;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    margin: 0px;
+    padding: 0px;
+}
+
 .header {
-    display: block;
+    /*display: block;
     width: 100%;
     padding: 1.75em 0;
-    background: white;
+    background: white;*/
+    top: 171px;
+    left: 502px;
+    width: 137px;
+    height: 24px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 18px/20px var(--unnamed-font-family-roboto-slab);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    text-align: left;
+    font: normal normal normal 14px/14px Roboto Slab;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
 }
 /* GRID */
 .row {
@@ -52,7 +84,7 @@
 .calendar {
     display: block;
     position: fixed;
-    top: 10px;
+    top: 75px;
     width: 70%;
     background: white;
     height: auto;
@@ -60,11 +92,22 @@
     box-sizing: border-box;
 }
 .calendar .header {
-    text-transform: uppercase;
+    /*text-transform: uppercase;
     font-weight: 700;
     font-size: 115%;
     padding: 1.5em 0;
-    width: 50%;
+    width: 50%;*/
+    top: 153px;
+    left: 439px;
+    width: 262px;
+    height: 40px;
+    color: #000000;
+    background: #eaeaea 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 25px #00000052;
+    border-radius: 13px;
+    opacity: 1;
+    padding: 8px;
+    margin: 5px;
 }
 .calendar .header .icon {
     cursor: pointer;
@@ -84,30 +127,35 @@
 .calendar .days {
     text-transform: uppercase;
     font-weight: 400;
-    color: gray;
+    color: #000000;
     font-size: 70%;
     padding: .75em 0;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-radius: 13px;
+    /*border-top: 1px solid gray;
+    border-bottom: 1px solid gray;*/
     background-color: #eaeaea;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+    /*border-right: 1px solid gray;
+    border-left: 1px solid gray;*/
+    left-margin: 5px;
 }
 .calendar .body .cell {
     position: relative;
     height: 8em;
-    border-right: 1px solid gray;
+    /*border-right: 1px solid gray;*/
     overflow: hidden;
     cursor: pointer;
     background: white;
+    box-shadow: 0px 3px 6px #00000029;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
     transition: 0.25s ease-out;
+    opacity: 1;
 }
 .calendar .body .cell:hover {
     background: whitesmoke;
     transition: 0.5s ease-out;
 }
 
-.calendar .body .row {
+/*.calendar .body .row {
     border-bottom: 1px solid gray;
     border-left: 1px solid gray;
     border-right: 1px solid gray;
@@ -117,7 +165,7 @@
 }
 .calendar .body .cell:last-child {
     border-right: none;
-}
+}*/
 .calendar .body .cell .number {
     position: absolute;
     font-size: 82.5%;
@@ -170,7 +218,14 @@
 }
 
 .daysOfTheWeek {
-    color: black;
-    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 234px;
+    left: 426px;
+    width: 1350px;
+    height: 30px;
+    border-radius: 14px;
+    opacity: 1;
 }
 
