@@ -30,8 +30,8 @@
 }
 
 .mainHeader {
-  top: 31px;
-  left: 336px;
+  top: 10px;
+  left: 15px;
   width: 503px;
   height: 50px;
   font: var(--unnamed-font-style-normal) normal
@@ -45,6 +45,7 @@
   opacity: 1;
   margin: 0px;
   padding: 0px;
+  position: fixed;
 }
 
 .header {
@@ -82,12 +83,13 @@
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
+  width: 10px;
 }
 /* Calendar */
 .calendar {
   display: block;
   position: fixed;
-  top: 75px;
+  top: 60px;
   width: 70%;
   background: white;
   height: auto;
@@ -102,8 +104,8 @@
     width: 50%;*/
   top: 153px;
   left: 439px;
-  width: 262px;
-  height: 40px;
+  width:200px;
+  height: 30px;
   color: #000000;
   background: #eaeaea 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 25px #00000052;
@@ -215,6 +217,8 @@
 .colEnd {
   justify-content: flex-end;
   text-align: right;
+  padding: 0;
+  width: 10px;
 }
 
 .daysOfTheWeek {
@@ -224,7 +228,7 @@
   top: 234px;
   left: 426px;
   width: 1360px;
-  height: 20px;
+  height: 10px;
   border-radius: 14px;
   opacity: 1;
 }

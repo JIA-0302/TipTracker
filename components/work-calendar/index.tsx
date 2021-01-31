@@ -38,18 +38,14 @@ const WorkCalendar: React.FunctionComponent = () => {
     const dateFormat = "MMMM yyyy"
     return (
       <div className={` ${styles.header} ${styles.row} `}>
-        <div className={` ${styles.column} ${styles.row}`}>
-          <div className={styles.icon} onClick={prevMonth}>
-            chevron_left
-          </div>
+        <div className={styles.icon} onClick={prevMonth}>
+          chevron_left
         </div>
-        <div className={` ${styles.column} ${styles.colCenter} `}>
+        <div>
           <span>{format(currentDate, dateFormat)}</span>
         </div>
-        <div className={` ${styles.column} ${styles.colEnd}`}>
-          <div className={styles.icon} onClick={nextMonth}>
-            chevron_right
-          </div>
+        <div className={styles.icon} onClick={nextMonth}>
+          chevron_right
         </div>
       </div>
     )
