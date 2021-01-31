@@ -20,16 +20,6 @@ If you have Adobe XD installed, you can download the XD file from [here](https:/
 3. Run `npm run dev`
 
 The website should now be accessible at `http://localhost:3000`.
-
-## Instructions for Docker Image
-1. Run `docker save -o <path to copied image file> mysql`
-    <sub><sup>This saves after local changes made</sup><sub>
-
-2. Run `docker load -i <path to copied image file>`
-    <sub><sup>This loads the docker image after downloading it</sup><sub>
-
-3. Run `docker run --name=<name for container> -e MYSQL_ROOT_PASSWORD=<replace with MYSQL PASS> -d mysql`
-    <sub><sup>This runs the docker image as a container after loading it</su
     
 ## Two ways to view Mobile app version on Desktop
 1. Use chrome devtools to view in different devices (https://developers.google.com/web/tools/chrome-devtools/device-mode)
