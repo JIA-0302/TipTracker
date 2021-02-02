@@ -8,8 +8,7 @@ function ShiftEditedModal(props) {
         <Modal
             {...props}
             size="lg"
-            dialogClassName={styles.shiftEdiModal}
-            className={styles.modelContent}
+            contentClassName={styles.modelStyle}
 
         >
             <Modal.Header closeButton>
@@ -34,7 +33,7 @@ function ShiftEditedModal(props) {
                             <img src="/cashTips.jpg" />
                         </Col>
                         <Col sm={5}>
-                            <Form.Label>Cash Tips</Form.Label>
+                            <Form.Label>Cash Tip</Form.Label>
                             <Form.Control type="text" placeholder="Enter Cash Tips" />
                         </Col>
                     </Form.Row>
@@ -45,7 +44,7 @@ function ShiftEditedModal(props) {
                         </Col>
                         <Col sm={5}>
                             <Form.Label>Credit Card Tips</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Credit Card Tips" />
+                            <Form.Control type="text" placeholder="Enter Credit Card Tip" />
                         </Col>
                     </Form.Row>
                     <Form.Row>
@@ -55,8 +54,8 @@ function ShiftEditedModal(props) {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Delete</Button>
-                <Button onClick={props.onHide}>Update</Button>
+                <Button className={styles.shiftEditDeleteButton} onClick={props.onHide}>Delete</Button>
+                <Button className={styles.shiftEditUpdateButton} onClick={props.onHide}>Update</Button>
             </Modal.Footer>
         </Modal>
     );

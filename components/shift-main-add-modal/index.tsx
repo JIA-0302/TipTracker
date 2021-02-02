@@ -6,46 +6,45 @@ import ShiftAddModal from "../shift-add-modal";
 
 function ShiftMainAddModal(props) {
     const [showMainAddModel, setMainAddModel] = React.useState(true);
-    const [hourlyWage, setHourlyWage] = React.useState(false);
+    const [NonhourlyWage, setNonHourlyWage] = React.useState(false);
 
 
     const openHourlyWageModel = (hideMainModel) => {
         setMainAddModel(false);
-        setHourlyWage(true);
+        setNonHourlyWage(false);
         hideMainModel();
     };
 
     const openNonHourlyWageModel = (hideMainModel) => {
         setMainAddModel(false);
-        setHourlyWage(false);
+        setNonHourlyWage(true);
         hideMainModel();
     };
 
     return !(showMainAddModel) ?
-        <ShiftAddModal hourly={hourlyWage} showAddModal={true} setMainModal={setMainAddModel}/> :
+        <ShiftAddModal hourly={NonhourlyWage} showAddModal={true} setMainModal={setMainAddModel}/> :
 
      (
         <Modal
             {...props}
             size="lg"
-            dialogClassName={styles.modelContent}
-
+            contentClassName={styles.modelStyle}
         >
             <Modal.Header closeButton>
-                <Modal.Title className={styles.shiftTitle}>
-                    Select Wage Type
+                <Modal.Title style={{color:"grey", margin:"auto"}}>
+                    Select Your Wage Type
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body className={styles.shiftEditBody}>
-                <Row>
+            <Modal.Body>
+                <Row className={styles.shiftMainModal}>
                     <Col xs={5}>
-                        <Button onClick={() => openHourlyWageModel(props.onHide)}>
+                        <Button className={styles.mainButton} onClick={() => openHourlyWageModel(props.onHide)}>
                             Hourly Wages
                         </Button>
                     </Col>
 
                     <Col xs={5}>
-                        <Button onClick={() => openNonHourlyWageModel(props.onHide)}>
+                        <Button  className={styles.mainButton} onClick={() => openNonHourlyWageModel(props.onHide)}>
                             Non-Hourly Wages
                         </Button>
                     </Col>
@@ -53,7 +52,6 @@ function ShiftMainAddModal(props) {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Submit</Button>
             </Modal.Footer>
         </Modal>
     );

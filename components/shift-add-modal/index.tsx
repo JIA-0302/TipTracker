@@ -8,10 +8,10 @@ function ShiftAddedModal(props) {
         <Modal
             {...props}
             size="lg"
-            dialogClassName={styles.modelContent}
+            contentClassName={styles.modelStyle}
 
         >
-            <Modal.Header closeButton>
+            <Modal.Header closeButton style={{color: "red"}}>
                 <Modal.Title className={styles.shiftTitle}>
                     Calendar Date Place Holder
                 </Modal.Title>
@@ -21,7 +21,7 @@ function ShiftAddedModal(props) {
                     {props.hourly ?
 
                         <Form.Row>
-                            <Col sm={3}>
+                            <Col sm={4}>
                                 <img src="/baseEarning.jpg"/>
                             </Col>
                             <Col sm={5}>
@@ -31,12 +31,12 @@ function ShiftAddedModal(props) {
                         </Form.Row> :
                         <div>
                             <Form.Row>
-                                <Col sm={3}>
+                                <Col sm={4}>
                                     <img src="/time.jpg"/>
                                 </Col>
                                 <Col sm={4}>
                                     <Form.Label>Start Time</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter Start Time"/>
+                                    <Form.Control type="text" placeholder="Enter Start Time" style={{lineHeight: "10px"}}/>
                                 </Col>
                                 <Col sm={4}>
                                     <Form.Label>End Time</Form.Label>
@@ -44,7 +44,7 @@ function ShiftAddedModal(props) {
                                 </Col>
                             </Form.Row>
                             <Form.Row>
-                                <Col sm={3}>
+                                <Col sm={4}>
                                     <img src="/baseEarning.jpg"/>
                                 </Col>
                                 <Col sm={5}>
@@ -56,22 +56,22 @@ function ShiftAddedModal(props) {
                     }
 
                     <Form.Row>
-                        <Col sm={3}>
+                        <Col sm={4}>
                             <img src="/cashTips.jpg"/>
                         </Col>
                         <Col sm={5}>
                             <Form.Label>Cash Tips</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Cash Tips"/>
+                            <Form.Control type="text" placeholder="Enter Cash Tip"/>
                         </Col>
                     </Form.Row>
 
                     <Form.Row>
-                        <Col sm={3}>
+                        <Col sm={4}>
                             <img src="/ccTips.jpg"/>
                         </Col>
                         <Col sm={5}>
                             <Form.Label>Credit Card Tips</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Credit Card Tips"/>
+                            <Form.Control type="text" placeholder="Enter Credit Card Tip"/>
                         </Col>
                     </Form.Row>
                     <Form.Row>
@@ -81,7 +81,7 @@ function ShiftAddedModal(props) {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Submit</Button>
+                <Button className={styles.shiftAddSubmitButton}onClick={props.onHide}>Submit</Button>
             </Modal.Footer>
         </Modal>
     );

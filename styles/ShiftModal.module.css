@@ -1,13 +1,73 @@
 .shiftTitle {
     margin: auto;
+    color: black;
+    font-weight: bold;
+    font-family: Arial;
 }
 
 .shiftEditBody {
-    background-color: lightgrey;
+    color: black;
+    font-family: Arial;
+    font-weight: initial;
+
 }
-.modelContent {
-    width:25%;
-    margin-left:40%;
-    margin-right:50%;
-    margin-top:10%;
+
+
+.modelStyle {;
+    width:500px;
+    margin:auto;
+}
+
+.shiftEditUpdateButton {
+    background-color: darkseagreen;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+    border-color: green;
+    margin:auto;
+    width: 100px;
+}
+
+.shiftEditDeleteButton {
+    background-color: indianred;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+    border-color: red;
+    margin:auto;
+    width: 100px;
+}
+.shiftEditDeleteButton:hover {
+    background-color: red;
+}
+
+.shiftEditUpdateButton:hover {
+    background-color: green;
+}
+
+.shiftAddSubmitButton {
+    background-color: darkseagreen;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+    border-color: green;
+    margin:auto;
+    width: 100px;
+}
+
+.shiftAddSubmitButton:hover {
+    background-color: green;
+}
+
+.shiftMainModal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainButton {
+    height: 75px;
+    width: 125px;
+    border-radius: 20px;
+    margin-left: 25px;
 }
