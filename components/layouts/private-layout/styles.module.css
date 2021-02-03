@@ -1,0 +1,12 @@
+.childrenLayout {
+  width: 100%;
+  margin-left: 300px;
+  min-height: 100vh;
+  background-color: white;
+}
+
+@media (max-width: 767.99px) {
+  .childrenLayout {
+    margin-left: 0;
+  }
+}

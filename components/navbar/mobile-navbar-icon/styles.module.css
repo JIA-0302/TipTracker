@@ -1,0 +1,12 @@
+.iconContainer {
+  color: black;
+  padding-top: 10px;
+  font-size: 1.25em;
+  width: 48px;
+  text-align: center;
+}
+
+.active {
+  border-top: 2px solid red;
+  color: red;
+}
