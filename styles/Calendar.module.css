@@ -230,3 +230,8 @@
   border-radius: 14px;
   opacity: 1;
 }
+ .check {
+   display: table;
+   margin:auto;
+   font-size: 30px;
+ }

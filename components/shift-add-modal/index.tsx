@@ -1,24 +1,29 @@
 import React from "react";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import styles from "styles/ShiftModal.module.css";
+import {format} from "date-fns";
 
 
-function ShiftAddedModal(props) {
+const ShiftAddModal = (props) => {
+    const closeModal = () =>{
+        props.onHide({wageType: "", wageMode: false});
+    }
     return (
         <Modal
             {...props}
             size="lg"
             contentClassName={styles.modelStyle}
+            backdrop="static"
 
         >
-            <Modal.Header closeButton style={{color: "red"}}>
+            <Modal.Header closeButton onHide={closeModal} >
                 <Modal.Title className={styles.shiftTitle}>
-                    Calendar Date Place Holder
+                    {props.date ? format(props.date, "P") : ""}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.shiftEditBody}>
                 <Form>
-                    {props.hourly ?
+                    {props.hourly === "nonHourly" ?
 
                         <Form.Row>
                             <Col sm={4}>
@@ -81,29 +86,29 @@ function ShiftAddedModal(props) {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button className={styles.shiftAddSubmitButton}onClick={props.onHide}>Submit</Button>
+                <Button className={styles.shiftAddSubmitButton} onClick={closeModal}>Submit</Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-const ShiftAddModal = (props) => {
-    const [modalShow, setModalShow] = React.useState(props.showAddModal);
-    const closeModal = () => {
-        setModalShow(false);
-        props.setMainModal(true);
-    };
-    return (
-
-        <>
-
-            <ShiftAddedModal
-                show={modalShow}
-                onHide={closeModal}
-                hourly={props.hourly}
-            />
-        </>
-    );
-}
+// const ShiftAddModal = (props) => {
+//     const [modalShow, setModalShow] = React.useState(props.showAddModal);
+//     const closeModal = () => {
+//         setModalShow(false);
+//         props.setMainModal(true);
+//     };
+//     return (
+//
+//         <>
+//
+//             <ShiftAddedModal
+//                 show={modalShow}
+//                 onHide={closeModal}
+//                 hourly={props.hourly}
+//             />
+//         </>
+//     );
+// }
 
 export default ShiftAddModal

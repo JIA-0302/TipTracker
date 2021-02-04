@@ -4,47 +4,46 @@ import styles from "styles/ShiftModal.module.css";
 import ShiftAddModal from "../shift-add-modal";
 
 
-function ShiftMainAddModal(props) {
-    const [showMainAddModel, setMainAddModel] = React.useState(true);
-    const [NonhourlyWage, setNonHourlyWage] = React.useState(false);
+const ShiftMainAddModal = (props) =>{
+    const [showWageModel, setWageModel] = React.useState({wageType: "", wageMode: false});
 
-
-    const openHourlyWageModel = (hideMainModel) => {
-        setMainAddModel(false);
-        setNonHourlyWage(false);
-        hideMainModel();
+    const openHourlyWageModal = () => {
+        props.onHide(false);
+        setWageModel({wageType:"hourly", wageMode: true});
     };
 
-    const openNonHourlyWageModel = (hideMainModel) => {
-        setMainAddModel(false);
-        setNonHourlyWage(true);
-        hideMainModel();
+    const openNonHourlyWageModal = () => {
+
+        props.onHide(false);
+        setWageModel({wageType:"nonHourly", wageMode: true});
     };
 
-    return !(showMainAddModel) ?
-        <ShiftAddModal hourly={NonhourlyWage} showAddModal={true} setMainModal={setMainAddModel}/> :
+
+    return ((!(props.show)) && showWageModel.wageMode) ?
+        <ShiftAddModal date={props.date} show={showWageModel.wageMode} hourly={showWageModel.wageType}  onHide={setWageModel}/> :
 
      (
         <Modal
             {...props}
             size="lg"
             contentClassName={styles.modelStyle}
+            backdrop="static"
         >
-            <Modal.Header closeButton>
-                <Modal.Title style={{color:"grey", margin:"auto"}}>
+            <Modal.Header closeButton >
+                <Modal.Title className={styles.mainTitle}>
                     Select Your Wage Type
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Row className={styles.shiftMainModal}>
                     <Col xs={5}>
-                        <Button className={styles.mainButton} onClick={() => openHourlyWageModel(props.onHide)}>
+                        <Button className={styles.mainButton} onClick={openHourlyWageModal}>
                             Hourly Wages
                         </Button>
                     </Col>
 
                     <Col xs={5}>
-                        <Button  className={styles.mainButton} onClick={() => openNonHourlyWageModel(props.onHide)}>
+                        <Button  className={styles.mainButton} onClick={openNonHourlyWageModal}>
                             Non-Hourly Wages
                         </Button>
                     </Col>
@@ -55,24 +54,24 @@ function ShiftMainAddModal(props) {
             </Modal.Footer>
         </Modal>
     );
-}
+};
 
-const ShiftMainModal: React.FunctionComponent = () => {
-    const [modalShow, setModalShow] = React.useState(false);
+// const ShiftMainModal: React.FunctionComponent = () => {
+//     const [modalShow, setModalShow] = React.useState(false);
+//
+//
+//     return (
+//
+//         <>
+//             <Button variant="primary" onClick={() => setModalShow(true)}>
+//                 Launch Main Model
+//             </Button>
+//             <ShiftMainAddModal
+//                 show={modalShow}
+//                 onHide={() => setModalShow(false)}
+//             />
+//         </>
+//     );
+// }
 
-
-    return (
-
-        <>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
-                Launch Main Model
-            </Button>
-            <ShiftMainAddModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            />
-        </>
-    );
-}
-
-export default ShiftMainModal
+export default ShiftMainAddModal
