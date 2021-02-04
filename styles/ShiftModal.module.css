@@ -81,6 +81,10 @@
     margin-right:0px;
 }
 
+.modalLabel {
+    width: max-content;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .modelStyle {
@@ -103,7 +107,6 @@
         font-size: 20px;
         margin-right:0px;
     }
-
 }
 
 

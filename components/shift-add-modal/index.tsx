@@ -35,7 +35,7 @@ const ShiftAddModal = (props) => {
                                 <AiFillDollarCircle size={"75px"}/>
                             </Col>
                             <Col xs={5}>
-                                <Form.Label>Total Base Earnings</Form.Label>
+                                <Form.Label className={styles.modalLabel}>Total Base Earnings</Form.Label>
                                 <Form.Control type="text" placeholder="Enter Hourly wage"/>
                             </Col>
                         </Form.Row> :
@@ -70,7 +70,7 @@ const ShiftAddModal = (props) => {
                             <IoIosCash size={"75px"}/>
                         </Col>
                         <Col xs={5}>
-                            <Form.Label>Total Cash Tips</Form.Label>
+                            <Form.Label className={styles.modalLabel}>Total Cash Tips</Form.Label>
                             <Form.Control type="text" placeholder="Enter Cash Tips"/>
                         </Col>
                     </Form.Row>
@@ -80,7 +80,7 @@ const ShiftAddModal = (props) => {
                             <HiCreditCard size={"75px"} />
                         </Col>
                         <Col xs={5}>
-                            <Form.Label>Total Credit Card Tips</Form.Label>
+                            <Form.Label className={styles.modalLabel}>Total Credit Card Tips</Form.Label>
                             <Form.Control type="text" placeholder="Enter Credit Card Tips"/>
                         </Col>
                     </Form.Row>

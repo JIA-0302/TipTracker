@@ -60,20 +60,19 @@ const ShiftEditModal = (props) => {
                        </Col>
                        <Col xs={5}>
                            <Form.Group controlId={"baseEarning"}>
-                           <Form.Label>Total Base Earnings</Form.Label>
+                           <Form.Label className={styles.modalLabel}>Total Base Earnings</Form.Label>
                            <Form.Control type="text" defaultValue={`${props.data.mData.earnings}`}placeholder="Enter Earnings" onChange={earnings}></Form.Control>
                            </Form.Group>
 
                        </Col>
                    </Form.Row>
-
                     <Form.Row>
                         <Col xs={4}>
                             <IoIosCash size={"75px"}/>
                         </Col>
                         <Col xs={5}>
                             <Form.Group controlId={"cashTips"}>
-                            <Form.Label>Total Cash Tips</Form.Label>
+                            <Form.Label className={styles.modalLabel}>Total Cash Tips</Form.Label>
                             <Form.Control type="text"  defaultValue={`${props.data.mData.cashTips}`} placeholder="Enter Cash Tips"  onChange={cashTips}/>
                             </Form.Group>
                         </Col>
@@ -85,7 +84,7 @@ const ShiftEditModal = (props) => {
                         </Col>
                         <Col xs={5}>
                             <Form.Group controlId={"ccTip"}>
-                            <Form.Label>Total Credit Card Tips</Form.Label>
+                            <Form.Label className={styles.modalLabel}>Total Credit Card Tips</Form.Label>
                             <Form.Control type="text" defaultValue={`${props.data.mData.ccTips}`} placeholder="Enter Credit Card Tips" onChange={ccTips} />
                             </Form.Group>
                         </Col>
