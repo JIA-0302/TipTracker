@@ -102,7 +102,7 @@
   width: 200px;
   height: 30px;
   color: #000000;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0% no-repeat padding-box;
   /*background: #eaeaea 0% 0% no-repeat padding-box;*/
   box-shadow: 0px 3px 25px #00000052;
   border-radius: 13px;
@@ -135,7 +135,9 @@
   padding: 0.75em 0;
   border-radius: 12px;
   background-color: #eaeaea;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 18px/24px var(--unnamed-font-family-roboto-slab);
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 18px/24px
+    var(--unnamed-font-family-roboto-slab);
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: left;
   font: normal normal normal 18px/24px Roboto Slab;
@@ -230,8 +232,8 @@
   border-radius: 14px;
   opacity: 1;
 }
- .check {
-   display: table;
-   margin:auto;
-   font-size: 30px;
- }
+.check {
+  display: table;
+  margin: auto;
+  font-size: 30px;
+}

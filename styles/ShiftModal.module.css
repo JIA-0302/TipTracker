@@ -1,112 +1,104 @@
 .shiftTitle {
-    margin: auto;
-    color: black;
-    font-weight: initial;
-    font-family: Arial;
-    margin-right:0px;
+  margin: auto;
+  color: black;
+  font-weight: initial;
+  font-family: Arial;
+  margin-right: 0px;
 }
 
 .shiftEditBody {
-    color: black;
-    font-family: Arial;
-    font-weight: initial;
-    font-family: Arial;
-
+  color: black;
+  font-family: Arial;
+  font-weight: initial;
+  font-family: Arial;
 }
 
-
 .modelStyle {
-    width:500px;
-    margin:auto;
+  width: 500px;
+  margin: auto;
 }
 
 .shiftEditUpdateButton {
-    background-color: darkseagreen;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
-    border-color: green;
-    margin:auto;
-    width: 100px;
+  background-color: darkseagreen;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+  border-color: green;
+  margin: auto;
+  width: 100px;
 }
 
 .shiftEditDeleteButton {
-    background-color: indianred;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
-    border-color: red;
-    margin:auto;
-    width: 100px;
+  background-color: indianred;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+  border-color: red;
+  margin: auto;
+  width: 100px;
 }
 .shiftEditDeleteButton:hover {
-    background-color: red;
+  background-color: red;
 }
 
 .shiftEditUpdateButton:hover {
-    background-color: green;
+  background-color: green;
 }
 
 .shiftAddSubmitButton {
-    background-color: darkseagreen;
-    color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
-    border-color: green;
-    margin:auto;
-    width: 100px;
+  background-color: darkseagreen;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+  border-color: green;
+  margin: auto;
+  width: 100px;
 }
 
 .shiftAddSubmitButton:hover {
-    background-color: green;
+  background-color: green;
 }
 
 .shiftMainModal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mainButton {
-    height: 75px;
-    width: 125px;
-    border-radius: 20px;
-    margin-left: 25px;
-    border-color: white;
-    background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
+  height: 75px;
+  width: 125px;
+  border-radius: 20px;
+  margin-left: 25px;
+  border-color: white;
+  background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
 }
 .mainTitle {
-    margin:auto;
-    color: black;
-    margin-right:0px;
+  margin: auto;
+  color: black;
+  margin-right: 0px;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .modelStyle {
-        width:300px;
-        margin:auto;
-    }
+  .modelStyle {
+    width: 300px;
+    margin: auto;
+  }
 
-    .mainButton {
-        height: 90px;
-        width: 80px;
-        border-radius: 5px;
-        margin-left: 25px;
-        border-color: white;
-        background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
-    }
+  .mainButton {
+    height: 90px;
+    width: 80px;
+    border-radius: 5px;
+    margin-left: 25px;
+    border-color: white;
+    background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
+  }
 
-    .mainTitle {
-        margin:auto;
-        color: black;
-        font-size: 20px;
-        margin-right:0px;
-    }
-
+  .mainTitle {
+    margin: auto;
+    color: black;
+    font-size: 20px;
+    margin-right: 0px;
+  }
 }
-
-
-
-
-
