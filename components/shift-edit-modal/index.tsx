@@ -70,7 +70,9 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
             </Col>
             <Col xs={5}>
               <Form.Group controlId={"baseEarning"}>
-                <Form.Label>Total Base Earnings</Form.Label>
+                <Form.Label className={styles.modalLabel}>
+                  Total Base Earnings
+                </Form.Label>
                 <Form.Control
                   type="text"
                   defaultValue={`${props.data.earnings}`}
@@ -87,7 +89,9 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
             </Col>
             <Col xs={5}>
               <Form.Group controlId={"cashTips"}>
-                <Form.Label>Total Cash Tips</Form.Label>
+                <Form.Label className={styles.modalLabel}>
+                  Total Cash Tips
+                </Form.Label>
                 <Form.Control
                   type="text"
                   defaultValue={`${props.data.cashTips}`}
@@ -104,7 +108,9 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
             </Col>
             <Col xs={5}>
               <Form.Group controlId={"ccTip"}>
-                <Form.Label>Total Credit Card Tips</Form.Label>
+                <Form.Label className={styles.modalLabel}>
+                  Total Credit Card Tips
+                </Form.Label>
                 <Form.Control
                   type="text"
                   defaultValue={`${props.data.ccTips}`}
@@ -127,22 +133,5 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
     </Modal>
   )
 }
-
-// const ShiftEditModal: React.FunctionComponent = () => {
-//     const [modalShow, setModalShow] = React.useState(false);
-//
-//     return (
-//         <>
-//             <Button variant="primary" onClick={() => setModalShow(true)}>
-//                 Launch Edit Shift
-//             </Button>
-//
-//             <ShiftEditedModal
-//                 show={modalShow}
-//                 onHide={() => setModalShow(false)}
-//             />
-//         </>
-//     );
-// }
 
 export default ShiftEditModal

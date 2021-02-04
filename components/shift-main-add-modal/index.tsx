@@ -70,22 +70,4 @@ const ShiftMainAddModal: React.FunctionComponent<ShiftMainAddModalProps> = (
   )
 }
 
-// const ShiftMainModal: React.FunctionComponent = () => {
-//     const [modalShow, setModalShow] = React.useState(false);
-//
-//
-//     return (
-//
-//         <>
-//             <Button variant="primary" onClick={() => setModalShow(true)}>
-//                 Launch Main Model
-//             </Button>
-//             <ShiftMainAddModal
-//                 show={modalShow}
-//                 onHide={() => setModalShow(false)}
-//             />
-//         </>
-//     );
-// }
-
 export default ShiftMainAddModal

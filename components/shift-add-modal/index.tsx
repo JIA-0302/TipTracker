@@ -40,7 +40,9 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
                 <AiFillDollarCircle size={"75px"} />
               </Col>
               <Col xs={5}>
-                <Form.Label>Total Base Earnings</Form.Label>
+                <Form.Label className={styles.modalLabel}>
+                  Total Base Earnings
+                </Form.Label>
                 <Form.Control type="text" placeholder="Enter Hourly wage" />
               </Col>
             </Form.Row>
@@ -80,7 +82,9 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
               <IoIosCash size={"75px"} />
             </Col>
             <Col xs={5}>
-              <Form.Label>Total Cash Tips</Form.Label>
+              <Form.Label className={styles.modalLabel}>
+                Total Cash Tips
+              </Form.Label>
               <Form.Control type="text" placeholder="Enter Cash Tips" />
             </Col>
           </Form.Row>
@@ -90,7 +94,9 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
               <HiCreditCard size={"75px"} />
             </Col>
             <Col xs={5}>
-              <Form.Label>Total Credit Card Tips</Form.Label>
+              <Form.Label className={styles.modalLabel}>
+                Total Credit Card Tips
+              </Form.Label>
               <Form.Control type="text" placeholder="Enter Credit Card Tips" />
             </Col>
           </Form.Row>
@@ -105,24 +111,5 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
     </Modal>
   )
 }
-
-// const ShiftAddModal = (props) => {
-//     const [modalShow, setModalShow] = React.useState(props.showAddModal);
-//     const closeModal = () => {
-//         setModalShow(false);
-//         props.setMainModal(true);
-//     };
-//     return (
-//
-//         <>
-//
-//             <ShiftAddedModal
-//                 show={modalShow}
-//                 onHide={closeModal}
-//                 hourly={props.hourly}
-//             />
-//         </>
-//     );
-// }
 
 export default ShiftAddModal
