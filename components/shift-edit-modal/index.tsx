@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Button, Col, Form, Modal } from "react-bootstrap";
 import styles from "styles/ShiftModal.module.css";
 import {format} from "date-fns";
 import { AiFillDollarCircle } from "react-icons/ai";
@@ -99,22 +99,5 @@ const ShiftEditModal = (props) => {
         </Modal>
     );
 };
-
-// const ShiftEditModal: React.FunctionComponent = () => {
-//     const [modalShow, setModalShow] = React.useState(false);
-//
-//     return (
-//         <>
-//             <Button variant="primary" onClick={() => setModalShow(true)}>
-//                 Launch Edit Shift
-//             </Button>
-//
-//             <ShiftEditedModal
-//                 show={modalShow}
-//                 onHide={() => setModalShow(false)}
-//             />
-//         </>
-//     );
-// }
 
 export default ShiftEditModal

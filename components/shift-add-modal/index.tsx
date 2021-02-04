@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Button, Col, Form, Modal } from "react-bootstrap";
 import styles from "styles/ShiftModal.module.css";
 import {format} from "date-fns";
 import {AiFillDollarCircle} from "react-icons/ai";
@@ -96,24 +96,5 @@ const ShiftAddModal = (props) => {
         </Modal>
     );
 }
-
-// const ShiftAddModal = (props) => {
-//     const [modalShow, setModalShow] = React.useState(props.showAddModal);
-//     const closeModal = () => {
-//         setModalShow(false);
-//         props.setMainModal(true);
-//     };
-//     return (
-//
-//         <>
-//
-//             <ShiftAddedModal
-//                 show={modalShow}
-//                 onHide={closeModal}
-//                 hourly={props.hourly}
-//             />
-//         </>
-//     );
-// }
 
 export default ShiftAddModal

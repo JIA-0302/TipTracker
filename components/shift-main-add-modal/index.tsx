@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Button, Col, Modal, Row} from "react-bootstrap";
 import styles from "styles/ShiftModal.module.css";
 import ShiftAddModal from "../shift-add-modal";
 
@@ -55,23 +55,5 @@ const ShiftMainAddModal = (props) =>{
         </Modal>
     );
 };
-
-// const ShiftMainModal: React.FunctionComponent = () => {
-//     const [modalShow, setModalShow] = React.useState(false);
-//
-//
-//     return (
-//
-//         <>
-//             <Button variant="primary" onClick={() => setModalShow(true)}>
-//                 Launch Main Model
-//             </Button>
-//             <ShiftMainAddModal
-//                 show={modalShow}
-//                 onHide={() => setModalShow(false)}
-//             />
-//         </>
-//     );
-// }
 
 export default ShiftMainAddModal
