@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import styles from "styles/ShiftModal.module.css";
 import {format} from "date-fns";
+import { AiFillDollarCircle } from "react-icons/ai";
+import { IoIosCash } from "react-icons/io";
+import { HiCreditCard } from "react-icons/hi";
+
+
+
 
 
 const ShiftEditModal = (props) => {
@@ -12,15 +18,15 @@ const ShiftEditModal = (props) => {
 
     const updateData = () => {
         props.onHide(false);
-        props.update(userData);
+        const newData = {...userData};
+        props.data.updatedata(newData);
 
     };
 
     const deleteData = () => {
         props.onHide(false);
-        props.update({...userData, "active":false});
-
-
+        const deleteData = {...userData, "active":false};
+        props.data.updatedata(deleteData);
     };
 
     const earnings = ({target:{value}}) => {
@@ -49,38 +55,38 @@ const ShiftEditModal = (props) => {
             <Modal.Body className={styles.shiftEditBody}>
                 <Form>
                    <Form.Row>
-                       <Col sm={4}>
-                           <img src="/baseEarning.jpg" />
+                       <Col xs={4}>
+                           <AiFillDollarCircle size={"75px"}/>
                        </Col>
-                       <Col sm={5}>
+                       <Col xs={5}>
                            <Form.Group controlId={"baseEarning"}>
                            <Form.Label>Total Base Earnings</Form.Label>
-                           <Form.Control type="text" defaultValue={`${props.data.earnings}`}placeholder="Enter Earnings" onChange={earnings}></Form.Control>
+                           <Form.Control type="text" defaultValue={`${props.data.mData.earnings}`}placeholder="Enter Earnings" onChange={earnings}></Form.Control>
                            </Form.Group>
 
                        </Col>
                    </Form.Row>
 
                     <Form.Row>
-                        <Col sm={4}>
-                            <img src="/cashTips.jpg" />
+                        <Col xs={4}>
+                            <IoIosCash size={"75px"}/>
                         </Col>
-                        <Col sm={5}>
+                        <Col xs={5}>
                             <Form.Group controlId={"cashTips"}>
-                            <Form.Label>Cash Tip</Form.Label>
-                            <Form.Control type="text"  defaultValue={`${props.data.cashTips}`} placeholder="Enter Cash Tips"  onChange={cashTips}/>
+                            <Form.Label>Total Cash Tips</Form.Label>
+                            <Form.Control type="text"  defaultValue={`${props.data.mData.cashTips}`} placeholder="Enter Cash Tips"  onChange={cashTips}/>
                             </Form.Group>
                         </Col>
                     </Form.Row>
 
                     <Form.Row>
-                        <Col sm={4}>
-                            <img src="/ccTips.jpg" />
+                        <Col xs={4}>
+                            <HiCreditCard size={"75px"} />
                         </Col>
-                        <Col sm={5}>
+                        <Col xs={5}>
                             <Form.Group controlId={"ccTip"}>
-                            <Form.Label>Credit Card Tips</Form.Label>
-                            <Form.Control type="text" defaultValue={`${props.data.ccTips}`} placeholder="Enter Credit Card Tip" onChange={ccTips} />
+                            <Form.Label>Total Credit Card Tips</Form.Label>
+                            <Form.Control type="text" defaultValue={`${props.data.mData.ccTips}`} placeholder="Enter Credit Card Tips" onChange={ccTips} />
                             </Form.Group>
                         </Col>
                     </Form.Row>

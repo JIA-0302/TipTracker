@@ -3,6 +3,7 @@
     color: black;
     font-weight: initial;
     font-family: Arial;
+    margin-right:0px;
 }
 
 .shiftEditBody {
@@ -14,10 +15,9 @@
 }
 
 
-.modelStyle {;
+.modelStyle {
     width:500px;
     margin:auto;
-
 }
 
 .shiftEditUpdateButton {
@@ -78,6 +78,7 @@
 .mainTitle {
     margin:auto;
     color: black;
+    margin-right:0px;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -100,14 +101,12 @@
         margin:auto;
         color: black;
         font-size: 20px;
+        margin-right:0px;
     }
 
 }
 
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
 
-}
 
 
