@@ -13,7 +13,7 @@ const Home: React.FunctionComponent = () => {
         />
         <title>Calendar | TipTracker</title>
       </Head>
-
+      <h1>Work Calendar</h1>
       <WorkCalendar />
     </PrivateLayout>
   )
