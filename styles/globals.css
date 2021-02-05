@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;700&display=swap");
 html,
 body {
   padding: 0;
@@ -20,9 +23,15 @@ a {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: Roboto Slab;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Roboto Slab", serif;
 }
+
+/* Bootstrap Overrides */
 
 .btn-warning {
   color: white;
@@ -42,4 +51,55 @@ h1, h2, h3, h4, h5 {
   color: white;
   box-shadow: 0 10px 30px rgba(219, 161, 14, 0.6);
   border-color: transparent;
+}
+
+.btn-success {
+  border: 2px double transparent;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  background-origin: border-box;
+  box-shadow: 0 10px 30px rgba(79, 219, 14, 0.3);
+  transition: all 0.5s linear;
+  min-width: 150px;
+}
+
+.btn-success:hover {
+  color: white;
+  box-shadow: 0 10px 30px rgba(120, 255, 57, 0.3);
+  border-color: transparent;
+}
+
+.btn-danger {
+  border: 2px double transparent;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  background-origin: border-box;
+  box-shadow: 0 10px 30px rgba(255, 147, 147, 0.3);
+  transition: all 0.5s linear;
+  min-width: 150px;
+}
+
+.btn-danger:hover {
+  color: white;
+  box-shadow: 0 10px 30px rgba(73, 0, 0, 0.3);
+  border-color: transparent;
+}
+
+.form-control {
+  border-radius: 8px;
+  height: 50px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px 0 rgb(77 87 222 / 30%);
+  width: 100%;
+  border: 1px solid #fff;
+  padding-left: 10px;
+}
+
+.form-control::placeholder {
+  opacity: 0.5;
+  font-size: 0.75em;
 }

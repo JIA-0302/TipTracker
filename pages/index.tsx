@@ -28,7 +28,7 @@ const Home: React.FunctionComponent = () => {
             <h1 className={styles.focusText}>
               Tip<span style={{ color: "black" }}>Tracker</span>
             </h1>
-            <Link href="/home">
+            <Link href="/calendar">
               <Button size="lg" variant="warning" className="mt-4">
                 Continue
               </Button>

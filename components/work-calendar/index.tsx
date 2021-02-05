@@ -61,18 +61,10 @@ const WorkCalendar: React.FunctionComponent = () => {
     setCurrentDate(subMonths(currentDate, 1))
   }
 
-  const mainHeader = () => {
-    return (
-      <div className={` ${styles.mainHeader} `}>
-        <span>Work Calendar</span>
-      </div>
-    )
-  }
-
   const header = () => {
     const dateFormat = "MMMM yyyy"
     return (
-      <div className={` ${styles.header} ${styles.row} `}>
+      <div className={` ${styles.header}`}>
         <div className={styles.icon} onClick={prevMonth}>
           chevron_left
         </div>
@@ -164,6 +156,7 @@ const WorkCalendar: React.FunctionComponent = () => {
         )
         day = addDays(day, 1)
       }
+
       rows.push(
         <div className={styles.row} key={day.toDateString()}>
           {" "}
@@ -177,8 +170,7 @@ const WorkCalendar: React.FunctionComponent = () => {
 
   return (
     <div>
-      <div className={styles.calendar}>
-        <div>{mainHeader()}</div>
+      <div className={`${styles.calendar} mt-4`}>
         <div>{header()}</div>
         {<div>{daysOfWeek()}</div>}
         {<div>{cells()}</div>}
