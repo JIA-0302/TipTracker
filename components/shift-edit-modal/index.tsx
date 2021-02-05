@@ -2,9 +2,8 @@ import React, { useState } from "react"
 import { Button, Col, Form, Modal } from "react-bootstrap"
 import styles from "styles/ShiftModal.module.css"
 import { format } from "date-fns"
-import { AiFillDollarCircle } from "react-icons/ai"
-import { IoIosCash } from "react-icons/io"
 import { HiCreditCard } from "react-icons/hi"
+import { FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc"
 import { ShiftData } from "components/work-calendar"
 
 interface ShiftEditModalProps {
@@ -60,16 +59,16 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
     >
       <Modal.Header closeButton onHide={closeModal}>
         <Modal.Title className={styles.shiftTitle}>
-          {props.date ? format(props.date, "P") : ""}
+          <h2>{props.date ? format(props.date, "P") : ""}</h2>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className={styles.shiftEditBody}>
         <Form>
           <Form.Row>
-            <Col xs={4}>
-              <AiFillDollarCircle size={"75px"} />
+            <Col xs={3}>
+              <FcCurrencyExchange size={"75px"} />
             </Col>
-            <Col xs={5}>
+            <Col xs={6}>
               <Form.Group controlId={"baseEarning"}>
                 <Form.Label className={styles.modalLabel}>
                   Total Base Earnings
@@ -85,10 +84,10 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
           </Form.Row>
 
           <Form.Row>
-            <Col xs={4}>
-              <IoIosCash size={"75px"} />
+            <Col xs={3}>
+              <FcMoneyTransfer size={"75px"} />
             </Col>
-            <Col xs={5}>
+            <Col xs={6}>
               <Form.Group controlId={"cashTips"}>
                 <Form.Label className={styles.modalLabel}>
                   Total Cash Tips
@@ -104,10 +103,10 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
           </Form.Row>
 
           <Form.Row>
-            <Col xs={4}>
+            <Col xs={3}>
               <HiCreditCard size={"75px"} />
             </Col>
-            <Col xs={5}>
+            <Col xs={6}>
               <Form.Group controlId={"ccTip"}>
                 <Form.Label className={styles.modalLabel}>
                   Total Credit Card Tips
@@ -123,11 +122,19 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
           </Form.Row>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button className={styles.shiftEditDeleteButton} onClick={deleteData}>
+      <Modal.Footer className="py-3">
+        <Button
+          variant="danger"
+          className={styles.shiftEditDeleteButton}
+          onClick={deleteData}
+        >
           Delete
         </Button>
-        <Button className={styles.shiftEditUpdateButton} onClick={updateData}>
+        <Button
+          variant="success"
+          className={styles.shiftEditUpdateButton}
+          onClick={updateData}
+        >
           Update
         </Button>
       </Modal.Footer>

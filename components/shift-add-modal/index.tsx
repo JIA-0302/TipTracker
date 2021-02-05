@@ -2,11 +2,8 @@ import React from "react"
 import { Button, Col, Form, Modal } from "react-bootstrap"
 import styles from "styles/ShiftModal.module.css"
 import { format } from "date-fns"
-import { AiFillDollarCircle } from "react-icons/ai"
-import { IoIosCash } from "react-icons/io"
 import { HiCreditCard } from "react-icons/hi"
-import { FaMoneyCheckAlt } from "react-icons/fa"
-import { TiTime } from "react-icons/ti"
+import { FcClock, FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc"
 
 interface ShiftAddModalProps {
   date: Date
@@ -30,17 +27,17 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
     >
       <Modal.Header closeButton onHide={closeModal}>
         <Modal.Title className={styles.shiftTitle}>
-          {props.date ? format(props.date, "P") : ""}
+          <h2>{props.date ? format(props.date, "P") : ""}</h2>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className={styles.shiftEditBody}>
         <Form>
           {props.hourly === "nonHourly" ? (
             <Form.Row>
-              <Col xs={4}>
-                <AiFillDollarCircle size={"75px"} />
+              <Col xs={3}>
+                <FcCurrencyExchange size={"75px"} />
               </Col>
-              <Col xs={5}>
+              <Col xs={6} md={5}>
                 <Form.Label className={styles.modalLabel}>
                   Total Base Earnings
                 </Form.Label>
@@ -50,11 +47,13 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
           ) : (
             <div>
               <Form.Row>
-                <Col xs={4}>
-                  <TiTime size={"75px"} />
+                <Col xs={3}>
+                  <FcClock size={"75px"} />
                 </Col>
                 <Col xs={4}>
-                  <Form.Label>Start Time</Form.Label>
+                  <Form.Label className={styles.modalLabel}>
+                    Start Time
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter Start Time"
@@ -62,27 +61,31 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
                   />
                 </Col>
                 <Col xs={4}>
-                  <Form.Label>End Time</Form.Label>
+                  <Form.Label className={styles.modalLabel}>
+                    End Time
+                  </Form.Label>
                   <Form.Control type="text" placeholder="Enter End Time" />
                 </Col>
               </Form.Row>
-              <Form.Row>
-                <Col xs={4}>
-                  <FaMoneyCheckAlt size={"75px"} />
+              <Form.Row className="mt-4">
+                <Col xs={3}>
+                  <FcCurrencyExchange size={"75px"} />
                 </Col>
-                <Col xs={5}>
-                  <Form.Label>Hourly Wages</Form.Label>
+                <Col xs={6} md={5}>
+                  <Form.Label className={styles.modalLabel}>
+                    Hourly Wages
+                  </Form.Label>
                   <Form.Control type="text" placeholder="Enter Wages" />
                 </Col>
               </Form.Row>
             </div>
           )}
 
-          <Form.Row>
-            <Col xs={4}>
-              <IoIosCash size={"75px"} />
+          <Form.Row className="mt-4">
+            <Col xs={3}>
+              <FcMoneyTransfer size={"75px"} />
             </Col>
-            <Col xs={5}>
+            <Col xs={6} md={5}>
               <Form.Label className={styles.modalLabel}>
                 Total Cash Tips
               </Form.Label>
@@ -90,11 +93,11 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
             </Col>
           </Form.Row>
 
-          <Form.Row>
-            <Col xs={4}>
+          <Form.Row className="mt-4">
+            <Col xs={3}>
               <HiCreditCard size={"75px"} />
             </Col>
-            <Col xs={5}>
+            <Col xs={6} md={5}>
               <Form.Label className={styles.modalLabel}>
                 Total Credit Card Tips
               </Form.Label>
@@ -104,8 +107,12 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
           <Form.Row></Form.Row>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button className={styles.shiftAddSubmitButton} onClick={closeModal}>
+      <Modal.Footer className="py-3">
+        <Button
+          variant="success"
+          className={styles.shiftAddSubmitButton}
+          onClick={closeModal}
+        >
           Submit
         </Button>
       </Modal.Footer>
