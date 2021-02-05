@@ -56,6 +56,7 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
       size="lg"
       contentClassName={styles.modelStyle}
       backdrop="static"
+      centered
     >
       <Modal.Header closeButton onHide={closeModal}>
         <Modal.Title className={styles.shiftTitle}>

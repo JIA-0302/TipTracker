@@ -26,6 +26,7 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
       size="lg"
       contentClassName={styles.modelStyle}
       backdrop="static"
+      centered
     >
       <Modal.Header closeButton onHide={closeModal}>
         <Modal.Title className={styles.shiftTitle}>

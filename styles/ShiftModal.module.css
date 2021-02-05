@@ -14,8 +14,11 @@
 }
 
 .modelStyle {
-  width: 500px;
+  width: 95%;
+  max-width: 500px;
   margin: auto;
+  border-radius: 15px;
+  border: none;
 }
 
 .shiftEditUpdateButton {
@@ -63,16 +66,29 @@
 .shiftMainModal {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .mainButton {
-  height: 75px;
-  width: 125px;
-  border-radius: 20px;
-  margin-left: 25px;
+  /* max-width: 125px; */
+  border-radius: 10px;
+  margin: auto;
   border-color: white;
-  background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(158, 158, 158, 0.3);
+  cursor: pointer;
+  padding: 1.5em;
+  transition: all 0.25s ease-in-out;
+}
+
+.mainButton:hover {
+  box-shadow: 0 10px 30px rgba(158, 158, 158, 0.75);
+  transition: all 0.25s ease-in-out;
 }
 
 .mainTitle {
@@ -88,18 +104,18 @@
 /* Extra small devices (phones, 600px and down) */
 
 @media only screen and (max-width: 600px) {
-  .modelStyle {
+  /* .modelStyle {
     width: 300px;
     margin: auto;
-  }
-  .mainButton {
+  } */
+  /* .mainButton {
     height: 90px;
     width: 80px;
     border-radius: 5px;
     margin-left: 25px;
     border-color: white;
     background: linear-gradient(to bottom right, #ffb7b7, #9fc6ff);
-  }
+  } */
   .mainTitle {
     margin: auto;
     color: black;
