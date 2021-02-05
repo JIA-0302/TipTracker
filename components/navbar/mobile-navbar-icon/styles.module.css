@@ -7,6 +7,6 @@
 }
 
 .active {
-  border-top: 2px solid red;
-  color: red;
+  border-top: 2px solid #dba10e;
+  color: #dba10e;
 }

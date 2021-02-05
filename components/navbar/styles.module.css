@@ -19,6 +19,7 @@
   border-top: 1px solid rgb(216, 216, 216);
   display: flex;
   justify-content: space-evenly;
+  z-index: 99999;
 }
 
 @media (max-width: 767.99px) {
