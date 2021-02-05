@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;700&display=swap");
 html,
 body {
   padding: 0;
@@ -27,7 +28,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: Roboto Slab;
+  font-family: "Roboto Slab", serif;
 }
 
 /* Bootstrap Overrides */
