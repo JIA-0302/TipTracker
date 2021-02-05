@@ -65,7 +65,7 @@ h5 {
   min-width: 150px;
 }
 
-.btn-warning:hover {
+.btn-success:hover {
   color: white;
   box-shadow: 0 10px 30px rgba(120, 255, 57, 0.3);
   border-color: transparent;
