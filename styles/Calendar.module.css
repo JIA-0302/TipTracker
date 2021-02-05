@@ -22,7 +22,7 @@
 .body {
   top: 0px;
   left: 200px;
-  width: 1120px;
+  width: 100%;
   height: 1120px;
   background: #ffffff 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -67,6 +67,7 @@
   color: #000000;
   opacity: 1;
 }
+
 /* GRID */
 .row {
   margin: 0;
@@ -128,7 +129,6 @@
   margin-right: 1em;
 }
 .calendar .days {
-  /*text-transform: uppercase;*/
   font-weight: 100;
   color: #000000;
   font-size: 70%;
@@ -145,6 +145,7 @@
 }
 .calendar .body .cell {
   position: relative;
+  display: flex;
   height: 6.25em;
   overflow: hidden;
   cursor: pointer;
@@ -174,6 +175,16 @@
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
+}
+
+.calendar .body .cell .number:hover {
+    width: 30px;
+    height: 30px;
+    background: transparent linear-gradient(180deg, #FF0000 0%, #FFBBBB 100%) 0% 0% no-repeat padding-box;
+    opacity: 0.23;
+    border-radius: 25px;
+    text-align: center;
+    padding: 5px;
 }
 
 .calendar .body .disabled {
@@ -227,7 +238,7 @@
   align-items: center;
   top: 234px;
   left: 426px;
-  width: 1360px;
+  width: 70%;
   height: 15px;
   border-radius: 14px;
   opacity: 1;
