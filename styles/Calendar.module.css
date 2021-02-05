@@ -67,6 +67,7 @@
   color: #000000;
   opacity: 1;
 }
+
 /* GRID */
 .row {
   margin: 0;
@@ -172,6 +173,16 @@
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
+}
+
+.calendar .body .cell .number:hover {
+    width: 30px;
+    height: 30px;
+    background: transparent linear-gradient(180deg, #FF0000 0%, #FFBBBB 100%) 0% 0% no-repeat padding-box;
+    opacity: 0.23;
+    border-radius: 25px;
+    text-align: center;
+    padding: 5px;
 }
 
 .calendar .body .disabled {
