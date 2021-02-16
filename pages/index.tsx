@@ -1,9 +1,9 @@
-import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
-import { Row, Col } from "react-bootstrap"
-import Button from "react-bootstrap/Button"
-import styles from "../styles/Home.module.css"
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { Row, Col } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import styles from "../styles/Home.module.css";
 
 const Home: React.FunctionComponent = () => {
   return (
@@ -41,7 +41,7 @@ const Home: React.FunctionComponent = () => {
         
       </footer> */}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

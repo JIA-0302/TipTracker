@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import addMonths from "date-fns/addMonths"
-import subMonths from "date-fns/subMonths"
-import styles from "styles/Calendar.module.css"
+import React, { useState } from "react";
+import addMonths from "date-fns/addMonths";
+import subMonths from "date-fns/subMonths";
+import styles from "styles/Calendar.module.css";
 import {
   addDays,
   endOfMonth,
@@ -12,29 +12,29 @@ import {
   startOfMonth,
   startOfWeek,
   toDate,
-} from "date-fns"
-import ShiftMainAddModal from "../shift-main-add-modal"
-import ShiftEditModal from "../shift-edit-modal"
+} from "date-fns";
+import ShiftMainAddModal from "../shift-main-add-modal";
+import ShiftEditModal from "../shift-edit-modal";
 
 export interface ShiftData {
-  earnings: number
-  cashTips: number
-  ccTips: number
-  active: boolean
+  earnings: number;
+  cashTips: number;
+  ccTips: number;
+  active: boolean;
 }
 
 const WorkCalendar: React.FunctionComponent = () => {
   // Add Work Calendar here
-  const [currentDate, setCurrentDate] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(new Date())
-  const [showAddModal, setShowAddModal] = useState(false)
-  const [showEditModal, setShowEditModal] = useState(false)
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [mockEditData, setMockEditData] = useState<ShiftData>({
     earnings: 110.5,
     cashTips: 230,
     ccTips: 55,
     active: true,
-  })
+  });
 
   const createShiftModal = (calendarDate) => {
     return showAddModal || !showEditModal ? (
@@ -51,18 +51,18 @@ const WorkCalendar: React.FunctionComponent = () => {
         data={mockEditData}
         updateData={setMockEditData}
       />
-    )
-  }
+    );
+  };
 
   const nextMonth = () => {
-    setCurrentDate(addMonths(currentDate, 1))
-  }
+    setCurrentDate(addMonths(currentDate, 1));
+  };
   const prevMonth = () => {
-    setCurrentDate(subMonths(currentDate, 1))
-  }
+    setCurrentDate(subMonths(currentDate, 1));
+  };
 
   const header = () => {
-    const dateFormat = "MMMM yyyy"
+    const dateFormat = "MMMM yyyy";
     return (
       <div className={` ${styles.header}`}>
         <div className={styles.icon} onClick={prevMonth}>
@@ -75,13 +75,13 @@ const WorkCalendar: React.FunctionComponent = () => {
           chevron_right
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const daysOfWeek = () => {
-    const dateFormat = "E"
-    const days = []
-    const startDate = startOfWeek(currentDate)
+    const dateFormat = "E";
+    const days = [];
+    const startDate = startOfWeek(currentDate);
     for (let i = 0; i < 7; i++) {
       days.push(
         <div
@@ -90,35 +90,35 @@ const WorkCalendar: React.FunctionComponent = () => {
         >
           {format(addDays(startDate, i), dateFormat)}
         </div>
-      )
+      );
     }
-    return <div className={`${styles.days} ${styles.row}`}>{days}</div>
-  }
+    return <div className={`${styles.days} ${styles.row}`}>{days}</div>;
+  };
 
   const onDateClick = (day, modalType) => {
-    setSelectedDate(day)
+    setSelectedDate(day);
     if (modalType === "add") {
-      setShowAddModal(true)
+      setShowAddModal(true);
     } else {
-      setShowEditModal(true)
+      setShowEditModal(true);
     }
-  }
+  };
 
   const cells = () => {
-    const monthStart = startOfMonth(currentDate)
-    const monthEnd = endOfMonth(monthStart)
-    const startDate = startOfWeek(monthStart)
-    const endDate = endOfWeek(monthEnd)
+    const monthStart = startOfMonth(currentDate);
+    const monthEnd = endOfMonth(monthStart);
+    const startDate = startOfWeek(monthStart);
+    const endDate = endOfWeek(monthEnd);
 
-    const dateFormat = "d"
-    const rows = []
-    let days = []
-    let day = startDate
-    let formattedDate = ""
+    const dateFormat = "d";
+    const rows = [];
+    let days = [];
+    let day = startDate;
+    let formattedDate = "";
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
-        formattedDate = format(day, dateFormat)
-        const cloneDay = day
+        formattedDate = format(day, dateFormat);
+        const cloneDay = day;
 
         days.push(
           <div
@@ -153,8 +153,8 @@ const WorkCalendar: React.FunctionComponent = () => {
               ""
             )}
           </div>
-        )
-        day = addDays(day, 1)
+        );
+        day = addDays(day, 1);
       }
 
       rows.push(
@@ -162,11 +162,11 @@ const WorkCalendar: React.FunctionComponent = () => {
           {" "}
           {days}{" "}
         </div>
-      )
-      days = []
+      );
+      days = [];
     }
-    return <div className={styles.body}>{rows}</div>
-  }
+    return <div className={styles.body}>{rows}</div>;
+  };
 
   return (
     <div>
@@ -177,7 +177,7 @@ const WorkCalendar: React.FunctionComponent = () => {
       </div>
       {createShiftModal(selectedDate)}
     </div>
-  )
-}
+  );
+};
 
-export default WorkCalendar
+export default WorkCalendar;

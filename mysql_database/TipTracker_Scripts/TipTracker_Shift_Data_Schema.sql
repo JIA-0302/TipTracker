@@ -19,14 +19,15 @@ Drop table if exists `non_hourly_shift_details`;
 Drop table if exists `hourly_shift_details`;
 
 CREATE TABLE `users` (
-  `user_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `image`          VARCHAR(255),
   `password_hash` varchar(255) NOT NULL,
-  `timezone` varchar(255),
-  `created_at` timestamp,
-  `email_verified` TIMESTAMP(6),
+  `timezone` varchar(255),  
+  `created_at`     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at`     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `email_verified` TIMESTAMP(6)
 );
 
 CREATE TABLE `accounts` (
@@ -97,7 +98,7 @@ CREATE TABLE `hourly_shift_details` (
 ALTER TABLE
   `non_hourly_shift_details`
 ADD
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE
   `non_hourly_shift_details`
@@ -107,7 +108,7 @@ ADD
 ALTER TABLE
   `hourly_shift_details`
 ADD
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE
   `hourly_shift_details`

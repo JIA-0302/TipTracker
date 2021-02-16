@@ -1,17 +1,17 @@
-import React, { useState } from "react"
-import { Button, Col, Form, Modal } from "react-bootstrap"
-import styles from "styles/ShiftModal.module.css"
-import { format } from "date-fns"
-import { HiCreditCard } from "react-icons/hi"
-import { FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc"
-import { ShiftData } from "components/work-calendar"
+import React, { useState } from "react";
+import { Button, Col, Form, Modal } from "react-bootstrap";
+import styles from "styles/ShiftModal.module.css";
+import { format } from "date-fns";
+import { HiCreditCard } from "react-icons/hi";
+import { FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc";
+import { ShiftData } from "components/work-calendar";
 
 interface ShiftEditModalProps {
-  date: Date
-  onHide: (boolean) => void
-  show: boolean
-  data: ShiftData
-  updateData: (data: ShiftData) => void
+  date: Date;
+  onHide: (boolean) => void;
+  show: boolean;
+  data: ShiftData;
+  updateData: (data: ShiftData) => void;
 }
 
 const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
@@ -22,32 +22,32 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
     cashTips: 230,
     ccTips: 55,
     active: true,
-  })
+  });
   const closeModal = () => {
-    props.onHide(false)
-  }
+    props.onHide(false);
+  };
 
   const updateData = () => {
-    props.onHide(false)
-    const newData = { ...userData }
-    props.updateData(newData)
-  }
+    props.onHide(false);
+    const newData = { ...userData };
+    props.updateData(newData);
+  };
 
   const deleteData = () => {
-    props.onHide(false)
-    const deleteData = { ...userData, active: false }
-    props.updateData(deleteData)
-  }
+    props.onHide(false);
+    const deleteData = { ...userData, active: false };
+    props.updateData(deleteData);
+  };
 
   const earnings = ({ target: { value } }) => {
-    updateUserData({ ...userData, earnings: value })
-  }
+    updateUserData({ ...userData, earnings: value });
+  };
   const cashTips = ({ target: { value } }) => {
-    updateUserData({ ...userData, cashTips: value })
-  }
+    updateUserData({ ...userData, cashTips: value });
+  };
   const ccTips = ({ target: { value } }) => {
-    updateUserData({ ...userData, ccTips: value })
-  }
+    updateUserData({ ...userData, ccTips: value });
+  };
 
   return (
     <Modal
@@ -139,7 +139,7 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
         </Button>
       </Modal.Footer>
     </Modal>
-  )
-}
+  );
+};
 
-export default ShiftEditModal
+export default ShiftEditModal;

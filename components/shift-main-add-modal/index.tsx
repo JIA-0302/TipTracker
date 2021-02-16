@@ -1,14 +1,14 @@
-import React from "react"
-import { Col, Modal, Row } from "react-bootstrap"
-import styles from "styles/ShiftModal.module.css"
-import ShiftAddModal from "../shift-add-modal"
-import { FcClock, FcMoneyTransfer } from "react-icons/fc"
+import React from "react";
+import { Col, Modal, Row } from "react-bootstrap";
+import styles from "styles/ShiftModal.module.css";
+import ShiftAddModal from "../shift-add-modal";
+import { FcClock, FcMoneyTransfer } from "react-icons/fc";
 
 interface ShiftMainAddModalProps {
-  date: Date
-  hourly?: string
-  show: boolean
-  onHide: (boolean) => void
+  date: Date;
+  hourly?: string;
+  show: boolean;
+  onHide: (boolean) => void;
 }
 
 const ShiftMainAddModal: React.FunctionComponent<ShiftMainAddModalProps> = (
@@ -17,17 +17,17 @@ const ShiftMainAddModal: React.FunctionComponent<ShiftMainAddModalProps> = (
   const [showWageModel, setWageModel] = React.useState({
     wageType: "",
     wageMode: false,
-  })
+  });
 
   const openHourlyWageModal = () => {
-    props.onHide(false)
-    setWageModel({ wageType: "hourly", wageMode: true })
-  }
+    props.onHide(false);
+    setWageModel({ wageType: "hourly", wageMode: true });
+  };
 
   const openNonHourlyWageModal = () => {
-    props.onHide(false)
-    setWageModel({ wageType: "nonHourly", wageMode: true })
-  }
+    props.onHide(false);
+    setWageModel({ wageType: "nonHourly", wageMode: true });
+  };
 
   return !props.show && showWageModel.wageMode ? (
     <ShiftAddModal
@@ -67,7 +67,7 @@ const ShiftMainAddModal: React.FunctionComponent<ShiftMainAddModalProps> = (
         </Row>
       </Modal.Body>
     </Modal>
-  )
-}
+  );
+};
 
-export default ShiftMainAddModal
+export default ShiftMainAddModal;

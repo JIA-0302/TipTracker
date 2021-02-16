@@ -1,6 +1,6 @@
-import Navbar from "components/navbar"
-import styles from "./styles.module.css"
-import classnames from "classnames"
+import Navbar from "components/navbar";
+import styles from "./styles.module.css";
+import classnames from "classnames";
 
 const PrivateLayout: React.FunctionComponent = ({ children }) => {
   return (
@@ -10,7 +10,7 @@ const PrivateLayout: React.FunctionComponent = ({ children }) => {
         {children}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PrivateLayout
+export default PrivateLayout;

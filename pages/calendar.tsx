@@ -1,7 +1,7 @@
-import Head from "next/head"
-import WorkCalendar from "components/work-calendar"
-import PrivateLayout from "components/layouts/private-layout"
-import React from "react"
+import Head from "next/head";
+import WorkCalendar from "components/work-calendar";
+import PrivateLayout from "components/layouts/private-layout";
+import React from "react";
 
 const Home: React.FunctionComponent = () => {
   return (
@@ -16,7 +16,7 @@ const Home: React.FunctionComponent = () => {
       <h1>Work Calendar</h1>
       <WorkCalendar />
     </PrivateLayout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
