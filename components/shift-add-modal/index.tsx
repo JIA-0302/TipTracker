@@ -1,21 +1,21 @@
-import React from "react"
-import { Button, Col, Form, Modal } from "react-bootstrap"
-import styles from "styles/ShiftModal.module.css"
-import { format } from "date-fns"
-import { HiCreditCard } from "react-icons/hi"
-import { FcClock, FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc"
+import React from "react";
+import { Button, Col, Form, Modal } from "react-bootstrap";
+import styles from "styles/ShiftModal.module.css";
+import { format } from "date-fns";
+import { HiCreditCard } from "react-icons/hi";
+import { FcClock, FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc";
 
 interface ShiftAddModalProps {
-  date: Date
-  hourly: string
-  show: boolean
-  onHide: (object) => void
+  date: Date;
+  hourly: string;
+  show: boolean;
+  onHide: (object) => void;
 }
 
 const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
   const closeModal = () => {
-    props.onHide({ wageType: "", wageMode: false })
-  }
+    props.onHide({ wageType: "", wageMode: false });
+  };
 
   return (
     <Modal
@@ -117,7 +117,7 @@ const ShiftAddModal: React.FunctionComponent<ShiftAddModalProps> = (props) => {
         </Button>
       </Modal.Footer>
     </Modal>
-  )
-}
+  );
+};
 
-export default ShiftAddModal
+export default ShiftAddModal;

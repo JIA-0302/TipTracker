@@ -1,30 +1,33 @@
 -- The following command turns off the Safe Update checks so that your
 -- UPDATE and DELETE queries will work without restrictions.  You don't
 -- have to replicate this command anywhere else in your code.
--- The following command turns off the Safe Update checks so that your
--- UPDATE and DELETE queries will work without restrictions.  You don't
--- have to replicate this command anywhere else in your code.
 SET
   SQL_SAFE_UPDATES = 0;
 
-Drop table if exists `non_hourly_shift_details`;
-Drop table if exists `hourly_shift_details`;
 Drop table if exists `users`;
-Drop table if exists `employers`;
+
 Drop table if exists `accounts`;
-Drop table if exists `accounts`;
+
 Drop table if exists `sessions`;
+
 Drop table if exists `verification_requests`;
 
+Drop table if exists `employers`;
+
+Drop table if exists `non_hourly_shift_details`;
+
+Drop table if exists `hourly_shift_details`;
+
 CREATE TABLE `users` (
-  `user_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `image`          VARCHAR(255),
   `password_hash` varchar(255) NOT NULL,
-  `timezone` varchar(255),
-  `created_at` timestamp,
-  `email_verified` BOOLEAN
+  `timezone` varchar(255),  
+  `created_at`     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at`     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `email_verified` TIMESTAMP(6)
 );
 
 CREATE TABLE `accounts` (
@@ -75,9 +78,9 @@ CREATE TABLE `non_hourly_shift_details` (
   `user_id` int NOT NULL,
   `employer_id` int NOT NULL,
   `shift_date` DATETIME NOT NULL,
-  `total_base_earning` DECIMAL(9,2),
-  `credit_card_tips` DECIMAL(9,2),
-  `cash_tips` DECIMAL(9,2)
+  `total_base_earning` DECIMAL(9, 2),
+  `credit_card_tips` DECIMAL(9, 2),
+  `cash_tips` DECIMAL(9, 2)
 );
 
 CREATE TABLE `hourly_shift_details` (
@@ -87,15 +90,15 @@ CREATE TABLE `hourly_shift_details` (
   `shift_date` DATETIME NOT NULL,
   `start_time` DATETIME NOT NULL,
   `end_time` DATETIME NOT NULL,
-  `hourly_wage` DECIMAL(9,2),
-  `credit_card_tips` DECIMAL(9,2),
-  `cash_tips` DECIMAL(9,2)
+  `hourly_wage` DECIMAL(9, 2),
+  `credit_card_tips` DECIMAL(9, 2),
+  `cash_tips` DECIMAL(9, 2)
 );
 
 ALTER TABLE
   `non_hourly_shift_details`
 ADD
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE
   `non_hourly_shift_details`
@@ -105,7 +108,7 @@ ADD
 ALTER TABLE
   `hourly_shift_details`
 ADD
-  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE
   `hourly_shift_details`

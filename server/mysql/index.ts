@@ -1,4 +1,4 @@
-import mysql from "serverless-mysql"
+import mysql from "serverless-mysql";
 
 export const db = mysql({
   config: {
@@ -7,17 +7,17 @@ export const db = mysql({
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
   },
-})
+});
 
 export async function query(
   q: string,
   values: (string | number)[] | string | number = []
-) {
+): Promise<any> {
   try {
-    const results = await db.query(q, values)
-    await db.end()
-    return results
+    const results = await db.query(q, values);
+    await db.end();
+    return results;
   } catch (e) {
-    throw Error(e.message)
+    throw Error(e.message);
   }
 }
