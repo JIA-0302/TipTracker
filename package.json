@@ -35,7 +35,8 @@
     "react": "17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "17.0.1",
-    "react-icons": "^4.1.0"
+    "react-icons": "^4.1.0",
+    "serverless-mysql": "^1.5.4"
   },
   "devDependencies": {
     "@bitwarden/cli": "^1.13.3",

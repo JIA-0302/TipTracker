@@ -1,18 +1,22 @@
-USE sql5388964;
-
 -- The following command turns off the Safe Update checks so that your
 -- UPDATE and DELETE queries will work without restrictions.  You don't
 -- have to replicate this command anywhere else in your code.
 SET
   SQL_SAFE_UPDATES = 0;
 
+Drop table if exists `users`;
+
+Drop table if exists `accounts`;
+
+Drop table if exists `sessions`;
+
+Drop table if exists `verification_requests`;
+
+Drop table if exists `employers`;
+
 Drop table if exists `non_hourly_shift_details`;
 
 Drop table if exists `hourly_shift_details`;
-
-Drop table if exists `users`;
-
-Drop table if exists `employers`;
 
 CREATE TABLE `users` (
   `user_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -72,22 +76,22 @@ CREATE TABLE `non_hourly_shift_details` (
   `shift_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `user_id` int NOT NULL,
   `employer_id` int NOT NULL,
-  `shift_date` timestamp COMMENT 'can be stored as varchar MM-DD-YY',
-  `total_base_earning` int,
-  `credit_card_tips` int,
-  `cash_tips` int
+  `shift_date` DATETIME NOT NULL,
+  `total_base_earning` DECIMAL(9, 2),
+  `credit_card_tips` DECIMAL(9, 2),
+  `cash_tips` DECIMAL(9, 2)
 );
 
 CREATE TABLE `hourly_shift_details` (
   `shift_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `user_id` int NOT NULL,
   `employer_id` int NOT NULL,
-  `shift_date` timestamp COMMENT 'can be stored as varchar MM-DD-YY',
-  `start_time` timestamp,
-  `end_time` timestamp,
-  `hourly_wage` int,
-  `credit_card_tips` int,
-  `cash_tips` int
+  `shift_date` DATETIME NOT NULL,
+  `start_time` DATETIME NOT NULL,
+  `end_time` DATETIME NOT NULL,
+  `hourly_wage` DECIMAL(9, 2),
+  `credit_card_tips` DECIMAL(9, 2),
+  `cash_tips` DECIMAL(9, 2)
 );
 
 ALTER TABLE
