@@ -1,3 +1,9 @@
+DROP DATABASE if exists tiptracker;
+
+CREATE DATABASE tiptracker;
+
+use tiptracker;
+
 -- The following command turns off the Safe Update checks so that your
 -- UPDATE and DELETE queries will work without restrictions.  You don't
 -- have to replicate this command anywhere else in your code.
@@ -22,12 +28,12 @@ CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `image`          VARCHAR(255),
+  `image` VARCHAR(255),
   `password_hash` varchar(255) NOT NULL,
-  `timezone` varchar(255),  
-  `created_at`     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `updated_at`     TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `email_verified` TIMESTAMP(6)
+  `timezone` varchar(255),
+  `created_at` TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `email_verified` TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
 
 CREATE TABLE `accounts` (
@@ -137,32 +143,20 @@ CREATE UNIQUE INDEX token ON verification_requests(token);
 
 INSERT INTO
   `users`(
-    `user_id`,
-    `first_name`,
-    `last_name`,
+    `name`,
     `email`,
-    `password_hash`,
-    `timezone`,
-    `created_at`
+    `password_hash`
   )
 VALUES
   (
-    0,
-    "George",
-    "Burdell",
+    "George Burdell",
     "gbb1908@gatech.edu",
-    "1234567890",
-    null,
-    null
+    "1234567890"
   ),
   (
-    0,
-    "John",
-    "Doe",
+    "John Doe",
     "jd1765@gatech.edu",
-    "0987654321",
-    null,
-    null
+    "0987654321"
   );
 
 INSERT INTO
