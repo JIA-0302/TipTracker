@@ -4,7 +4,6 @@ import styles from "styles/Registration.module.css";
 
 const Registration: React.FunctionComponent = () => {
     const [registerFields, setRegisterFields] = useState({
-        userId: 0,
         firstName: "",
         lastName: "",
         email: "",
@@ -27,14 +26,12 @@ const Registration: React.FunctionComponent = () => {
 
     const registerUser = () => {
         const user = {
-            userId: registerFields.userId,
             name: registerFields.firstName + " " + registerFields.lastName,
             email: registerFields.email,
             password: registerFields.password
         }
         setRegisterFields(
             {
-                userId: 0,
                 firstName: "",
                 lastName: "",
                 email: "",
