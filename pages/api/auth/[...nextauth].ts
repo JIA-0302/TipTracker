@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Providers from "next-auth/providers";
 import NextAuth, { InitOptions } from "next-auth";
+import { getUserByCredentials } from "server/mysql/actions/user";
 
 const options: InitOptions = {
   providers: [
@@ -15,9 +16,8 @@ const options: InitOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const { email } = credentials;
-        // TODO - Add logic to retrieve user based on credentials
-        const user = { id: 1, name: "Signed Test User", email: email };
+        const { email, password } = credentials;
+        const user = await getUserByCredentials(email, password);
 
         if (user) {
           return user;
