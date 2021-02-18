@@ -1,6 +1,9 @@
 import Head from "next/head";
 import PrivateLayout from "components/layouts/private-layout";
 import { getSession } from "next-auth/client";
+import React from "react";
+import Link from "next/link";
+import { Button } from "react-bootstrap";
 
 interface HomeProps {
   session: {
@@ -21,8 +24,21 @@ export function Home(props: HomeProps): JSX.Element {
         <title>Home | TipTracker</title>
       </Head>
 
-      <h1>Home</h1>
-      <h2>Welcome back: {session?.user?.name || "Guest"}</h2>
+      {session ? (
+        <>
+          <h1>Home</h1>
+          <h2>Welcome back: {session?.user?.name.split(" ")[0] || "Guest"}</h2>
+        </>
+      ) : (
+        <>
+          <h1>Hello Guest</h1>
+          <Link href="/api/auth/signin">
+            <Button size="lg" variant="warning" className="mt-4">
+              Login
+            </Button>
+          </Link>
+        </>
+      )}
     </PrivateLayout>
   );
 }
