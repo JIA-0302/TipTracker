@@ -24,12 +24,14 @@ const Registration: React.FunctionComponent = () => {
         setRegisterFields({...registerFields, password: value});
     };
 
-    const registerUser = () => {
+    const registerUser = (event) => {
+        event.preventDefault();
         const user = {
             name: registerFields.firstName + " " + registerFields.lastName,
             email: registerFields.email,
             password: registerFields.password
-        }
+        };
+        postData(user);
         setRegisterFields(
             {
                 firstName: "",
@@ -39,6 +41,33 @@ const Registration: React.FunctionComponent = () => {
             }
         );
     };
+    const postData = (data) => {
+        fetch('api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.text().then(text => {
+                            throw new Error(text)
+                        })
+                    }
+
+                }
+            )
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+    };
+
     return (
         <div className={styles.dFlex}>
             <div className={styles.center}>
@@ -48,7 +77,7 @@ const Registration: React.FunctionComponent = () => {
                     </Form.Row>
                     <Form.Row>
                         <Col xs={12}>
-                            <Form.Group controlId="firstName">
+                            <Form.Group controlId="firstName" >
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control type="text" onChange={firstName}></Form.Control>
                             </Form.Group>
@@ -66,7 +95,7 @@ const Registration: React.FunctionComponent = () => {
                         <Col xs={12}>
                             <Form.Group controlId="email">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="text" onChange={email}></Form.Control>
+                                <Form.Control type="email" onChange={email}></Form.Control>
                             </Form.Group>
                         </Col>
                     </Form.Row>
@@ -74,7 +103,7 @@ const Registration: React.FunctionComponent = () => {
                         <Col xs={12}>
                             <Form.Group controlId="password">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="text" onChange={password}></Form.Control>
+                                <Form.Control type="password" onChange={password}></Form.Control>
                             </Form.Group>
                         </Col>
                     </Form.Row>
