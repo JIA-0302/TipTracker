@@ -101,6 +101,15 @@ CREATE TABLE `hourly_shift_details` (
   `cash_tips` DECIMAL(9, 2)
 );
 
+CREATE TABLE `work_schedule_details` (
+  `schedule_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `user_id` int NOT NULL,
+  `employer_id` int NOT NULL,
+  `shift_date` DATETIME NOT NULL,
+  `start_time` DATETIME NOT NULL,
+  `end_time` DATETIME NOT NULL
+);
+
 ALTER TABLE
   `non_hourly_shift_details`
 ADD
@@ -120,6 +129,17 @@ ALTER TABLE
   `hourly_shift_details`
 ADD
   FOREIGN KEY (`employer_id`) REFERENCES `employers` (`employer_id`);
+
+ALTER TABLE
+  `work_schedule_details`
+ADD
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE
+  `work_schedule_details`
+ADD
+  FOREIGN KEY (`employer_id`) REFERENCES `employers` (`employer_id`);
+
 
 CREATE INDEX `unique_shift_data` ON `non_hourly_shift_details` (`user_id`, `employer_id`, `shift_date`);
 
@@ -140,65 +160,3 @@ CREATE UNIQUE INDEX access_token ON sessions(access_token);
 CREATE UNIQUE INDEX email ON users(email);
 
 CREATE UNIQUE INDEX token ON verification_requests(token);
-
-INSERT INTO
-  `users`(
-    `name`,
-    `email`,
-    `password_hash`
-  )
-VALUES
-  (
-    "George Burdell",
-    "gbb1908@gatech.edu",
-    "1234567890"
-  ),
-  (
-    "John Doe",
-    "jd1765@gatech.edu",
-    "0987654321"
-  );
-
-INSERT INTO
-  `employers`(`employer_id`, `employer_name`, `industry`)
-VALUES
-  (0, "Starbucks", "Restaurant"),
-  (0, "Dominos", "Restaurant");
-
-INSERT INTO
-  `non_hourly_shift_details`(
-    `shift_id`,
-    `user_id`,
-    `employer_id`,
-    `shift_date`,
-    `total_base_earning`,
-    `credit_card_tips`,
-    `cash_tips`
-  )
-VALUES
-  (0, 1, 1, "2020-01-01 10:10:10", 40000, 126, 39);
-
-INSERT INTO
-  `hourly_shift_details`(
-    `shift_id`,
-    `user_id`,
-    `employer_id`,
-    `shift_date`,
-    `start_time`,
-    `end_time`,
-    `hourly_wage`,
-    `credit_card_tips`,
-    `cash_tips`
-  )
-VALUES
-  (
-    0,
-    2,
-    2,
-    "2020-02-01 11:10:10",
-    "2020-02-01 11:10:10",
-    "2020-02-01 20:10:10",
-    8,
-    93,
-    47
-  );
