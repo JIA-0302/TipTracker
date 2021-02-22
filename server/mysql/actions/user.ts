@@ -27,7 +27,7 @@ export async function registerUser(
   password: string
 ) {
   if (await isExistingEmail(email)) {
-    throw Error(`${email} is already an registered account`);
+    throw Error(`${email} is already registered`);
   }
 
   try {
@@ -38,7 +38,7 @@ export async function registerUser(
       [name, email, passwordHash]
     );
   } catch (err) {
-    throw Error(`Internal server error. Please try again later`);
+    throw Error(`Couldn't Register Please try again later`);
   }
 }
 
