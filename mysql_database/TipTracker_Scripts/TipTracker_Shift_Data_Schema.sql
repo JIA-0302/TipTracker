@@ -83,22 +83,26 @@ CREATE TABLE `non_hourly_shift_details` (
   `shift_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `user_id` int NOT NULL,
   `employer_id` int NOT NULL,
-  `shift_date` DATETIME NOT NULL,
+  `shift_date` DATE NOT NULL,
   `total_base_earning` DECIMAL(9, 2),
   `credit_card_tips` DECIMAL(9, 2),
-  `cash_tips` DECIMAL(9, 2)
+  `cash_tips` DECIMAL(9, 2),
+  `created_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
 );
 
 CREATE TABLE `hourly_shift_details` (
   `shift_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `user_id` int NOT NULL,
   `employer_id` int NOT NULL,
-  `shift_date` DATETIME NOT NULL,
+  `shift_date` DATE NOT NULL,
   `start_time` DATETIME NOT NULL,
   `end_time` DATETIME NOT NULL,
   `hourly_wage` DECIMAL(9, 2),
   `credit_card_tips` DECIMAL(9, 2),
-  `cash_tips` DECIMAL(9, 2)
+  `cash_tips` DECIMAL(9, 2),
+  `created_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
+  `updated_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
 );
 
 ALTER TABLE
@@ -176,7 +180,7 @@ INSERT INTO
     `cash_tips`
   )
 VALUES
-  (0, 1, 1, "2020-01-01 10:10:10", 40000, 126, 39);
+  (0, 1, 1, "2020-01-01", 40000, 126, 39);
 
 INSERT INTO
   `hourly_shift_details`(
@@ -195,7 +199,7 @@ VALUES
     0,
     2,
     2,
-    "2020-02-01 11:10:10",
+    "2020-02-01",
     "2020-02-01 11:10:10",
     "2020-02-01 20:10:10",
     8,
