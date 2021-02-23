@@ -1,16 +1,13 @@
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { getWorkedDaysForMonth } from "server/mysql/actions/shiftData";
+import withUser from "utils/user-middleware";
 
 interface SearchDate {
   month: number;
   year: number;
 }
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  const userId = 2; // TODO - repalce with middleware to extract id from session
+const handler = async (req, res) => {
+  const userId = req.user?.id;
 
   switch (req.method) {
     case "GET":
@@ -30,7 +27,7 @@ const handler: NextApiHandler = async (
   }
 };
 
-function getSearchDateFromQuery(query: NextApiRequest["query"]): SearchDate {
+function getSearchDateFromQuery(query): SearchDate {
   const { month, year } = query;
 
   if (!month) {
@@ -58,4 +55,4 @@ function getSearchDateFromQuery(query: NextApiRequest["query"]): SearchDate {
   };
 }
 
-export default handler;
+export default withUser(handler);

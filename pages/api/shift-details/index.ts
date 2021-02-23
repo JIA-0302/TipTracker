@@ -1,4 +1,3 @@
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import {
   getAllShiftDetailsByUserId,
   addHourlyShiftData,
@@ -8,17 +7,14 @@ import {
   IHourlyShiftDetails,
   INonHourlyShiftDetails,
 } from "server/mysql/models/shiftData";
-
 import {
   parseHourlyShiftDetails,
   parseNonHourlyShiftDetails,
 } from "utils/validations/shiftDetails";
+import withUser from "utils/user-middleware";
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  const userId = 2; // TODO - repalce with middleware to extract id from session
+const handler = async (req, res) => {
+  const userId = req.user?.id;
 
   switch (req.method) {
     case "GET":
@@ -70,4 +66,4 @@ const handler: NextApiHandler = async (
   }
 };
 
-export default handler;
+export default withUser(handler);

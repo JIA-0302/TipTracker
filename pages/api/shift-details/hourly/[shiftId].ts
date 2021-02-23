@@ -1,10 +1,10 @@
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import {
   deleteShiftForUser,
   getShiftDetail,
   updateHourlyShiftData,
 } from "server/mysql/actions/shiftData";
 import { IHourlyShiftDetails } from "server/mysql/models/shiftData";
+import withUser from "utils/user-middleware";
 import { parseHourlyShiftDetails } from "utils/validations/shiftDetails";
 
 /**
@@ -16,11 +16,8 @@ import { parseHourlyShiftDetails } from "utils/validations/shiftDetails";
  * @param req
  * @param res
  */
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
-  const userId = 2; // TODO - repalce with middleware to extract id from session
+const handler = async (req, res) => {
+  const userId = req.user?.id; // TODO - repalce with middleware to extract id from session
 
   const { shiftId } = req.query;
   if (!shiftId) {
@@ -74,4 +71,4 @@ const handler: NextApiHandler = async (
   }
 };
 
-export default handler;
+export default withUser(handler);

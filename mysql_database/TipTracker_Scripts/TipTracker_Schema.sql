@@ -111,7 +111,7 @@ CREATE TABLE `work_schedule_details` (
   `schedule_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `user_id` int NOT NULL,
   `employer_id` int NOT NULL,
-  `shift_date` DATETIME NOT NULL,
+  `shift_date` DATE NOT NULL,
   `start_time` DATETIME NOT NULL,
   `end_time` DATETIME NOT NULL
 );
