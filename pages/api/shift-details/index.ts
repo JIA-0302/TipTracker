@@ -53,9 +53,10 @@ const handler = async (req, res) => {
             });
         }
 
-        res
-          .status(200)
-          .json({ success: true, shiftDetail: { shift_id: newShiftId } });
+        res.status(200).json({
+          success: true,
+          shiftDetail: { shift_id: newShiftId, wageType },
+        });
       } catch (e) {
         res.status(500).json({ message: e.message });
       }
