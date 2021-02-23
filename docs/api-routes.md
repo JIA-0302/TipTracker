@@ -5,6 +5,7 @@ The JWT must be stored in the cookie and should be passed on each request for au
 All the base url for the API routes will be `/api/*`.
 
 Some available API endpoints are:
+
 - [`/shift-details`](#shift-details)
 - [`/shift-details/worked`](#shift-details-worked)
 - [`/shift-details/hourly/:id`](#shift-details-hourly)
@@ -15,6 +16,7 @@ Some available API endpoints are:
 ## `/shift-details`
 
 #### **GET** `/shift-details`
+
 This will return all the shift details of the user, both hourly and non-hourly.
 A sample response is:
 
@@ -53,10 +55,11 @@ A sample response is:
 ```
 
 #### **POST** `/shift-details`
+
 This endpoint is used to add shift data for the user. The body parameters for the request are as follows:
 | Parameter | Description | Required |
 |-----------|-------------|----------|
-| wageType  | specified the type of wage. Accepted values are `HOURLY` and `NON_HOURLY` | Yes |
+| wageType | specified the type of wage. Accepted values are `HOURLY` and `NON_HOURLY` | Yes |
 | shift_date | the day for which the data is being added. It should be formatted as `yyyy-MM-dd` | Yes |
 | start_time | the start time for the shift. It should be the same time as the shift_date. It should be formatted as `yyyy-MM-dd HH:mm:ss` | Yes for `HOURLY` |
 | end_time | the end time for the shift. It should not be before the start_time. It should be formatted as `yyyy-MM-dd HH:mm:ss` | Yes for `HOURLY` |
@@ -66,6 +69,7 @@ This endpoint is used to add shift data for the user. The body parameters for th
 | total_base_earning | total base earning for the shift <br/> Deafult: `0` | No |
 
 Example Request Body:
+
 ```
 {
     "wageType": "HOURLY",
@@ -80,6 +84,7 @@ Example Request Body:
 
 If the request is successful, it will return the `id` and the wage type for the newly created shift.
 Example Response:
+
 ```
 {
     "success": true,
@@ -95,16 +100,18 @@ Example Response:
 ## `/shift-details/worked`
 
 #### **GET** `/shift-details/worked`
+
 This endpoint is used to retrieve list of `shift_id` for the days worked in the given month.
 The month and the year are specified in the query.
-The request parameters  are as follows:
+The request parameters are as follows:
 | Parameter | Description | Required |
 |-----------|-------------|----------|
-| month  | Month to retrieve the data. It should be `1-12` where `1-January, 2-February, ..., 12-December` | Yes |
+| month | Month to retrieve the data. It should be `1-12` where `1-January, 2-February, ..., 12-December` | Yes |
 | shift_date | Year to retrieve the data. It should be formatted as `yyyy` | Yes |
 An example of a valid request is `/api/shift-details/worked?month=2&year=2021`.
 
 If the request is valid, the following response is generated:
+
 ```
 {
     "hourlyShiftDetails": [
@@ -150,6 +157,7 @@ If the specified shift is found, the sample response is:
 ```
 
 #### **PUT** `/shift-details/hourly/:id`
+
 This is used to update the details about the shift specified by `:id`.
 The body parameters for the request are as follows:
 | Parameter | Description | Required |
@@ -162,6 +170,7 @@ The body parameters for the request are as follows:
 | cash_tips | total cash tips earned for the shift <br/> Deafult: `0` | No |
 
 Example Request Body:
+
 ```
 {
     "shift_date": "2021-02-20",
@@ -175,6 +184,7 @@ Example Request Body:
 
 If the request is successful, it will simply return a success message.
 Example Response:
+
 ```
 {
     "success": true
@@ -182,12 +192,14 @@ Example Response:
 ```
 
 #### **DELETE** `/shift-details/hourly/:id`
+
 This is used to delete the specified shift data.
 
 For example, to delete a hourly shift data with `id` 8:
 `DELETE /shift-details/hourly/8`
 
 If the request is successful, it will return a success message.
+
 ```
 {
     "success": true
@@ -204,6 +216,7 @@ This returns the details about the shift with provided `:id`.
 For example, to get details about shift with `id` `8`, the request will be:
 `GET /shift-details/non-hourly/8`.
 If the specified shift is found, the sample response is:
+
 ```
 {
     "shiftDetail": {
@@ -221,6 +234,7 @@ If the specified shift is found, the sample response is:
 ```
 
 #### **PUT** `/shift-details/non-hourly/:id`
+
 This is used to update the details about the shift specified by `:id`.
 The body parameters for the request are as follows:
 | Parameter | Description | Required |
@@ -231,6 +245,7 @@ The body parameters for the request are as follows:
 | cash_tips | total cash tips earned for the shift <br/> Deafult: `0` | No |
 
 Example Request Body:
+
 ```
 {
     "shift_date": "2021-02-20",
@@ -242,6 +257,7 @@ Example Request Body:
 
 If the request is successful, it will simply return a success message.
 Example Response:
+
 ```
 {
     "success": true
@@ -249,12 +265,14 @@ Example Response:
 ```
 
 #### **DELETE** `/shift-details/non-hourly/:id`
+
 This is used to delete the specified shift data.
 
 For example, to delete an non-hourly shift data with `id` 8:
 `DELETE /shift-details/non-hourly/8`
 
 If the request is successful, it will return a success message.
+
 ```
 {
     "success": true

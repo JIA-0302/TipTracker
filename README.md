@@ -29,6 +29,10 @@ If you have Adobe XD installed, you can download the XD file from [here](https:/
 
 The web app should now be accessible at `http://localhost:3000`.
 
+### API Routes
+All API routes should be created under `/pages/api/`.
+The documentation for existing API endpoints can be found [here](docs/api-routes.md). If you are adding new endpoints, please update the documentation.
+
 ### Testing
 #### Manual Testing Tips
 1. Use devtools/web inspector to view in different devices and viewports locally. Guide for [Chrome Devtools](https://developers.google.com/web/tools/chrome-devtools/device-mode).
