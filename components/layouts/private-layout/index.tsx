@@ -1,6 +1,7 @@
-import Navbar from "components/navbar";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import ScreenLoader from "components/screen-loader";
+import Navbar from "components/navbar";
 
 import styles from "./styles.module.css";
 import classnames from "classnames";
@@ -10,7 +11,7 @@ const PrivateLayout: React.FunctionComponent = ({ children }) => {
   const router = useRouter();
 
   if (loading) {
-    return <h1>LOADING</h1>;
+    return <ScreenLoader />;
   } else if (!session) {
     router.push("/api/auth/signin");
   } else {

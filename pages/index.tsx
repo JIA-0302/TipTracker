@@ -2,15 +2,16 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Row, Col } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import { useSession } from "next-auth/client";
+import Button from "react-bootstrap/Button";
+import ScreenLoader from "components/screen-loader";
 import styles from "../styles/Home.module.css";
 
 const Home: React.FunctionComponent = () => {
   const [session, loading] = useSession();
 
   if (loading) {
-    return <h1>...LOADING...</h1>;
+    return <ScreenLoader />;
   }
 
   return (
