@@ -35,15 +35,18 @@ const handler: NextApiHandler = async (
         const { wageType } = req.body;
 
         let shiftData: IHourlyShiftDetails | INonHourlyShiftDetails = null;
-
+        let newShiftId = 0;
         switch (wageType) {
           case "HOURLY":
             shiftData = parseHourlyShiftDetails(req.body);
-            await addHourlyShiftData(userId, shiftData as IHourlyShiftDetails);
+            newShiftId = await addHourlyShiftData(
+              userId,
+              shiftData as IHourlyShiftDetails
+            );
             break;
           case "NON_HOURLY":
             shiftData = parseNonHourlyShiftDetails(req.body);
-            await addNonHourlyShiftData(
+            newShiftId = await addNonHourlyShiftData(
               userId,
               shiftData as INonHourlyShiftDetails
             );
@@ -54,7 +57,9 @@ const handler: NextApiHandler = async (
             });
         }
 
-        res.status(200).json({ success: true });
+        res
+          .status(200)
+          .json({ success: true, shiftDetail: { shift_id: newShiftId } });
       } catch (e) {
         res.status(500).json({ message: e.message });
       }

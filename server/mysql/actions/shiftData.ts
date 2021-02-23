@@ -95,7 +95,7 @@ export async function addHourlyShiftData(
     cash_tips,
   } = shiftData;
 
-  await query(
+  const result = await query(
     `insert into hourly_shift_details (user_id, employer_id, shift_date, start_time, end_time, hourly_wage, credit_card_tips, cash_tips)
     values (?, ?, ?, ?, ?, ?, ?, ?)`,
     [
@@ -109,6 +109,8 @@ export async function addHourlyShiftData(
       cash_tips,
     ]
   );
+
+  return result.insertId;
 }
 
 export async function addNonHourlyShiftData(
@@ -123,7 +125,7 @@ export async function addNonHourlyShiftData(
     cash_tips,
   } = shiftData;
 
-  await query(
+  const result = await query(
     `insert into non_hourly_shift_details (user_id, employer_id, shift_date, total_base_earning, credit_card_tips, cash_tips)
     values (?, ?, ?, ?, ?, ?)`,
     [
@@ -135,6 +137,8 @@ export async function addNonHourlyShiftData(
       cash_tips,
     ]
   );
+
+  return result.insertId;
 }
 
 export async function deleteShiftForUser(
@@ -159,4 +163,74 @@ export async function deleteShiftForUser(
   }
 
   return;
+}
+
+export async function updateHourlyShiftData(
+  userId: number | string,
+  shiftId: string | number,
+  shiftData: IHourlyShiftDetails,
+  employerId = 2
+) {
+  const {
+    start_time,
+    end_time,
+    shift_date,
+    hourly_wage,
+    credit_card_tips,
+    cash_tips,
+  } = shiftData;
+
+  const result = await query(
+    `update hourly_shift_details
+    set shift_date = ?, start_time = ?, end_time = ?, hourly_wage = ?, credit_card_tips = ?, cash_tips = ?
+    where user_id = ? and employer_id = ? and shift_id = ?`,
+    [
+      shift_date,
+      start_time,
+      end_time,
+      hourly_wage,
+      credit_card_tips,
+      cash_tips,
+      userId,
+      employerId,
+      shiftId,
+    ]
+  );
+
+  if (result.affectedRows === 0) {
+    throw Error("Could not update the specified shift");
+  }
+}
+
+export async function updateNonHourlyShiftData(
+  userId: number | string,
+  shiftId: number | string,
+  shiftData: INonHourlyShiftDetails,
+  employerId = 2
+) {
+  const {
+    shift_date,
+    total_base_earning,
+    credit_card_tips,
+    cash_tips,
+  } = shiftData;
+
+  const result = await query(
+    `update non_hourly_shift_details
+    set shift_date = ?, total_base_earning = ?, credit_card_tips = ?, cash_tips = ?
+    where user_id = ? and employer_id = ? and shift_id = ?`,
+    [
+      shift_date,
+      total_base_earning,
+      credit_card_tips,
+      cash_tips,
+      userId,
+      employerId,
+      shiftId,
+    ]
+  );
+
+  if (result.affectedRows === 0) {
+    throw Error("Could not update the specified shift");
+  }
 }
