@@ -12,10 +12,12 @@ Some available API endpoints are:
 - [`/shift-details/non-hourly/:id`](#shift-details-non-hourly)
 
 <hr />
+
 <div id="shift-details"></div>
+
 ## `/shift-details`
 
-#### **GET** `/shift-details`
+#### **GET** `/shift-details` 
 
 This will return all the shift details of the user, both hourly and non-hourly.
 A sample response is:
@@ -64,9 +66,9 @@ This endpoint is used to add shift data for the user. The body parameters for th
 | start_time | the start time for the shift. It should be the same time as the shift_date. It should be formatted as `yyyy-MM-dd HH:mm:ss` | Yes for `HOURLY` |
 | end_time | the end time for the shift. It should not be before the start_time. It should be formatted as `yyyy-MM-dd HH:mm:ss` | Yes for `HOURLY` |
 | hourly_wage | hourly wage rate for the hourly workers. | Yes for `HOURLY` |
-| credit_card_tips | total credit card tips earned for the shift <br/> Deafult: `0` | No |
-| cash_tips | total cash tips earned for the shift <br/> Deafult: `0` | No |
-| total_base_earning | total base earning for the shift <br/> Deafult: `0` | No |
+| credit_card_tips | total credit card tips earned for the shift <br/> Default: `0` | No |
+| cash_tips | total cash tips earned for the shift <br/> Default: `0` | No |
+| total_base_earning | total base earning for the shift <br/> Default: `0` | No |
 
 Example Request Body:
 
@@ -95,8 +97,9 @@ Example Response:
 }
 ```
 
-<hr />
+
 <div id="shift-details-worked"></div>
+
 ## `/shift-details/worked`
 
 #### **GET** `/shift-details/worked`
@@ -129,9 +132,9 @@ If the request is valid, the following response is generated:
 }
 ```
 
-<hr />
 <div id="shift-details-hourly"></div>
-## `/shift-details/hourly/:id`
+
+## `/shift-details/hourly/:id` ##
 These routes are used for the specific `HOURLY` type shift data defined by `shift_id` which is provided in the URL.
 #### **GET** `/shift-details/hourly/:id`
 This returns the details about the shift with provided `:id`.
@@ -166,8 +169,8 @@ The body parameters for the request are as follows:
 | start_time | the start time for the shift. It should be the same time as the shift_date. It should be formatted as `yyyy-MM-dd HH:mm:ss` | Yes |
 | end_time | the end time for the shift. It should not be before the start_time. It should be formatted as `yyyy-MM-dd HH:mm:ss` | Yes |
 | hourly_wage | hourly wage rate for the shift | Yes |
-| credit_card_tips | total credit card tips earned for the shift <br/> Deafult: `0` | No |
-| cash_tips | total cash tips earned for the shift <br/> Deafult: `0` | No |
+| credit_card_tips | total credit card tips earned for the shift <br/> Default: `0` | No |
+| cash_tips | total cash tips earned for the shift <br/> Default: `0` | No |
 
 Example Request Body:
 
@@ -206,9 +209,11 @@ If the request is successful, it will return a success message.
 }
 ```
 
-<hr />
+
 <div id="shift-details-non-hourly"></div>
+
 ## `/shift-details/non-hourly/:id`
+
 These routes are used for the specific `NON_HOURLY` type shift data defined by `shift_id` which is provided in the URL.
 #### **GET** `/shift-details/non-hourly/:id`
 This returns the details about the shift with provided `:id`.
@@ -240,9 +245,9 @@ The body parameters for the request are as follows:
 | Parameter | Description | Required |
 |-----------|-------------|----------|
 | shift_date | the day for which the data is being added. It should be formatted as `yyyy-MM-dd` | Yes |
-| total_base_earning | total base earning for the shift <br/> Deafult: `0` | No |
-| credit_card_tips | total credit card tips earned for the shift <br/> Deafult: `0` | No |
-| cash_tips | total cash tips earned for the shift <br/> Deafult: `0` | No |
+| total_base_earning | total base earning for the shift <br/> Default: `0` | No |
+| credit_card_tips | total credit card tips earned for the shift <br/> Default: `0` | No |
+| cash_tips | total cash tips earned for the shift <br/> Default: `0` | No |
 
 Example Request Body:
 
