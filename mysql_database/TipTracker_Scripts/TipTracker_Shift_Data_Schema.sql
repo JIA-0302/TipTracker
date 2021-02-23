@@ -84,9 +84,9 @@ CREATE TABLE `non_hourly_shift_details` (
   `user_id` int NOT NULL,
   `employer_id` int NOT NULL,
   `shift_date` DATE NOT NULL,
-  `total_base_earning` DECIMAL(9, 2),
-  `credit_card_tips` DECIMAL(9, 2),
-  `cash_tips` DECIMAL(9, 2),
+  `total_base_earning` DECIMAL(9, 2) DEFAULT 0.00,
+  `credit_card_tips` DECIMAL(9, 2) DEFAULT 0.00,
+  `cash_tips` DECIMAL(9, 2) DEFAULT 0.00,
   `created_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
   `updated_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
 );
@@ -98,9 +98,9 @@ CREATE TABLE `hourly_shift_details` (
   `shift_date` DATE NOT NULL,
   `start_time` DATETIME NOT NULL,
   `end_time` DATETIME NOT NULL,
-  `hourly_wage` DECIMAL(9, 2),
-  `credit_card_tips` DECIMAL(9, 2),
-  `cash_tips` DECIMAL(9, 2),
+  `hourly_wage` DECIMAL(9, 2) NOT NULL,
+  `credit_card_tips` DECIMAL(9, 2) DEFAULT 0.00,
+  `cash_tips` DECIMAL(9, 2) DEFAULT 0.00,
   `created_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
   `updated_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
 );
@@ -125,9 +125,9 @@ ALTER TABLE
 ADD
   FOREIGN KEY (`employer_id`) REFERENCES `employers` (`employer_id`);
 
-CREATE INDEX `unique_shift_data` ON `non_hourly_shift_details` (`user_id`, `employer_id`, `shift_date`);
+CREATE UNIQUE INDEX `unique_shift_data` ON `non_hourly_shift_details` (`user_id`, `employer_id`, `shift_date`);
 
-CREATE INDEX `unique_shift_data` ON `hourly_shift_details` (`user_id`, `employer_id`, `shift_date`);
+CREATE UNIQUE INDEX `unique_shift_data` ON `hourly_shift_details` (`user_id`, `employer_id`, `shift_date`);
 
 CREATE UNIQUE INDEX compound_id ON accounts(compound_id);
 

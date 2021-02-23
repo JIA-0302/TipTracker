@@ -1,5 +1,9 @@
 import { format, endOfMonth } from "date-fns";
 import { query } from "../index";
+import {
+  IHourlyShiftDetails,
+  INonHourlyShiftDetails,
+} from "../models/shiftData";
 
 const SHIFT_DATE_FORMAT = "yyyy-MM-dd";
 
@@ -79,45 +83,57 @@ export async function getShiftDetail(
 
 export async function addHourlyShiftData(
   userId: number,
-  shiftData,
+  shiftData: IHourlyShiftDetails,
   employerId = 2
 ) {
   const {
-    startTime,
-    endTime,
-    shiftDate,
-    hourlyWage,
-    creditCardTips,
-    cashTips,
+    start_time,
+    end_time,
+    shift_date,
+    hourly_wage,
+    credit_card_tips,
+    cash_tips,
   } = shiftData;
 
   await query(
     `insert into hourly_shift_details (user_id, employer_id, shift_date, start_time, end_time, hourly_wage, credit_card_tips, cash_tips)
-    values (?, ?, ?, ?, ?)`,
+    values (?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       userId,
       employerId,
-      shiftDate,
-      startTime,
-      endTime,
-      hourlyWage,
-      creditCardTips,
-      cashTips,
+      shift_date,
+      start_time,
+      end_time,
+      hourly_wage,
+      credit_card_tips,
+      cash_tips,
     ]
   );
 }
 
 export async function addNonHourlyShiftData(
   userId: number,
-  shiftData,
+  shiftData: INonHourlyShiftDetails,
   employerId = 2
 ) {
-  const { shiftDate, baseEarnings, creditCardTips, cashTips } = shiftData;
+  const {
+    shift_date,
+    total_base_earning,
+    credit_card_tips,
+    cash_tips,
+  } = shiftData;
 
   await query(
-    `insert into hourly_shift_details (user_id, employer_id, shift_date, base_earnings, credit_card_tips, cash_tips)
-    values (?, ?, ?, ?)`,
-    [userId, employerId, shiftDate, baseEarnings, creditCardTips, cashTips]
+    `insert into non_hourly_shift_details (user_id, employer_id, shift_date, total_base_earning, credit_card_tips, cash_tips)
+    values (?, ?, ?, ?, ?, ?)`,
+    [
+      userId,
+      employerId,
+      shift_date,
+      total_base_earning,
+      credit_card_tips,
+      cash_tips,
+    ]
   );
 }
 

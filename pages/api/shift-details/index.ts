@@ -4,6 +4,15 @@ import {
   addHourlyShiftData,
   addNonHourlyShiftData,
 } from "server/mysql/actions/shiftData";
+import {
+  IHourlyShiftDetails,
+  INonHourlyShiftDetails,
+} from "server/mysql/models/shiftData";
+
+import {
+  parseHourlyShiftDetails,
+  parseNonHourlyShiftDetails,
+} from "utils/validations/shiftDetails";
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
@@ -23,21 +32,26 @@ const handler: NextApiHandler = async (
       break;
     case "POST":
       try {
-        const { shiftData, wageType } = req.body;
+        const { wageType } = req.body;
+
+        let shiftData: IHourlyShiftDetails | INonHourlyShiftDetails = null;
 
         switch (wageType) {
           case "HOURLY":
-            await addHourlyShiftData(userId, shiftData);
+            shiftData = parseHourlyShiftDetails(req.body);
+            await addHourlyShiftData(userId, shiftData as IHourlyShiftDetails);
             break;
           case "NON_HOURLY":
-            await addNonHourlyShiftData(userId, shiftData);
+            shiftData = parseNonHourlyShiftDetails(req.body);
+            await addNonHourlyShiftData(
+              userId,
+              shiftData as INonHourlyShiftDetails
+            );
             break;
           default:
-            return res
-              .status(400)
-              .json({
-                message: "Invalid wage type. Allow: [HOURLY, NON_HOURLY]",
-              });
+            return res.status(400).json({
+              message: "Invalid wage type. Allow: [HOURLY, NON_HOURLY]",
+            });
         }
 
         res.status(200).json({ success: true });
