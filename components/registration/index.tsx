@@ -30,6 +30,7 @@ const Registration: React.FunctionComponent = () => {
     //     email: registerFields.email,
     //     password: registerFields.password
     // }
+
     setRegisterFields({
       firstName: "",
       lastName: "",
