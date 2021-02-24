@@ -17,7 +17,7 @@ Some available API endpoints are:
 
 ## `/shift-details`
 
-#### **GET** `/shift-details` 
+#### **GET** `/shift-details`
 
 This will return all the shift details of the user, both hourly and non-hourly.
 A sample response is:
@@ -97,7 +97,6 @@ Example Response:
 }
 ```
 
-
 <div id="shift-details-worked"></div>
 
 ## `/shift-details/worked`
@@ -134,13 +133,17 @@ If the request is valid, the following response is generated:
 
 <div id="shift-details-hourly"></div>
 
-## `/shift-details/hourly/:id` ##
+## `/shift-details/hourly/:id`
+
 These routes are used for the specific `HOURLY` type shift data defined by `shift_id` which is provided in the URL.
+
 #### **GET** `/shift-details/hourly/:id`
+
 This returns the details about the shift with provided `:id`.
 For example, to get details about shift with `id` `8`, the request will be:
 `GET /shift-details/hourly/8`.
 If the specified shift is found, the sample response is:
+
 ```
 {
     "shiftDetail": {
@@ -209,13 +212,14 @@ If the request is successful, it will return a success message.
 }
 ```
 
-
 <div id="shift-details-non-hourly"></div>
 
 ## `/shift-details/non-hourly/:id`
 
 These routes are used for the specific `NON_HOURLY` type shift data defined by `shift_id` which is provided in the URL.
+
 #### **GET** `/shift-details/non-hourly/:id`
+
 This returns the details about the shift with provided `:id`.
 
 For example, to get details about shift with `id` `8`, the request will be:

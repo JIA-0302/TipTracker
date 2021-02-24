@@ -89,7 +89,8 @@ h5 {
   border-color: transparent;
 }
 
-.form-control {
+.form-control,
+input {
   border-radius: 8px;
   height: 50px;
   background-color: #fff;
@@ -99,7 +100,8 @@ h5 {
   padding-left: 10px;
 }
 
-.form-control::placeholder {
+.form-control::placeholder,
+input::placeholder {
   opacity: 0.5;
   font-size: 0.75em;
 }

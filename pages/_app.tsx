@@ -3,6 +3,7 @@ import { Provider } from "next-auth/client";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
+import "styles/preloader.css";
 
 const MyApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   return (
