@@ -1,6 +1,6 @@
 import Head from "next/head";
 import PrivateLayout from "components/layouts/private-layout";
-import getSession from "next-auth/client";
+/*import getSession from "next-auth/client";*/
 import React from "react";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
@@ -43,8 +43,8 @@ export function Home(props: HomeProps): JSX.Element {
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+export async function getServerSideProps() {
+  const session = {};
   return {
     props: { session },
   };
