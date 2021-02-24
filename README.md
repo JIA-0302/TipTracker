@@ -17,7 +17,7 @@ If you have Adobe XD installed, you can download the XD file from [here](https:/
     <br />
 
 2. Setup environment variables.
-    * Run `npm run:login` and `npm run:sync`. Contact in Teams for the password.
+    * Run `npm run secrets:login` and `npm run secrets:sync`. Contact in Teams for the password.
     * This will create `.env.local` file with all necessary environment variables for development environment.
     * See `.env.example` on how the environment variables are set.
     * After adding the environment variables, it can be accessed in the code using `process.env.<NEW_VARIABLE_KEY>`
@@ -28,6 +28,10 @@ If you have Adobe XD installed, you can download the XD file from [here](https:/
 3. Run `npm run dev`
 
 The web app should now be accessible at `http://localhost:3000`.
+
+### API Routes
+All API routes should be created under `/pages/api/`.
+The documentation for existing API endpoints can be found [here](docs/api-routes.md). If you are adding new endpoints, please update the documentation.
 
 ### Testing
 #### Manual Testing Tips

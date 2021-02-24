@@ -25,12 +25,12 @@ const Registration: React.FunctionComponent = () => {
   };
 
   const registerUser = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const user = {
-      name: registerFields.firstName + " " + registerFields.lastName,
-      email: registerFields.email,
-      password: registerFields.password,
-    };
+    // const user = {
+    //     name: registerFields.firstName + " " + registerFields.lastName,
+    //     email: registerFields.email,
+    //     password: registerFields.password
+    // }
+
     setRegisterFields({
       firstName: "",
       lastName: "",
