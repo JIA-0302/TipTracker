@@ -59,6 +59,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .avatar {
   border-radius: 50%;
 }
@@ -71,5 +72,5 @@
 }
 
 .dashboard {
-  background: url(/images/banner.png) no-repeat scroll center 100%;
+  background: url(/images/banner.png) no-repeat scroll center top #fff;
 }
