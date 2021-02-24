@@ -1,13 +1,11 @@
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 import { getSession } from "next-auth/client";
 import { Button, Container } from "react-bootstrap";
-import Image from "next/image";
-
-import styles from "styles/Home.module.css";
-
 import PrivateLayout from "components/layouts/private-layout";
 
+import styles from "styles/Home.module.css";
 interface HomeProps {
   session: {
     user: {
