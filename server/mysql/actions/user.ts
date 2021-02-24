@@ -47,3 +47,12 @@ export async function isExistingEmail(email: string): Promise<boolean> {
 
   return count.length >= 1;
 }
+
+export async function getUserByEmail(email: string) {
+  const user = await query("SELECT * FROM users WHERE email = ?", [email]);
+
+  if (user.length == 1) {
+    return user[0];
+  }
+  throw Error("No user found in the current session");
+}
