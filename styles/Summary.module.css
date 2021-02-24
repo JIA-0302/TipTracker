@@ -1,0 +1,77 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  gap: 5px;
+  grid-auto-rows: min-content;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.gridItem {
+  font-size: 35px;
+  text-align: center;
+}
+
+.gridHeader {
+  padding: 15px;
+  font-size: 18px;
+  text-align: center;
+  color: dimgrey;
+}
+
+.gridDatesContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.gridDatesItem {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.gridDatesHeader {
+  padding: 5px;
+  font-size: 18px;
+  text-align: center;
+  color: dimgrey;
+  display: inline-flex;
+  justify-content: space-evenly;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+.summaryHeader {
+  text-align: center;
+  font-size: 20px;
+  color: dimgrey;
+}
+
+.dateEntries {
+  display: inline-block;
+  justify-content: center;
+  margin-left: 75px;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.button {
+  justify-content: right;
+  float: right;
+  margin-top: 15px;
+}
+
+.buttonSpreadsheet {
+  justify-content: left;
+  float: left;
+  padding: 13px;
+  width: 100px;
+}
+
+.spreadsheet {
+  padding: 5px;
+  margin-top: 20px;
+}

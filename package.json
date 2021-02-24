@@ -26,23 +26,25 @@
     ]
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "@material-ui/core": "^4.11.3",
     "bootstrap": "^4.6.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
-    "mysql": "^2.18.1",
+    "moment": "^2.29.1",
     "next": "10.0.5",
-    "next-auth": "^3.3.0",
+    "next-auth": "^3.4.2",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.3",
+    "react-csv": "^2.0.3",
+    "react-data-grid": "^7.0.0-canary.36",
+    "react-datasheet": "^1.4.9",
+    "react-datepicker": "^3.4.1",
     "react-dom": "17.0.1",
-    "react-icons": "^4.1.0",
-    "serverless-mysql": "^1.5.4"
+    "react-icons": "^4.1.0"
   },
   "devDependencies": {
     "@bitwarden/cli": "^1.13.3",
     "@testing-library/react": "^11.2.3",
-    "@types/next-auth": "^3.1.24",
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.14.0",

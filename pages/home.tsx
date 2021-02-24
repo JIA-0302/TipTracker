@@ -1,6 +1,6 @@
 import Head from "next/head";
 import PrivateLayout from "components/layouts/private-layout";
-import { getSession } from "next-auth/client";
+import getSession from "next-auth/client";
 import React from "react";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
