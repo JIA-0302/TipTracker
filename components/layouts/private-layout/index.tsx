@@ -6,7 +6,15 @@ import Navbar from "components/navbar";
 import styles from "./styles.module.css";
 import classnames from "classnames";
 
-const PrivateLayout: React.FunctionComponent = ({ children }) => {
+interface PrivateLayoutProps {
+  children: React.ReactNode;
+  backgroundStyle?: any;
+}
+
+const PrivateLayout = ({
+  children,
+  backgroundStyle,
+}: PrivateLayoutProps): JSX.Element => {
   const [session, loading] = useSession();
   const router = useRouter();
 
@@ -18,7 +26,14 @@ const PrivateLayout: React.FunctionComponent = ({ children }) => {
     return (
       <div className="d-flex">
         <Navbar />
-        <div className={classnames("p-3", "pb-5", styles.childrenLayout)}>
+        <div
+          className={classnames(
+            "p-3",
+            "pb-5",
+            styles.childrenLayout,
+            backgroundStyle
+          )}
+        >
           {children}
         </div>
       </div>
