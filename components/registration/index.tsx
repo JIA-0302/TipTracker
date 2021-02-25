@@ -37,7 +37,7 @@ const Registration: React.FunctionComponent = () => {
 
                 }
             )
-            .then(data => {
+            .then(() => {
                 if (errorMessage.length > 0) {
                     setMessage('');
                 }
