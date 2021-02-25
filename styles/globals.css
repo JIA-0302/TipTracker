@@ -31,6 +31,11 @@ h5 {
   font-family: "Roboto Slab", serif;
 }
 
+/* react-time-picker overrides */
+.react-time-picker__wrapper {
+  border: none;
+}
+
 /* Bootstrap Overrides */
 
 .btn-warning {

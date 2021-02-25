@@ -37,6 +37,7 @@
     "react-bootstrap": "^1.4.3",
     "react-dom": "17.0.1",
     "react-icons": "^4.1.0",
+    "react-time-picker": "^4.1.2",
     "serverless-mysql": "^1.5.4"
   },
   "devDependencies": {

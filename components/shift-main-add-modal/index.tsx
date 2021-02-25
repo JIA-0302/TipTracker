@@ -9,7 +9,7 @@ interface ShiftMainAddModalProps {
   hourly?: string;
   show: boolean;
   onHide: (boolean) => void;
-  reload:(any) => void;
+  reload: (any) => void;
 }
 
 const ShiftMainAddModal: React.FunctionComponent<ShiftMainAddModalProps> = (

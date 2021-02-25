@@ -84,7 +84,7 @@ export async function getShiftDetail(
 export async function addHourlyShiftData(
   userId: number,
   shiftData: IHourlyShiftDetails,
-  employerId = 2
+  employerId = 1
 ) {
   const {
     start_time,
@@ -116,7 +116,7 @@ export async function addHourlyShiftData(
 export async function addNonHourlyShiftData(
   userId: number,
   shiftData: INonHourlyShiftDetails,
-  employerId = 2
+  employerId = 1
 ) {
   const {
     shift_date,
@@ -169,7 +169,7 @@ export async function updateHourlyShiftData(
   userId: number | string,
   shiftId: string | number,
   shiftData: IHourlyShiftDetails,
-  employerId = 2
+  employerId = 1
 ) {
   const {
     start_time,
@@ -206,7 +206,7 @@ export async function updateNonHourlyShiftData(
   userId: number | string,
   shiftId: number | string,
   shiftData: INonHourlyShiftDetails,
-  employerId = 2
+  employerId = 1
 ) {
   const {
     shift_date,
