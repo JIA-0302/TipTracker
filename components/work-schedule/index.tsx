@@ -20,6 +20,8 @@ export interface WorkScheduleProp {
 const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
   return (
     <div className={styles.div}>
+      <h3 className={styles.h3}>Upcoming Shift</h3>
+
       <List className={styles.list}>
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
