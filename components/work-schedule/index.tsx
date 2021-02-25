@@ -10,7 +10,6 @@ import {
 import AlarmRoundedIcon from "@material-ui/icons/AlarmRounded";
 import HourglassEmptyRoundedIcon from "@material-ui/icons/HourglassEmptyRounded";
 import HourglassFullRoundedIcon from "@material-ui/icons/HourglassFullRounded";
-import { red } from "@material-ui/core/colors";
 
 export interface WorkScheduleProp {
   workDay: string;
@@ -25,7 +24,7 @@ const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
             <Avatar>
-              <AlarmRoundedIcon style={{ color: red[500] }} />
+              <AlarmRoundedIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Work Day" secondary={props.workDay} />
@@ -33,7 +32,7 @@ const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
             <Avatar>
-              <HourglassEmptyRoundedIcon style={{ color: red[500] }} />
+              <HourglassEmptyRoundedIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Start Time" secondary={props.startTime} />
@@ -41,7 +40,7 @@ const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
             <Avatar>
-              <HourglassFullRoundedIcon style={{ color: red[500] }} />
+              <HourglassFullRoundedIcon />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="End Time" secondary={props.endTime} />

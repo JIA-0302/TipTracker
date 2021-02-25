@@ -8,6 +8,7 @@
   width: 25%;
   background: #ffffff;
   z-index: 4;
+  border-radius: 10px;
 }
 
 .list:hover {
@@ -18,4 +19,5 @@
 .listItem:hover {
   box-shadow: 0 10px 30px #cc970d;
   border-color: transparent;
+  border-radius: 10px;
 }
