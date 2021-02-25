@@ -2,10 +2,18 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Row, Col } from "react-bootstrap";
+import { useSession } from "next-auth/client";
 import Button from "react-bootstrap/Button";
+import ScreenLoader from "components/screen-loader";
 import styles from "../styles/Home.module.css";
 
 const Home: React.FunctionComponent = () => {
+  const [session, loading] = useSession();
+
+  if (loading) {
+    return <ScreenLoader />;
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -28,11 +36,28 @@ const Home: React.FunctionComponent = () => {
             <h1 className={styles.focusText}>
               Tip<span style={{ color: "black" }}>Tracker</span>
             </h1>
-            <Link href="/home">
-              <Button size="lg" variant="warning" className="mt-4">
-                Continue
-              </Button>
-            </Link>
+            {!session && (
+              <>
+                <Link href="/api/auth/signin">
+                  <Button size="lg" variant="warning" className="mt-4">
+                    Login
+                  </Button>
+                </Link>
+                <br />
+                <Link href="/registration">
+                  <Button size="lg" variant="link" className="mt-4">
+                    Register Now
+                  </Button>
+                </Link>
+              </>
+            )}
+            {session && (
+              <Link href="/home">
+                <Button size="lg" variant="warning" className="mt-4">
+                  Continue
+                </Button>
+              </Link>
+            )}
           </main>
         </Col>
       </Row>
