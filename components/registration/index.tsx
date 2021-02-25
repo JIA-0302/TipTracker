@@ -38,7 +38,6 @@ const Registration: React.FunctionComponent = () => {
                 }
             )
             .then(data => {
-                console.log('Success:', data);
                 if (errorMessage.length > 0) {
                     setMessage('');
                 }
