@@ -43,13 +43,13 @@ export async function getWorkedDaysForMonth(
   const formattedEndDate = format(endDate, SHIFT_DATE_FORMAT);
 
   const hourlyShiftDetails = await query(
-    `select shift_id, shift_date from hourly_shift_details
+    `select shift_id, shift_date, hourly from hourly_shift_details
     where (shift_date between ? and ?) and user_id = ?`,
     [formattedStartDate, formattedEndDate, userId]
   );
 
   const nonHourlyShiftDetails = await query(
-    `select shift_id, shift_date from non_hourly_shift_details
+    `select shift_id, shift_date, hourly from non_hourly_shift_details
     where (shift_date between ? and ?) and user_id = ?`,
     [formattedStartDate, formattedEndDate, userId]
   );

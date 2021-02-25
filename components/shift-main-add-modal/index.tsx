@@ -9,6 +9,7 @@ interface ShiftMainAddModalProps {
   hourly?: string;
   show: boolean;
   onHide: (boolean) => void;
+  reload:(any) => void;
 }
 
 const ShiftMainAddModal: React.FunctionComponent<ShiftMainAddModalProps> = (
@@ -35,6 +36,7 @@ const ShiftMainAddModal: React.FunctionComponent<ShiftMainAddModalProps> = (
       show={showWageModel.wageMode}
       hourly={showWageModel.wageType}
       onHide={setWageModel}
+      reload={props.reload}
     />
   ) : (
     <Modal

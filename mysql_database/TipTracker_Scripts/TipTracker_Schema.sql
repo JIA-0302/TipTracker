@@ -89,6 +89,7 @@ CREATE TABLE `non_hourly_shift_details` (
   `total_base_earning` DECIMAL(9, 2) DEFAULT 0.00,
   `credit_card_tips` DECIMAL(9, 2) DEFAULT 0.00,
   `cash_tips` DECIMAL(9, 2) DEFAULT 0.00,
+  `hourly` int DEFAULT 0 NOT NULL ,
   `created_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
   `updated_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
 );
@@ -103,6 +104,7 @@ CREATE TABLE `hourly_shift_details` (
   `hourly_wage` DECIMAL(9, 2) NOT NULL,
   `credit_card_tips` DECIMAL(9, 2) DEFAULT 0.00,
   `cash_tips` DECIMAL(9, 2) DEFAULT 0.00,
+   `hourly` int DEFAULT 1 NOT NULL ,
   `created_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6),
   `updated_at` TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
 );
