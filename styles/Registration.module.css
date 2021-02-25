@@ -1,29 +1,50 @@
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:100vh;
-    font-family: Arial;
-    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
-    font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial;
+  background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9);
+  font-size: 14px;
+  text-align: center;
 }
 
 .formBody {
-    background-color: white;
-    padding-right: 50px;
-    padding-left: 50px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border-radius: 3%;
+  background-color: white;
+  padding-right: 40px;
+  padding-left: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 3%;
+  border-color: black;
+  border-style: solid;
+  width: 350px;
 }
 
 .button {
-    width: 100%
+  width: 100%;
+  border-color: black;
+  margin-top: 15px;
+  margin-left: 10px;
+  outline: none;
+}
+.button:hover {
+  background-color: #dba10e;
 }
 
 .title {
-    margin: auto;
-    font-weight: bold;
-    position:relative;
-    top: -10px;
+  margin: auto;
+  font-weight: bold;
+  position: relative;
+  top: -10px;
+}
+
+.errors {
+  color: #bf1650;
+  word-break: break-word;
+}
+
+.errors::before {
+  display: inline;
+  content: "⚠ ";
 }
