@@ -1,21 +1,21 @@
 .div {
-    margin-top: 1.75rem;
-    margin-bottom: 1.75rem;
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
 }
 
 .list {
-    height: 230px;
-    width: 25%;
-    background: #ffffff;
-    z-index: 4;
+  height: 230px;
+  width: 25%;
+  background: #ffffff;
+  z-index: 4;
 }
 
 .list:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border-color: transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-color: transparent;
 }
 
 .listItem:hover {
-    box-shadow: 0 10px 30px #cc970d;
-    border-color: transparent;
+  box-shadow: 0 10px 30px #cc970d;
+  border-color: transparent;
 }
