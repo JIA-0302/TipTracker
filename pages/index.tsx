@@ -37,11 +37,19 @@ const Home: React.FunctionComponent = () => {
               Tip<span style={{ color: "black" }}>Tracker</span>
             </h1>
             {!session && (
-              <Link href="/api/auth/signin">
-                <Button size="lg" variant="warning" className="mt-4">
-                  Login
-                </Button>
-              </Link>
+              <>
+                <Link href="/api/auth/signin">
+                  <Button size="lg" variant="warning" className="mt-4">
+                    Login
+                  </Button>
+                </Link>
+                <br />
+                <Link href="/registration">
+                  <Button size="lg" variant="link" className="mt-4">
+                    Register Now
+                  </Button>
+                </Link>
+              </>
             )}
             {session && (
               <Link href="/home">
