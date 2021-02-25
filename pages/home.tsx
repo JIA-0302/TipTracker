@@ -1,10 +1,11 @@
-import Head from "next/head";
-import PrivateLayout from "components/layouts/private-layout";
-import { getSession } from "next-auth/client";
 import React from "react";
-import Link from "next/link";
-import { Button } from "react-bootstrap";
+import Head from "next/head";
+import Image from "next/image";
+import { getSession } from "next-auth/client";
+import { Button, Container } from "react-bootstrap";
+import PrivateLayout from "components/layouts/private-layout";
 
+import styles from "styles/Home.module.css";
 interface HomeProps {
   session: {
     user: {
@@ -18,27 +19,36 @@ interface HomeProps {
 
 export function Home(props: HomeProps): JSX.Element {
   const { session } = props;
+
   return (
-    <PrivateLayout>
+    <PrivateLayout backgroundStyle={styles.dashboard}>
       <Head>
         <title>Home | TipTracker</title>
       </Head>
 
-      {session ? (
-        <>
-          <h1>Home</h1>
-          <h2>Welcome back: {session?.user?.name.split(" ")[0] || "Guest"}</h2>
-        </>
-      ) : (
-        <>
-          <h1>Hello Guest</h1>
-          <Link href="/api/auth/signin">
-            <Button size="lg" variant="warning" className="mt-4">
-              Login
-            </Button>
-          </Link>
-        </>
-      )}
+      <div>
+        <Container className="mt-3">
+          <div className="d-flex align-items-center">
+            <div className={styles.avatarContainer}>
+              <Image
+                src={session.user.image || "/images/avatar.png"}
+                alt="Picture of the user"
+                width={128}
+                height={128}
+                className={styles.avatar}
+              />
+            </div>
+
+            <h2 className="ml-3">
+              Welcome back <b>{session?.user?.name.split(" ")[0]}</b>
+            </h2>
+          </div>
+
+          <Button variant="warning" href="/api/auth/signout" className="mt-5">
+            Sign out
+          </Button>
+        </Container>
+      </div>
     </PrivateLayout>
   );
 }
