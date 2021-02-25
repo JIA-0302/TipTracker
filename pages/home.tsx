@@ -4,8 +4,9 @@ import Image from "next/image";
 import { getSession } from "next-auth/client";
 import { Button, Container } from "react-bootstrap";
 import PrivateLayout from "components/layouts/private-layout";
-
 import styles from "styles/Home.module.css";
+import WorkSchedule from "components/work-schedule/";
+
 interface HomeProps {
   session: {
     user: {
@@ -31,7 +32,7 @@ export function Home(props: HomeProps): JSX.Element {
           <div className="d-flex align-items-center">
             <div className={styles.avatarContainer}>
               <Image
-                src={session.user.image || "/images/avatar.png"}
+                src={session?.user?.image || "/images/avatar.png"}
                 alt="Picture of the user"
                 width={128}
                 height={128}
@@ -47,6 +48,12 @@ export function Home(props: HomeProps): JSX.Element {
           <Button variant="warning" href="/api/auth/signout" className="mt-5">
             Sign out
           </Button>
+
+          <WorkSchedule
+            workDay="02/26/2021"
+            startTime="11:30"
+            endTime="21:00"
+          />
         </Container>
       </div>
     </PrivateLayout>
