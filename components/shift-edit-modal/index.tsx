@@ -4,6 +4,11 @@ import styles from "styles/ShiftModal.module.css";
 import { format } from "date-fns";
 import { HiCreditCard } from "react-icons/hi";
 import { FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc";
+import {
+  deleteShiftData,
+  getShiftData,
+  updateShiftData,
+} from "src/actions/shift-details";
 
 interface ShiftEditModalProps {
   date: Date;
@@ -13,37 +18,37 @@ interface ShiftEditModalProps {
   reload: (any) => void;
 }
 
+interface IUserData {
+  shiftDetail?: {
+    shift_id: number;
+    user_id: number;
+    employer_id: number;
+    shift_date: string;
+    start_time?: string;
+    end_time?: string;
+    total_base_earning?: number;
+    hourly_wage?: number;
+    credit_card_tips?: number;
+    cash_tips?: number;
+  };
+}
+
 const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
   props
 ) => {
   const [updatedShiftData, setUpdatedShiftData] = useState({});
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<IUserData>({});
+
+  const apiWageType = props.data.hourly ? "hourly" : "non-hourly";
+
   useEffect(() => {
-    fetch(
-      (props.data.hourly
-        ? "api/shift-details/hourly/"
-        : "api/shift-details/non-hourly/") + props.data.id,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return response.text().then((text) => {
-            throw new Error(text);
-          });
-        }
-      })
+    getShiftData(apiWageType, props.data.id)
       .then((data) => {
         setUpdatedShiftData(data.shiftDetail);
         setUserData(data);
       })
       .catch((error) => {
+        window.alert(error.message);
         console.error(error.message);
       });
   }, [setUserData]);
@@ -52,7 +57,8 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
     const { id, value } = event.target;
     setUpdatedShiftData({ ...updatedShiftData, [id]: value });
   };
-  const updateEditedShiftData = () => {
+
+  const updateEditedShiftData = async () => {
     let data;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -94,65 +100,29 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
       data = { ...updatedShiftData, shift_date: shift_date };
     }
 
-    fetch(
-      (props.data.hourly
-        ? "api/shift-details/hourly/"
-        : "api/shift-details/non-hourly/") + props.data.id,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return response.text().then((text) => {
-            throw new Error(text);
-          });
-        }
-      })
-      .then(() => {
-        closeModal();
-        props.reload(new Date().getTime());
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
+    try {
+      await updateShiftData(apiWageType, props.data.id, data);
+      closeModal();
+      props.reload(new Date().getTime());
+    } catch (e) {
+      window.alert(e.message);
+    }
   };
-  const deleteShiftData = () => {
-    fetch(
-      (props.data.hourly
-        ? "api/shift-details/hourly/"
-        : "api/shift-details/non-hourly/") + props.data.id,
-      {
-        method: "DELETE",
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return response.text().then((text) => {
-            throw new Error(text);
-          });
-        }
-      })
-      .then(() => {
-        closeModal();
-        props.reload(new Date().getTime());
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
+
+  const deleteData = async () => {
+    try {
+      await deleteShiftData(apiWageType, props.data.id);
+      closeModal();
+      props.reload(new Date().getTime());
+    } catch (e) {
+      window.alert(e.message);
+    }
   };
+
   const closeModal = () => {
     props.onHide(false);
   };
+
   const calcBaseEarning = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -197,7 +167,7 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
                   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                   // @ts-ignore
                   defaultValue={`${
-                    userData.shiftDetail
+                    userData?.shiftDetail
                       ? props.data.hourly == 0
                         ? userData.shiftDetail.total_base_earning
                         : calcBaseEarning()
@@ -263,7 +233,7 @@ const ShiftEditModal: React.FunctionComponent<ShiftEditModalProps> = (
         <Button
           variant="danger"
           className={styles.shiftEditDeleteButton}
-          onClick={deleteShiftData}
+          onClick={deleteData}
         >
           Delete
         </Button>

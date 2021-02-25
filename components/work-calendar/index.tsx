@@ -24,6 +24,11 @@ export interface ShiftData {
   active: boolean;
 }
 
+interface IShiftIds {
+  hourlyShiftDetails: [];
+  nonHourlyShiftDetails: [];
+}
+
 const WorkCalendar: React.FunctionComponent = () => {
   // Add Work Calendar here
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -31,7 +36,10 @@ const WorkCalendar: React.FunctionComponent = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editData, setEditData] = useState({});
-  const [shiftIds, setShiftIds] = useState({});
+  const [shiftIds, setShiftIds] = useState<IShiftIds>({
+    hourlyShiftDetails: [],
+    nonHourlyShiftDetails: [],
+  });
   const [reload, setReload] = useState(new Date().getTime());
 
   useEffect(() => {
