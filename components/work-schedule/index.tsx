@@ -24,7 +24,7 @@ const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
             <Avatar>
-              <AlarmRoundedIcon />
+              <AlarmRoundedIcon className={styles.icon} />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Work Day" secondary={props.workDay} />
@@ -32,7 +32,7 @@ const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
             <Avatar>
-              <HourglassEmptyRoundedIcon />
+              <HourglassEmptyRoundedIcon className={styles.icon} />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Start Time" secondary={props.startTime} />
@@ -40,7 +40,7 @@ const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
             <Avatar>
-              <HourglassFullRoundedIcon />
+              <HourglassFullRoundedIcon className={styles.icon} />
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="End Time" secondary={props.endTime} />

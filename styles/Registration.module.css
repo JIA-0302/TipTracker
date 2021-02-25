@@ -39,6 +39,19 @@
   top: -10px;
 }
 
+.label_name {
+  float: left;
+  margin-left: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.label {
+  float: left;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 .errors {
   color: #bf1650;
   word-break: break-word;
