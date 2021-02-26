@@ -133,6 +133,7 @@
 
 .calendar .body .cell .number {
   margin: 10px;
+  margin-bottom: 0;
   top: 530px;
   left: 1240px;
   width: 18px;

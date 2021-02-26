@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import addMonths from "date-fns/addMonths";
 import subMonths from "date-fns/subMonths";
 import {
@@ -25,16 +26,21 @@ interface WorkCalendarProps {
 const WorkCalendar = ({ onDateSelect }: WorkCalendarProps): JSX.Element => {
   const { workedShifts, addShiftData } = useContext(WorkedShiftContext);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const date = formatISO(currentDate, { representation: "date" });
     const year = date.substring(0, 4);
     const month = date.substring(6, 7);
 
+    setLoading(true);
     getWorkedDays(month, year)
       .then((data) => addShiftData(data))
       .catch((error) => {
         console.error(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [currentDate]);
 
@@ -62,7 +68,8 @@ const WorkCalendar = ({ onDateSelect }: WorkCalendarProps): JSX.Element => {
 
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
-        const foundShift = format(day, "yyyy-MM-dd") in workedShifts;
+        const currentDay = format(day, "yyyy-MM-dd");
+        const foundShift = currentDay in workedShifts;
 
         days.push(
           <DateCell
@@ -71,6 +78,8 @@ const WorkCalendar = ({ onDateSelect }: WorkCalendarProps): JSX.Element => {
             formattedDate={format(day, "d")}
             hasShiftData={foundShift}
             updateSelectedDate={updateSelectedDate}
+            key={currentDay}
+            loading={loading}
           />
         );
         day = addDays(day, 1);
@@ -88,11 +97,19 @@ const WorkCalendar = ({ onDateSelect }: WorkCalendarProps): JSX.Element => {
 
   return (
     <div className={`${styles.calendar} mt-4`}>
-      <DateChangePanel
-        currentDate={currentDate}
-        prevMonth={prevMonth}
-        nextMonth={nextMonth}
-      />
+      <div className="d-flex flex-column flex-md-row">
+        <DateChangePanel
+          currentDate={currentDate}
+          prevMonth={prevMonth}
+          nextMonth={nextMonth}
+        />
+        {loading && (
+          <div className="d-flex align-self-center ml-md-5 mb-3 text-muted">
+            <Spinner animation="border" className="mr-3" />
+            Retrieving shift data
+          </div>
+        )}
+      </div>
       <WeekHeader currentDate={currentDate} />
       <div>{cells()}</div>
     </div>
