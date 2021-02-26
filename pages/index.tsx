@@ -45,7 +45,7 @@ const Home: React.FunctionComponent = () => {
                 </Link>
                 <br />
                 <Link href="/registration">
-                  <Button size="lg" variant="link" className="mt-4">
+                  <Button size="lg" variant="warning" className="mt-4">
                     Register Now
                   </Button>
                 </Link>

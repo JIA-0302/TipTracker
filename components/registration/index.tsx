@@ -66,7 +66,7 @@ const Registration: React.FunctionComponent = () => {
           <Row>
             <Row>
               <Col xs={12}>
-                <label>First Name</label>
+                <label className={styles.label_name}>First Name</label>
                 {errors.firstName ? (
                   <p className={styles.errors}>{errors.firstName.message}</p>
                 ) : (
@@ -91,7 +91,7 @@ const Registration: React.FunctionComponent = () => {
           <Row>
             <Row>
               <Col xs={12}>
-                <label>Last Name</label>
+                <label className={styles.label_name}>Last Name</label>
                 {errors.lastName ? (
                   <p className={styles.errors}>{errors.lastName.message}</p>
                 ) : (
@@ -115,7 +115,7 @@ const Registration: React.FunctionComponent = () => {
           </Row>
           <Row>
             <Col xs={12}>
-              <label>Email Address</label>
+              <label className={styles.label}>Email Address</label>
               {errors.email ? (
                 <p className={styles.errors}>{errors.email.message}</p>
               ) : (
@@ -140,7 +140,7 @@ const Registration: React.FunctionComponent = () => {
           </Row>
           <Row>
             <Col xs={12}>
-              <label>Password</label>
+              <label className={styles.label}>Password</label>
               {errors.password ? (
                 <p className={styles.errors}>{errors.password.message}</p>
               ) : (
