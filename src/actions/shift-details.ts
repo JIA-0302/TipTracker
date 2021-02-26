@@ -1,5 +1,5 @@
-import format from "date-fns/format";
 import { IWorkedShiftDay } from "src/providers/WorkedShiftContext";
+import { getFormattedShiftDate, getFormattedShiftTime } from "utils/date-utils";
 
 type APIWageType = "hourly" | "non-hourly";
 
@@ -37,14 +37,14 @@ export const getShiftData = async (wageType: APIWageType, shiftId) => {
         if (wageType === "hourly") {
           return {
             ...shiftDetail,
-            shift_date: parseRawDate(shiftDetail["shift_date"]),
-            start_time: parseRawTime(shiftDetail["start_time"]),
-            end_time: parseRawTime(shiftDetail["end_time"]),
+            shift_date: getFormattedShiftDate(shiftDetail["shift_date"]),
+            start_time: getFormattedShiftTime(shiftDetail["start_time"]),
+            end_time: getFormattedShiftTime(shiftDetail["end_time"]),
           };
         } else {
           return {
             ...shiftDetail,
-            shift_date: parseRawDate(shiftDetail["shift_date"]),
+            shift_date: getFormattedShiftDate(shiftDetail["shift_date"]),
           };
         }
       }
@@ -97,7 +97,7 @@ export const getWorkedDays = async (month, year) => {
       const newShiftData: IWorkedShiftDay = {};
       if (data.hourlyShiftDetails) {
         data.hourlyShiftDetails.forEach((shift) => {
-          newShiftData[parseRawDate(shift["shift_date"])] = {
+          newShiftData[getFormattedShiftDate(shift["shift_date"])] = {
             id: shift.shift_id,
             wageType: "HOURLY",
           };
@@ -105,7 +105,7 @@ export const getWorkedDays = async (month, year) => {
       }
       if (data.nonHourlyShiftDetails) {
         data.nonHourlyShiftDetails.forEach((shift) => {
-          newShiftData[parseRawDate(shift["shift_date"])] = {
+          newShiftData[getFormattedShiftDate(shift["shift_date"])] = {
             id: shift.shift_id,
             wageType: "NON_HOURLY",
           };
@@ -114,12 +114,4 @@ export const getWorkedDays = async (month, year) => {
 
       return newShiftData;
     });
-};
-
-const parseRawDate = (date: string) => {
-  return format(new Date(date), "yyyy-MM-dd");
-};
-
-const parseRawTime = (datetime: string) => {
-  return format(new Date(datetime), "HH:mm");
 };
