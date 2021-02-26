@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { HiCreditCard } from "react-icons/hi";
-import { FcClock, FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc";
-import TimePicker from "react-time-picker/dist/entry.nostyle";
+import { FcMoneyTransfer, FcCurrencyExchange } from "react-icons/fc";
 import { WorkedShiftContext } from "src/providers/WorkedShiftContext";
 import {
   createShiftData,
@@ -19,18 +18,16 @@ interface ShiftAddModalProps {
   onButtonSelect: () => void;
 }
 
-const HourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
+const NonHourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
   shiftDate,
   shiftId,
   onButtonSelect,
 }) => {
   const { removeShiftData, addShiftData } = useContext(WorkedShiftContext);
   const [shiftDetail, setShiftDetail] = useState({
-    wageType: "HOURLY",
+    wageType: "NON_HOURLY",
     shift_date: "",
-    start_time: "",
-    end_time: "",
-    hourly_wage: "",
+    total_base_earning: "",
     credit_card_tips: "",
     cash_tips: "",
   });
@@ -39,7 +36,7 @@ const HourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
   useEffect(() => {
     if (shiftId) {
       setLoading(true);
-      getShiftData("hourly", shiftId)
+      getShiftData("non-hourly", shiftId)
         .then((data) => {
           setShiftDetail({
             ...data,
@@ -57,13 +54,10 @@ const HourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
   };
 
   const getParsedShiftDetails = () => {
-    const { start_time, end_time } = shiftDetail;
     return {
       ...shiftDetail,
-      wageType: "HOURLY",
+      wageType: "NON_HOURLY",
       shift_date: shiftDate,
-      start_time: `${shiftDate} ${start_time}:00`,
-      end_time: `${shiftDate} ${end_time}:00`,
     };
   };
 
@@ -73,7 +67,7 @@ const HourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
       setLoading(true);
       const shiftDetail = await createShiftData(newShiftDetails);
       addShiftData({
-        [shiftDate]: { id: shiftDetail.shift_id, wageType: "HOURLY" },
+        [shiftDate]: { id: shiftDetail.shift_id, wageType: "NON_HOURLY" },
       });
       onButtonSelect();
     } catch (e) {
@@ -87,19 +81,19 @@ const HourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
     const newShiftDetails = getParsedShiftDetails();
     try {
       setLoading(true);
-      await updateShiftData("hourly", shiftId, newShiftDetails);
+      await updateShiftData("non-hourly", shiftId, newShiftDetails);
       onButtonSelect();
     } catch (e) {
       window.alert(e.message);
     } finally {
-      setLoading(false);
+      setLoading(true);
     }
   };
 
   const deleteData = async () => {
     try {
       setLoading(true);
-      await deleteShiftData("hourly", shiftId);
+      await deleteShiftData("non-hourly", shiftId);
       removeShiftData(shiftDate);
       onButtonSelect();
     } catch (e) {
@@ -114,58 +108,23 @@ const HourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
       <Form>
         <Form.Row>
           <Col xs={3}>
-            <FcClock size={"75px"} />
-          </Col>
-          <Col xs={4}>
-            <Form.Group controlId="start_time">
-              <Form.Label className={styles.modalLabel}>Start Time</Form.Label>
-              <TimePicker
-                onChange={(time) =>
-                  setShiftDetail({ ...shiftDetail, start_time: time })
-                }
-                value={shiftDetail?.start_time}
-                disableClock
-                className="form-control"
-                disabled={loading}
-              />
-            </Form.Group>
-          </Col>
-          <Col xs={4}>
-            <Form.Group controlId="end_time">
-              <Form.Label className={styles.modalLabel}>End Time</Form.Label>
-              <TimePicker
-                onChange={(time) =>
-                  setShiftDetail({ ...shiftDetail, end_time: time })
-                }
-                value={shiftDetail?.end_time}
-                disableClock
-                className="form-control"
-                disabled={loading}
-              />
-            </Form.Group>
-          </Col>
-        </Form.Row>
-        <Form.Row className="mt-4">
-          <Col xs={3}>
             <FcCurrencyExchange size={"75px"} />
           </Col>
           <Col xs={6} md={5}>
-            <Form.Group controlId="hourly_wage">
+            <Form.Group controlId="total_base_earning">
               <Form.Label className={styles.modalLabel}>
-                Hourly Wages
+                Total Base Earnings
               </Form.Label>
               <Form.Control
                 onChange={updateShiftDetails}
                 type="number"
-                placeholder="Enter Wages"
-                value={shiftDetail?.hourly_wage}
-                required
+                placeholder="Enter Hourly wage"
+                value={shiftDetail?.total_base_earning}
                 disabled={loading}
               />
             </Form.Group>
           </Col>
         </Form.Row>
-
         <Form.Row className="mt-4">
           <Col xs={3}>
             <FcMoneyTransfer size={"75px"} />
@@ -243,4 +202,4 @@ const HourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
   );
 };
 
-export default HourlyWageForm;
+export default NonHourlyWageForm;

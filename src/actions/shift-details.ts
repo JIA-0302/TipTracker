@@ -17,6 +17,7 @@ export const createShiftData = async (data) => {
       if (!json.success) {
         throw new Error(json.message);
       }
+      return json.shiftDetail;
     });
 };
 
@@ -33,12 +34,19 @@ export const getShiftData = async (wageType: APIWageType, shiftId) => {
     .then((data) => {
       const shiftDetail = data.shiftDetail;
       if (shiftDetail) {
-        return {
-          ...shiftDetail,
-          shift_date: parseRawDate(shiftDetail["shift_date"]),
-          start_time: parseRawTime(shiftDetail["start_time"]),
-          end_time: parseRawTime(shiftDetail["end_time"]),
-        };
+        if (wageType === "hourly") {
+          return {
+            ...shiftDetail,
+            shift_date: parseRawDate(shiftDetail["shift_date"]),
+            start_time: parseRawTime(shiftDetail["start_time"]),
+            end_time: parseRawTime(shiftDetail["end_time"]),
+          };
+        } else {
+          return {
+            ...shiftDetail,
+            shift_date: parseRawDate(shiftDetail["shift_date"]),
+          };
+        }
       }
       return {};
     });

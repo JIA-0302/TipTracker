@@ -5,6 +5,7 @@ import { WorkedShiftContext } from "src/providers/WorkedShiftContext";
 import styles from "styles/ShiftModal.module.css";
 import HourlyWageForm from "./hourly-wage-form";
 import ShiftMainForm from "./main-form";
+import NonHourlyWageForm from "./non-hourly-wage-form";
 
 interface ModalControllerProps {
   selectedDate: string;
@@ -50,7 +51,16 @@ const ModalController = ({
       modalTitle = selectedDate;
       break;
     case "NON_HOURLY":
-      formToShow = <h1>NON-HOURLY FORM</h1>;
+      formToShow = (
+        <NonHourlyWageForm
+          onButtonSelect={() => {
+            setFormType("");
+            onModalClose();
+          }}
+          shiftDate={selectedDate}
+          shiftId={workedShifts[selectedDate]?.id}
+        />
+      );
       modalTitle = selectedDate;
       break;
     default:
