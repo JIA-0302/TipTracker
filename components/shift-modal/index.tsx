@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { WorkedShiftContext } from "src/providers/WorkedShiftContext";
 
 import styles from "styles/ShiftModal.module.css";
+import HourlyWageForm from "./hourly-wage-form";
 import ShiftMainForm from "./main-form";
 
 interface ModalControllerProps {
@@ -36,7 +37,16 @@ const ModalController = ({
   let modalTitle;
   switch (formType) {
     case "HOURLY":
-      formToShow = <h1>HOURLY FORM</h1>;
+      formToShow = (
+        <HourlyWageForm
+          onButtonSelect={() => {
+            setFormType("");
+            onModalClose();
+          }}
+          shiftDate={selectedDate}
+          shiftId={workedShifts[selectedDate]?.id}
+        />
+      );
       modalTitle = selectedDate;
       break;
     case "NON_HOURLY":
@@ -50,7 +60,7 @@ const ModalController = ({
 
   return (
     <Modal
-      show={selectedDate && selectedDate.length > 0}
+      show={selectedDate?.trim().length > 0}
       size="lg"
       contentClassName={styles.modelStyle}
       backdrop="static"

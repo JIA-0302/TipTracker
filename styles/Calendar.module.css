@@ -65,7 +65,9 @@
   box-shadow: 0px 3px 25px #00000052;
   border-radius: 10px;
   margin-bottom: 20px;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 18px/20px var(--unnamed-font-family-roboto-slab);
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 18px/20px
+    var(--unnamed-font-family-roboto-slab);
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: center;
   font: normal normal normal 14px/14px Roboto Slab;
@@ -102,7 +104,9 @@
   padding: 0.75em 0;
   border-radius: 12px;
   background-color: #eaeaea;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 18px/24px var(--unnamed-font-family-roboto-slab);
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 18px/24px
+    var(--unnamed-font-family-roboto-slab);
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: left;
   font: normal normal normal 18px/24px Roboto Slab;
@@ -133,7 +137,9 @@
   left: 1240px;
   width: 18px;
   height: 24px;
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) 18px/24px var(--unnamed-font-family-roboto-slab);
+  font: var(--unnamed-font-style-normal) normal
+    var(--unnamed-font-weight-normal) 18px/24px
+    var(--unnamed-font-family-roboto-slab);
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: left;
   font: normal normal normal 15px/20px Roboto Slab;
@@ -162,7 +168,8 @@
   letter-spacing: -0.07em;
 }
 
-.calendar .body .cell:hover .bg, .calendar .body .selected .bg {
+.calendar .body .cell:hover .bg,
+.calendar .body .selected .bg {
   opacity: 0.2;
   transition: 0.5s ease-in;
 }

@@ -32,6 +32,7 @@ h5 {
 }
 
 /* react-time-picker overrides */
+
 .react-time-picker__wrapper {
   border: none;
 }
@@ -94,8 +95,7 @@ h5 {
   border-color: transparent;
 }
 
-.form-control,
-input {
+.form-control {
   border-radius: 8px;
   height: 50px;
   background-color: #fff;
@@ -105,8 +105,7 @@ input {
   padding-left: 10px;
 }
 
-.form-control::placeholder,
-input::placeholder {
+.form-control::placeholder {
   opacity: 0.5;
   font-size: 0.75em;
 }

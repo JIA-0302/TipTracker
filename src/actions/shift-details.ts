@@ -28,7 +28,20 @@ export const getShiftData = async (wageType: APIWageType, shiftId) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const shiftDetail = data.shiftDetail;
+      if (shiftDetail) {
+        return {
+          ...shiftDetail,
+          shift_date: parseRawDate(shiftDetail["shift_date"]),
+          start_time: parseRawTime(shiftDetail["start_time"]),
+          end_time: parseRawTime(shiftDetail["end_time"]),
+        };
+      }
+      return {};
+    });
 };
 
 export const updateShiftData = async (wageType: APIWageType, shiftId, data) => {
@@ -83,7 +96,7 @@ export const getWorkedDays = async (month, year) => {
         });
       }
       if (data.nonHourlyShiftDetails) {
-        data.hourlyShiftDetails.forEach((shift) => {
+        data.nonHourlyShiftDetails.forEach((shift) => {
           newShiftData[parseRawDate(shift["shift_date"])] = {
             id: shift.shift_id,
             wageType: "NON_HOURLY",
@@ -97,4 +110,8 @@ export const getWorkedDays = async (month, year) => {
 
 const parseRawDate = (date: string) => {
   return format(new Date(date), "yyyy-MM-dd");
+};
+
+const parseRawTime = (datetime: string) => {
+  return format(new Date(datetime), "HH:mm");
 };

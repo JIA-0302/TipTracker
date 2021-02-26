@@ -27,11 +27,11 @@ const DateCell = ({
       }`}
       onClick={() => (disableCell ? null : updateSelectedDate(day))}
     >
-      <span className={styles.number}>{formattedDate}</span>
+      <p className={styles.number}>{formattedDate}</p>
       {hasShiftData && (
-        <span className={styles.check}>
-          <RiCheckboxCircleLine color="green" />
-        </span>
+        <div className={`${styles.check} d-flex justify-content-center`}>
+          <RiCheckboxCircleLine color="#28a745" />
+        </div>
       )}
     </div>
   );
