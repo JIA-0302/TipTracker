@@ -1,5 +1,4 @@
 import { useSession } from "next-auth/client";
-import { useRouter } from "next/router";
 import ScreenLoader from "components/screen-loader";
 import Navbar from "components/navbar";
 
@@ -16,12 +15,11 @@ const PrivateLayout = ({
   backgroundStyle,
 }: PrivateLayoutProps): JSX.Element => {
   const [session, loading] = useSession();
-  const router = useRouter();
 
   if (loading) {
     return <ScreenLoader />;
   } else if (!session) {
-    router.push("/login");
+    window.location.href = "/login";
   } else {
     return (
       <div className="d-flex">

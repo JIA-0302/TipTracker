@@ -45,6 +45,7 @@
     "react-dom": "17.0.1",
     "react-hook-form": "^6.15.3",
     "react-icons": "^4.1.0",
+    "react-time-picker": "^4.1.2",
     "serverless-mysql": "^1.5.4"
   },
   "devDependencies": {

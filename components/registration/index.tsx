@@ -77,6 +77,7 @@ const Registration: React.FunctionComponent = () => {
           <input
             name="firstName"
             type="text"
+            className="form-control"
             ref={register({
               required: "First Name is required",
               pattern: {
@@ -102,6 +103,7 @@ const Registration: React.FunctionComponent = () => {
           <input
             name="lastName"
             type="text"
+            className="form-control"
             ref={register({
               required: "Last Name is required",
               pattern: {
@@ -127,6 +129,7 @@ const Registration: React.FunctionComponent = () => {
           <input
             type="text"
             name="email"
+            className="form-control"
             ref={register({
               required: "Email is required",
               pattern: {
@@ -152,6 +155,7 @@ const Registration: React.FunctionComponent = () => {
           <input
             type="password"
             name="password"
+            className="form-control"
             ref={register({
               required: "Password is required",
               minLength: {

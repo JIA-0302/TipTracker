@@ -2,6 +2,7 @@ import { AppProps } from "next/app";
 import { Provider } from "next-auth/client";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-time-picker/dist/TimePicker.css";
 import "../styles/globals.css";
 import "styles/preloader.css";
 import React from "react";

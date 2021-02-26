@@ -133,6 +133,7 @@
 
 .calendar .body .cell .number {
   margin: 10px;
+  margin-bottom: 0;
   top: 530px;
   left: 1240px;
   width: 18px;
@@ -146,17 +147,6 @@
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
-}
-
-.calendar .body .cell .number:hover {
-  width: 30px;
-  height: 30px;
-  background: transparent linear-gradient(180deg, #ff0000 0%, #ffbbbb 100%) 0%
-    0% no-repeat padding-box;
-  opacity: 0.23;
-  border-radius: 25px;
-  text-align: center;
-  padding: 5px;
 }
 
 .calendar .body .disabled {

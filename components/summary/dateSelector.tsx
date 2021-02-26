@@ -28,7 +28,7 @@ const DSelector = ({
           selectsStart
           startDate={startDate}
           endDate={endDate}
-          className={styles.gridDatesItem}
+          className={`${styles.gridDatesItem} form-control`}
         />
 
         <DatePicker
@@ -38,7 +38,7 @@ const DSelector = ({
           startDate={startDate}
           endDate={endDate}
           minDate={startDate}
-          className={styles.gridDatesItem}
+          className={`${styles.gridDatesItem} form-control ml-3`}
         />
       </div>
     </>
