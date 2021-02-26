@@ -40,7 +40,7 @@ const options: InitOptions = {
     maxAge: 1 * 24 * 60 * 60, // 1 day
   },
   pages: {
-    //signIn: '/api/auth/signin',
+    signIn: "/login",
     //signOut: '/api/auth/signout',
     //error: '/api/auth/error', // Error code passed in query string as ?error=
     //verifyRequest: '/api/auth/verify-request', // (used for check email message)

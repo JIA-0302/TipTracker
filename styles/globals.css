@@ -89,6 +89,43 @@ h5 {
   border-color: transparent;
 }
 
+.btn-dark {
+  border: 2px double transparent;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  background-origin: border-box;
+  box-shadow: 0 10px 30px rgba(185, 185, 185, 0.3);
+  transition: all 0.5s linear;
+  min-width: 150px;
+}
+
+.btn-dark:hover {
+  color: white;
+  box-shadow: 0 10px 30px rgba(73, 0, 0, 0.3);
+  border-color: transparent;
+}
+
+.btn-primary {
+  color: white;
+  border: 2px double transparent;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  background-origin: border-box;
+  box-shadow: 0 10px 30px rgba(14, 103, 219, 0.3);
+  transition: all 0.5s linear;
+  min-width: 150px;
+}
+
+.btn-primary:hover {
+  color: white;
+  box-shadow: 0 10px 30px rgba(14, 103, 219, 0.6);
+  border-color: transparent;
+}
+
 .form-control,
 input {
   border-radius: 8px;

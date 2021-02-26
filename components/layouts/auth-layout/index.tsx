@@ -1,18 +1,17 @@
-import Head from "next/head";
+import React from "react";
 import Image from "next/image";
 import { Row, Col } from "react-bootstrap";
-import styles from "../../../styles/Home.module.css";
+import styles from "styles/Home.module.css";
 
 const AuthLayout: React.FunctionComponent = ({ children }) => {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>TipTracker</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <Row>
-        <Col xs={12} md={5}>
+        <Col
+          xs={12}
+          md={5}
+          className="d-flex align-items-center justify-content-center"
+        >
           <Image
             src="/images/tip-tracker-logo.png"
             alt="Logo of TipTracker Application"
@@ -20,14 +19,14 @@ const AuthLayout: React.FunctionComponent = ({ children }) => {
             height={400}
           />
         </Col>
-        <Col xs={12} md={7}>
-          {children}
+        <Col
+          xs={12}
+          md={7}
+          className="d-flex align-items-center justify-content-center"
+        >
+          <main className={styles.main}>{children}</main>
         </Col>
       </Row>
-
-      {/* <footer className={styles.footer}>
-
-      </footer> */}
     </div>
   );
 };

@@ -1,12 +1,29 @@
 import React from "react";
 import Login from "../components/login";
 import AuthLayout from "../components/layouts/auth-layout";
+import { csrfToken } from "next-auth/client";
+import Head from "next/head";
 
-const Home: React.FunctionComponent = () => {
+interface LoginPageProps {
+  csrfToken: string;
+}
+
+const LoginPage = ({ csrfToken }: LoginPageProps): JSX.Element => {
   return (
     <AuthLayout>
-      <Login />
+      <Head>
+        <title>Login | TipTracker</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Login csrfToken={csrfToken} />
     </AuthLayout>
   );
 };
-export default Home;
+
+export async function getServerSideProps(context) {
+  return {
+    props: { csrfToken: await csrfToken(context) },
+  };
+}
+
+export default LoginPage;
