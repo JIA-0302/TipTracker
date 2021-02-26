@@ -1,11 +1,12 @@
-import Head from "next/head";
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
-import { Row, Col } from "react-bootstrap";
 import { useSession } from "next-auth/client";
 import Button from "react-bootstrap/Button";
 import ScreenLoader from "components/screen-loader";
-import styles from "../styles/Home.module.css";
+import AuthLayout from "components/layouts/auth-layout";
+import Head from "next/head";
+
+import styles from "styles/Home.module.css";
 
 const Home: React.FunctionComponent = () => {
   const [session, loading] = useSession();
@@ -15,57 +16,37 @@ const Home: React.FunctionComponent = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <AuthLayout>
       <Head>
         <title>TipTracker</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Row>
-        <Col xs={12} md={5}>
-          <Image
-            src="/images/tip-tracker-logo.png"
-            alt="Logo of TipTracker Application"
-            width={400}
-            height={400}
-          />
-        </Col>
-        <Col xs={12} md={7}>
-          <main className={styles.main}>
-            <h1 className={styles.title}>Welcome to</h1>
-            <h1 className={styles.focusText}>
-              Tip<span style={{ color: "black" }}>Tracker</span>
-            </h1>
-            {!session && (
-              <>
-                <Link href="/api/auth/signin">
-                  <Button size="lg" variant="warning" className="mt-4">
-                    Login
-                  </Button>
-                </Link>
-                <br />
-                <Link href="/registration">
-                  <Button size="lg" variant="warning" className="mt-4">
-                    Register Now
-                  </Button>
-                </Link>
-              </>
-            )}
-            {session && (
-              <Link href="/home">
-                <Button size="lg" variant="warning" className="mt-4">
-                  Continue
-                </Button>
-              </Link>
-            )}
-          </main>
-        </Col>
-      </Row>
-
-      {/* <footer className={styles.footer}>
-        
-      </footer> */}
-    </div>
+      <h1 className={styles.title}>Welcome to</h1>
+      <h1 className={styles.focusText}>
+        Tip<span style={{ color: "black" }}>Tracker</span>
+      </h1>
+      {!session && (
+        <>
+          <Link href="/login">
+            <Button size="lg" variant="warning" className="mt-4">
+              Login
+            </Button>
+          </Link>
+          <br />
+          <Link href="/registration">
+            <Button size="lg" variant="warning" className="mt-4">
+              Register Now
+            </Button>
+          </Link>
+        </>
+      )}
+      {session && (
+        <Link href="/home">
+          <Button size="lg" variant="warning" className="mt-4">
+            Continue
+          </Button>
+        </Link>
+      )}
+    </AuthLayout>
   );
 };
 

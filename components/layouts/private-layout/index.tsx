@@ -21,7 +21,7 @@ const PrivateLayout = ({
   if (loading) {
     return <ScreenLoader />;
   } else if (!session) {
-    router.push("/api/auth/signin");
+    router.push("/login");
   } else {
     return (
       <div className="d-flex">
