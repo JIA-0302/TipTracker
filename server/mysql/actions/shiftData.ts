@@ -62,8 +62,8 @@ export async function getWorkedDaysForMonth(
 
 export async function getShiftDetail(
   userId: number,
-  shiftId: string,
-  wageType: string
+  shiftId: string | number,
+  wageType: "HOURLY" | "NON_HOURLY"
 ) {
   switch (wageType) {
     case "HOURLY":
