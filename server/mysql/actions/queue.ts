@@ -50,8 +50,15 @@ export async function retrieveAllUnprocessedData(): Promise<IQueue[]> {
  *          uniquely identify shift data
  */
 export async function getMissingShiftData(): Promise<IQueue[]> {
-  // TODO - not implemented
-  return [];
+  const missingShiftData = await query(
+    `SELECT h.user_id, h.employer_id, h.shift_id
+    FROM hourly_shift_details as h
+    LEFT JOIN shift_data_queue s ON
+    h.user_id = s.user_id and h.employer_id = s.employer_id and h.shift_id = s.shift_id
+    WHERE s.queue_id is NULL`
+  );
+
+  return missingShiftData as IQueue[];
 }
 
 /**

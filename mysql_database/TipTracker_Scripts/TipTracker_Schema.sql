@@ -116,6 +116,16 @@ CREATE TABLE `work_schedule_details` (
   `end_time` DATETIME NOT NULL
 );
 
+-- Do not add foreign key constraints
+-- We will have a separate process to perform all necessary cleanups.
+CREATE TABLE `shift_data_queue` (
+  `queue_id` int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `user_id` int NOT NULL,
+  `employer_id` int NOT NULL,
+  `shift_id` int NOT NULL,
+  `processed` BOOLEAN DEFAULT 0
+);
+
 ALTER TABLE
   `non_hourly_shift_details`
 ADD
@@ -149,6 +159,8 @@ ADD
 CREATE UNIQUE INDEX `unique_shift_data` ON `non_hourly_shift_details` (`user_id`, `employer_id`, `shift_date`);
 
 CREATE UNIQUE INDEX `unique_shift_data` ON `hourly_shift_details` (`user_id`, `employer_id`, `shift_date`);
+
+CREATE UNIQUE INDEX `unique_shift_data_queue` ON `shift_data_queue` (`user_id`, `employer_id`, `shift_id`);
 
 CREATE UNIQUE INDEX compound_id ON accounts(compound_id);
 
