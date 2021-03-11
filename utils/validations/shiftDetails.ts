@@ -52,7 +52,7 @@ export function parseNonHourlyShiftDetails(body): INonHourlyShiftDetails {
   };
 }
 
-function validateShiftDate(shift_date: string) {
+export function validateShiftDate(shift_date: string) {
   if (!shift_date || shift_date.trim().length == 0) {
     throw Error(`Please specify the shift date`);
   } else if (!shift_date.match(/^\d{4}-\d{2}-\d{2}$/)) {

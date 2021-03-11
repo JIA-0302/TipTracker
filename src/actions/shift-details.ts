@@ -21,6 +21,44 @@ export const createShiftData = async (data) => {
     });
 };
 
+export const getFilteredShiftData = async (
+  start_date: string,
+  end_date: string
+) => {
+  return fetch(
+    `/api/summary/summary-data?start_date=${encodeURIComponent(
+      start_date
+    )}&end_date=${encodeURIComponent(end_date)}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const shiftDataArr = [];
+      data.shiftDetail.hourlyShiftDetails.forEach((shiftDetail) =>
+        shiftDataArr.push({
+          ...shiftDetail,
+          shift_date: getFormattedShiftDate(shiftDetail["shift_date"]),
+          start_time: getFormattedShiftTime(shiftDetail["start_time"]),
+          end_time: getFormattedShiftTime(shiftDetail["end_time"]),
+        })
+      );
+      data.shiftDetail.nonHourlyShiftDetails.forEach((shiftDetail) =>
+        shiftDataArr.push({
+          ...shiftDetail,
+          shift_date: getFormattedShiftDate(shiftDetail["shift_date"]),
+        })
+      );
+
+      return shiftDataArr;
+    });
+};
+
 export const getShiftData = async (wageType: APIWageType, shiftId) => {
   const url = `api/shift-details/${wageType}/${shiftId}`;
   return fetch(url, {

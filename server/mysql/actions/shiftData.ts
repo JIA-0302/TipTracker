@@ -7,6 +7,28 @@ import {
 
 const SHIFT_DATE_FORMAT = "yyyy-MM-dd";
 
+export async function getAllShiftDetailsByUserIdWithinDateRange(
+  userId: number,
+  start_date: string,
+  end_date: string
+) {
+  const hourlyShiftDetails = await query(
+    `select * from hourly_shift_details where user_id = ?
+                                          AND (shift_date >= ? AND shift_date <= ?)`,
+    [userId, start_date, end_date]
+  );
+  const nonHourlyShiftDetails = await query(
+    `select * from non_hourly_shift_details where user_id = ?
+                                     AND (shift_date >= ? AND shift_date <= ?)`,
+    [userId, start_date, end_date]
+  );
+
+  return {
+    hourlyShiftDetails,
+    nonHourlyShiftDetails,
+  };
+}
+
 export async function getAllShiftDetailsByUserId(userId: number) {
   const hourlyShiftDetails = await query(
     `select * from hourly_shift_details where user_id = ?`,
