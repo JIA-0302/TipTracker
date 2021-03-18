@@ -73,12 +73,14 @@ export async function getProcessedShiftData(shiftData: IHourlyShiftDetails) {
   // Add all relevant data to each shift interval
   const totalIntervals = splitShiftData.length;
   splitShiftData.forEach((data) => {
+    data["user_id"] = user_id;
     // Split the tips equally among each shift interval
     data["credit_card_tips"] = credit_card_tips / totalIntervals;
     data["cash_tips"] = cash_tips / totalIntervals;
 
     data["hourly_wage"] = hourly_wage;
     data["day_of_week"] = format(parsedStartTime, "dddd");
+    data["shift_date"] = format(parsedStartTime, "yyyy-MM-dd");
     data["industry"] = employerIndustry;
 
     // This will uniquely identify a shift data which is required for updates/deletes
