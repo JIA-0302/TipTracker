@@ -1,29 +1,21 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const futureTrendsSchema = new Schema({
-    user_id: {type: Number, required: true},
-    employer_id: {type: Number, required: true},
-    shift_date: {type: Date, required: true},
-    start_time: {type: Date, required: true},
-    end_time: {type: Date, required: true},
-    predicted_earnings: {type: Number, required: true}
+  user_id: { type: Number, required: true },
+  shift_date: { type: String, required: true },
+  start_time: { type: String, required: true },
+  end_time: { type: String, required: true },
+  credit_card_tips: { type: Number, default: 0 },
+  cash_tips: { type: Number, default: 0 },
+  hourly_wage: { type: Number, required: true },
+  day_of_week: { type: String, required: true },
+  industry: { type: String, required: true },
+  hash: { type: String, required: true },
 });
 
+const FutureTrends =
+  mongoose.models.future_trends ??
+  mongoose.model("future_trends", futureTrendsSchema);
 
-export const futureTrendsModel = mongoose.model('future_trends', futureTrendsSchema);
-
-//insert mock data
-futureTrendsModel.create({
-    user_id: '-1',
-    employer_id: '-1',
-    shift_date: '2016-05-18T16:00:00Z',
-    start_time: '2016-05-18T16:00:00Z',
-    end_time: '2016-05-18T16:00:00Z',
-    predicted_earnings: '-1'
-}, function (err) {
-    if (err) console.log(err);
-});
-
-//default connection for local server for mongodb
-//mongoose.connect('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
+export default FutureTrends;
