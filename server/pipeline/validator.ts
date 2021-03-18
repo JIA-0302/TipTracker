@@ -1,11 +1,12 @@
 import {
   addShiftToQueue,
+  findDeletedShiftData,
   getMissingShiftData,
   retrieveAllUnprocessedData,
 } from "server/mysql/actions/queue";
 import { getShiftDetail } from "server/mysql/actions/shiftData";
 import { IHourlyShiftDetails } from "server/mysql/models/shiftData";
-import { addNewShiftData } from ".";
+import { addNewShiftData, deleteExistingShiftData } from ".";
 
 async function addMissingShiftDataToQueue() {
   try {
@@ -58,4 +59,36 @@ export async function processMissingShiftData() {
 
   // If this is reached, there were some error detected while processing the data
   // TODO - Notify admins that it failed to process data
+}
+
+export async function processDeletedShiftData() {
+  let attempts = 5;
+  while (attempts > 0) {
+    try {
+      let hasErrors = false;
+      const deletedShiftData = await findDeletedShiftData();
+
+      for (const data of deletedShiftData) {
+        try {
+          await deleteExistingShiftData(data as IHourlyShiftDetails);
+        } catch (err) {
+          // Even if error is detected, allow remaining data to be deleted in this batch
+          hasErrors = true;
+        }
+      }
+
+      if (hasErrors) {
+        throw Error("Error removing deleted shift data from queue");
+      }
+
+      // On success return
+      return;
+    } catch (err) {
+      // On error, try again
+      attempts--;
+    }
+  }
+
+  // If this is reached, there were some error detected while deleting the data
+  // TODO - Notify admins that it failed to remove deleted data from queue
 }

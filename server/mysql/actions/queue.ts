@@ -65,6 +65,14 @@ export async function getMissingShiftData(): Promise<IQueue[]> {
  * Compare hourly_shift_data with shift_data_queue
  * and find shifts do not exist but are in shift_data_queue
  */
-export async function findDeletedShiftData() {
-  throw Error("Not implemented");
+export async function findDeletedShiftData(): Promise<IQueue[]> {
+  const deletedShiftData = await query(
+    `SELECT dq.user_id, dq.employer_id, dq.shift_id
+    FROM shift_data_queue as dq
+    LEFT JOIN hourly_shift_details h ON
+    dq.user_id = h.user_id and h.employer_id = dq.employer_id and h.shift_id = dq.shift_id
+    WHERE h.shift_id is NULL;`
+  );
+
+  return deletedShiftData as IQueue[];
 }
