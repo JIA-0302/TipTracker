@@ -4,7 +4,10 @@ import FutureTrends from "../models/FutureTrends";
 export async function addProcessedData(processedData: any[]) {
   await mongoDB();
 
+  // Use transaction to ensure either all or no data is saved
   const session = await FutureTrends.startSession();
+  session.startTransaction();
+
   try {
     processedData.forEach(async (data) => {
       const {
@@ -32,14 +35,14 @@ export async function addProcessedData(processedData: any[]) {
         industry,
         hash,
       });
-
-      await (await session).commitTransaction();
     });
+
+    await session.commitTransaction();
   } catch (err) {
-    (await session).abortTransaction();
+    await session.abortTransaction();
     throw err;
   } finally {
-    (await session).endSession();
+    session.endSession();
   }
 }
 

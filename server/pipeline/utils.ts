@@ -27,7 +27,7 @@ export function splitShiftTime(
   const shiftTimes = [];
   let currentStartTime = startTime;
   let currentEndTime = addMinutes(
-    endTime,
+    startTime,
     Number(process.env.SHIFT_INTERVAL_MINUTES)
   );
 
@@ -68,18 +68,20 @@ export async function getProcessedShiftData(shiftData: IHourlyShiftDetails) {
   // Get employer details
   const employerIndustry = (await getEmployerById(employer_id)).industry;
 
-  // TODO - Fetch additional information if needed to create ML model
+  // Add additional features for ML Model if needed here
 
-  // Add all relevant data to each shift interval
   const totalIntervals = splitShiftData.length;
+  // Add all relevant data to each shift interval
   splitShiftData.forEach((data) => {
     data["user_id"] = user_id;
     // Split the tips equally among each shift interval
-    data["credit_card_tips"] = credit_card_tips / totalIntervals;
-    data["cash_tips"] = cash_tips / totalIntervals;
+    data["credit_card_tips"] = parseFloat(
+      (credit_card_tips / totalIntervals).toFixed(2)
+    );
+    data["cash_tips"] = parseFloat((cash_tips / totalIntervals).toFixed(2));
 
     data["hourly_wage"] = hourly_wage;
-    data["day_of_week"] = format(parsedStartTime, "dddd");
+    data["day_of_week"] = format(parsedStartTime, "i");
     data["shift_date"] = format(parsedStartTime, "yyyy-MM-dd");
     data["industry"] = employerIndustry;
 
