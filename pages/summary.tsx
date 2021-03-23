@@ -106,7 +106,7 @@ const summary: React.FunctionComponent = () => {
         getDayOfWeek(data.shift_date),
         time_range,
         parseFloat(time_diff.toFixed(2)),
-        parseFloat((time_diff * 5.5).toFixed(2)),
+        parseFloat(data.hourly_wage.toFixed(2)),
         data.cash_tips,
         data.credit_card_tips,
         data.cash_tips + data.credit_card_tips
@@ -116,7 +116,7 @@ const summary: React.FunctionComponent = () => {
     daysWorked++;
     ccTips += data.credit_card_tips;
     cTips += data.cash_tips;
-    hourlyWages += time_diff * 5.5;
+    hourlyWages += data.hourly_wage;
   });
 
   tips = ccTips + cTips;
