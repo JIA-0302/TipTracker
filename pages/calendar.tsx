@@ -22,7 +22,7 @@ const Home: React.FunctionComponent = () => {
       </Head>
       <h1>Work Calendar</h1>
       <Link href="/summary" passHref>
-        <Button variant="success" className={styles.button}>
+        <Button variant="warning" className={styles.button}>
           Summary
         </Button>
       </Link>
