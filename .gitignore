@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+**/venv
 
 # testing
 /coverage
@@ -33,3 +34,6 @@ yarn-error.log*
 # vercel
 .vercel
 /.idea/.gitignore
+
+# Machine Learning Service
+ml/**/*.csv
