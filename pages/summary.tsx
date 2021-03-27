@@ -1,6 +1,7 @@
 import PrivateLayout from "../components/layouts/private-layout";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../styles/Summary.module.css";
+import stylesBackground from "styles/Home.module.css";
 import Spreadsheet from "components/summary/spreadsheet";
 import DSelector from "components/summary/dateSelector";
 import React, { useEffect, useState } from "react";
@@ -130,7 +131,7 @@ const summary: React.FunctionComponent = () => {
   tips = parseFloat(tips.toFixed(2));
 
   return (
-    <PrivateLayout>
+    <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
       <h1 className={styles.summaryHeader}>Summary For</h1>
       <DSelector
         startDate={startDate}

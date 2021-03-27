@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 import styles from "../styles/Summary.module.css";
+import stylesBackground from "styles/Home.module.css";
 import { WorkedShiftProvider } from "src/providers/WorkedShiftContext";
 import ModalController from "components/shift-modal";
 
@@ -12,7 +13,7 @@ const Home: React.FunctionComponent = () => {
   const [selectedDate, setSelectedDate] = useState("");
 
   return (
-    <PrivateLayout>
+    <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
       <Head>
         <meta
           name="viewport"
