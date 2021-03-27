@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import styles from "styles/Registration.module.css";
@@ -39,12 +38,17 @@ const Login = ({ csrfToken }: LoginProps): JSX.Element => {
           Login
         </Button>
       </Form.Row>
-
       <hr />
-
-      <div className="text-primary text-center">
-        <Link href="/registration">Sign up for TipTracker</Link>
-      </div>
+      <Form.Row>
+        <Button
+          className={styles.button}
+          variant="warning"
+          type="submit"
+          href="/registration"
+        >
+          Register
+        </Button>
+      </Form.Row>
     </Form>
   );
 };

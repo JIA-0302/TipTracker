@@ -1,6 +1,7 @@
 import PrivateLayout from "../components/layouts/private-layout";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../styles/Summary.module.css";
+import stylesBackground from "styles/Home.module.css";
 import Spreadsheet from "components/summary/spreadsheet";
 import DSelector from "components/summary/dateSelector";
 import React, { useEffect, useState } from "react";
@@ -106,7 +107,7 @@ const summary: React.FunctionComponent = () => {
         getDayOfWeek(data.shift_date),
         time_range,
         parseFloat(time_diff.toFixed(2)),
-        parseFloat((time_diff * 5.5).toFixed(2)),
+        parseFloat(data.hourly_wage.toFixed(2)),
         data.cash_tips,
         data.credit_card_tips,
         data.cash_tips + data.credit_card_tips
@@ -116,7 +117,7 @@ const summary: React.FunctionComponent = () => {
     daysWorked++;
     ccTips += data.credit_card_tips;
     cTips += data.cash_tips;
-    hourlyWages += time_diff * 5.5;
+    hourlyWages += data.hourly_wage;
   });
 
   tips = ccTips + cTips;
@@ -130,7 +131,7 @@ const summary: React.FunctionComponent = () => {
   tips = parseFloat(tips.toFixed(2));
 
   return (
-    <PrivateLayout>
+    <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
       <h1 className={styles.summaryHeader}>Summary For</h1>
       <DSelector
         startDate={startDate}
