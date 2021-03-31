@@ -1,5 +1,5 @@
 import withUser from "utils/user-middleware";
-import {getWeeklyFutureTrendsData} from "../../../server/mongodb/actions/FutureTrends";
+import { getWeeklyFutureTrendsData } from "../../../server/mongodb/actions/FutureTrends";
 
 /**
  * This routes are specific to each shift_id for Hourly wage type

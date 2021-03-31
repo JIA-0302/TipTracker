@@ -1,5 +1,5 @@
 import { createHash } from "crypto";
-import { addMinutes, format, parse } from "date-fns";
+import { addMinutes, format, parse, getWeekOfMonth } from "date-fns";
 import { getEmployerById } from "server/mysql/actions/employers";
 import { IHourlyShiftDetails } from "server/mysql/models/shiftData";
 
@@ -34,8 +34,8 @@ export function splitShiftTime(
   // Ensures there is atleast one shift time
   do {
     shiftTimes.push({
-      start_time: format(currentStartTime, "yyyy-MM-dd HH:mm:SS"),
-      end_time: format(currentEndTime, "yyyy-MM-dd HH:mm:SS"),
+      start_time: format(currentStartTime, "HHmm"),
+      end_time: format(currentEndTime, "HHmm"),
     });
     currentStartTime = currentEndTime;
     currentEndTime = addMinutes(currentStartTime, intervalTime);
@@ -65,25 +65,34 @@ export async function getProcessedShiftData(shiftData: IHourlyShiftDetails) {
     Number(process.env.SHIFT_INTERVAL_MINUTES)
   );
 
-  // Get employer details
   const employerIndustry = (await getEmployerById(employer_id)).industry;
+  const shiftDate = format(parsedStartTime, "yyyy-MM-dd");
+  const dayOfWeek = format(parsedStartTime, "i");
+  const month = parsedStartTime.getMonth();
+  const year = format(parsedStartTime, "yyyy");
+  const weekOfMonth = getWeekOfMonth(parsedStartTime);
 
   // Add additional features for ML Model if needed here
 
   const totalIntervals = splitShiftData.length;
+
   // Add all relevant data to each shift interval
   splitShiftData.forEach((data) => {
     data["user_id"] = user_id;
+    data["shift_date"] = shiftDate;
+    data["industry"] = employerIndustry;
+
+    data["hourly_wage"] = hourly_wage;
+    data["day_of_week"] = dayOfWeek;
+    data["month"] = month;
+    data["year"] = year;
+    data["week_of_month"] = weekOfMonth;
+
     // Split the tips equally among each shift interval
     data["credit_card_tips"] = parseFloat(
       (credit_card_tips / totalIntervals).toFixed(2)
     );
     data["cash_tips"] = parseFloat((cash_tips / totalIntervals).toFixed(2));
-
-    data["hourly_wage"] = hourly_wage;
-    data["day_of_week"] = format(parsedStartTime, "i");
-    data["shift_date"] = format(parsedStartTime, "yyyy-MM-dd");
-    data["industry"] = employerIndustry;
 
     // This will uniquely identify a shift data which is required for updates/deletes
     data["hash"] = generateHashForShiftData(shift_id, employer_id, user_id);

@@ -155,33 +155,33 @@ export const getWorkedDays = async (month, year) => {
 };
 
 export const getFilteredFutureShiftData = async (
-    start_date: string,
-    end_date: string
+  start_date: string,
+  end_date: string
 ) => {
-    return fetch(
-        `api/future-trends/future-shifts?start_date=${encodeURIComponent(
-            start_date
-        )}&end_date=${encodeURIComponent(end_date)}`,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-        }
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            const weeklyFutureShiftData = [];
-            data.futureShiftDetail.forEach((shiftDetail) =>
-                weeklyFutureShiftData.push({
-                    ...shiftDetail,
-                    shift_date: getFormattedShiftDate(shiftDetail["shift_date"]),
-                    start_time: getFormattedShiftTime(shiftDetail["start_time"]),
-                    end_time: getFormattedShiftTime(shiftDetail["end_time"]),
-                })
-            );
+  return fetch(
+    `api/future-trends/future-shifts?start_date=${encodeURIComponent(
+      start_date
+    )}&end_date=${encodeURIComponent(end_date)}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const weeklyFutureShiftData = [];
+      data.futureShiftDetail.forEach((shiftDetail) =>
+        weeklyFutureShiftData.push({
+          ...shiftDetail,
+          shift_date: getFormattedShiftDate(shiftDetail["shift_date"]),
+          start_time: getFormattedShiftTime(shiftDetail["start_time"]),
+          end_time: getFormattedShiftTime(shiftDetail["end_time"]),
+        })
+      );
 
-            return weeklyFutureShiftData;
-        });
+      return weeklyFutureShiftData;
+    });
 };
