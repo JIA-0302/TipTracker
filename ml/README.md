@@ -42,3 +42,13 @@ optional arguments:
 An example usage would be:
 
 `python test-data-gen.py -s 1/1/2021 -e 3/1/2021 -f test_dataset.csv`
+
+
+## Playground
+We need to continuously improve our ML model using different features, aggregating different data, different algorithms, and so much more.
+
+We are using Google Colab as a playground. Use TipTracker account to access it [here](https://colab.research.google.com/drive/1yPToDJgMi_kc8ZymerYhxs888vZwFWlk).
+
+
+
+
