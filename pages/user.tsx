@@ -42,7 +42,7 @@ export function User(props: UserProps): JSX.Element {
             </div>
 
             <h2 className="ml-3">
-              <b>{session?.user?.name.split(" ")[0] || "John Doe"}</b>
+              <b>{session?.user?.name.split(" ")[0] || "John"}</b>
             </h2>
           </div>
         </Container>

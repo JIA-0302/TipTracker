@@ -1,55 +1,55 @@
 .container {
-    min-height: 100vh;
-    padding: 0 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    background: url(/images/home-banner.png) no-repeat scroll center top #fff;
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  background: url(/images/home-banner.png) no-repeat scroll center top #fff;
 }
-  
+
 .main {
-    padding: 5rem 0;
-    width: 100%;
+  padding: 5rem 0;
+  width: 100%;
 }
-  
+
 .title {
-    margin: 0;
-    line-height: 1.15;
-    font-size: 2rem;
-    text-align: left;
+  margin: 0;
+  line-height: 1.15;
+  font-size: 2rem;
+  text-align: left;
 }
 
 .avatarContainer {
-    border-radius: 50%;
-    box-shadow: 0 10px 30px rgba(151, 151, 151, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(151, 151, 151, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-  
+
 .avatar {
-    border-radius: 50%;
+  border-radius: 50%;
 }
-  
+
 .dashboard {
-    background: url(/images/banner.png) no-repeat scroll center top #fff;
+  background: url(/images/banner.png) no-repeat scroll center top #fff;
 }
-  
+
 .h3 {
-    font-weight: 100;
-    color: #000000;
-    font-size: 70%;
-    margin-left: 3em;
-    font: normal normal normal 18px/24px Roboto Slab;
-    letter-spacing: 0px;
+  font-weight: 100;
+  color: #000000;
+  font-size: 70%;
+  margin-left: 3em;
+  font: normal normal normal 18px/24px Roboto Slab;
+  letter-spacing: 0px;
 }
 
 .div {
-    float:left;
+  float: left;
 }
 
 .buttonDiv {
-    margin-left: 3em;
+  margin-left: 3em;
 }

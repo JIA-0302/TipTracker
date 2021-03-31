@@ -1,92 +1,91 @@
 .scheduleTitle {
-    margin: auto;
-    color: black;
-    font-weight: initial;
-    font-family: Arial;
-    margin-right: 0px;
+  margin: auto;
+  color: black;
+  font-weight: initial;
+  font-family: Arial;
+  margin-right: 0px;
 }
-  
+
 .scheduleEditBody {
-    color: black;
-    font-family: Arial;
-    font-weight: initial;
-    font-family: Arial;
+  color: black;
+  font-family: Arial;
+  font-weight: initial;
+  font-family: Arial;
 }
-  
+
 .modelStyle {
-    width: 95%;
-    max-width: 500px;
-    margin: auto;
-    border-radius: 15px;
-    border: none;
+  width: 95%;
+  max-width: 500px;
+  margin: auto;
+  border-radius: 15px;
+  border: none;
 }
-  
+
 .scheduleEditDeleteButton {
-    margin: auto;
-    width: 100px;
+  margin: auto;
+  width: 100px;
 }
-  
+
 .scheduleEditDeleteButton:hover {
-    background-color: red;
+  background-color: red;
 }
-  
+
 .scheduleAddSubmitButton {
-    margin: auto;
-    width: 100px;
+  margin: auto;
+  width: 100px;
 }
-  
+
 .scheduleEditUpdateButton {
-    margin: auto;
+  margin: auto;
 }
-  
+
 .scheduleMainModal {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
-  
+
 .mainButton {
-    /* max-width: 125px; */
-    border-radius: 10px;
-    margin: auto;
-    border-color: white;
-    background-color: white;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(158, 158, 158, 0.3);
-    cursor: pointer;
-    padding: 1.5em;
-    transition: all 0.25s ease-in-out;
+  /* max-width: 125px; */
+  border-radius: 10px;
+  margin: auto;
+  border-color: white;
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(158, 158, 158, 0.3);
+  cursor: pointer;
+  padding: 1.5em;
+  transition: all 0.25s ease-in-out;
 }
-  
+
 .mainButton:hover {
-    box-shadow: 0 10px 30px rgba(158, 158, 158, 0.75);
-    transition: all 0.25s ease-in-out;
+  box-shadow: 0 10px 30px rgba(158, 158, 158, 0.75);
+  transition: all 0.25s ease-in-out;
 }
-  
+
 .mainTitle {
+  margin: auto;
+  color: black;
+  margin-right: 0px;
+}
+
+.modalLabel {
+  width: max-content;
+  font-family: "Roboto Slab", serif;
+  font-size: 0.8em;
+}
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+  .mainTitle {
     margin: auto;
     color: black;
+    font-size: 20px;
     margin-right: 0px;
+  }
 }
-  
-.modalLabel {
-    width: max-content;
-    font-family: "Roboto Slab", serif;
-    font-size: 0.8em;
-}
-  
-/* Extra small devices (phones, 600px and down) */
-  
-@media only screen and (max-width: 600px) {
-    .mainTitle {
-      margin: auto;
-      color: black;
-      font-size: 20px;
-      margin-right: 0px;
-    }
-}
-  
