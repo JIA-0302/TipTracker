@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from util import parse_request_body
+from predictor import Predictor
 
 app = Flask(__name__)
 
@@ -21,7 +22,12 @@ def predict_tips():
         print(err)
         return {'error': str(err)}, 400
 
-    return f'{user_id}, {search_dates}'
+    try:
+        predictor = Predictor(user_id=user_id, search_dates=search_dates)
+        return predictor.get_predicted_tips(), 200
+    except Exception as err:
+        print(err)
+        return {'error': 'Failed to predict tips for the user. Please try again later'}, 500
 
 
 if __name__ == '__main__':

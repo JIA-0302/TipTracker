@@ -1,27 +1,52 @@
-import sklearn.ensemble import RandomForestRegressor
-from util import SELECTED_FEATURES, SELECTED_LABELS
+import pandas as pd
+import numpy as np
+from datetime import datetime
 
-# Parameters for Random Forest
-n_trees = 100
-max_depth = None
-samples_split = 2
-verbose = 1
+from regressor import Regressor
+from util import get_data_points_for_day
+
 
 class Predictor:
-    def __init__(self, dataset):
-        self.dataset = dataset
-        self.__get_features_and_labels()
+    def __init__(self, user_id, search_dates):
+        self.user_id = user_id
+        self.search_dates = search_dates
+        self._dataset = None
 
-    def __get_features_and_labels(self):
-        self.X = np.array(dataset[SELECTED_FEATURES])
-        self.y = np.array(dataset[SELECTED_LABELS])
+    def get_dataset(self):
+        if self._dataset is None:
+            # TODO - Retrieve dataset from database
+            self._dataset = pd.read_csv('./shift_data.csv')
 
-    def perform_regression(self):
-        self.regression = RandomForestRegressor(n_estimators=n_trees, max_depth=max_depth, min_samples_split=samples_split, verbose=verbose)
-        self.regression.fit(self.X, self.y)
+        return self._dataset
 
-    def get_predicted_values(self, input_values):
-        if self.regression is None:
-            self.perform_regression()
+    def get_predicted_tips(self):
+        dataset = self.get_dataset()
+        model = Regressor(dataset=dataset)
 
-        return regression.predict(input_values)
+        result = {}
+        for date in self.search_dates:
+            shift_date = date.strftime('%Y-%m-%d')
+            datapoints = get_data_points_for_day(date)
+
+            predicted_values = model.get_predicted_values(
+                [x.get_input_value() for x in datapoints])
+
+            current_predictions = []
+            
+            for i, dp in enumerate(datapoints):
+                cash_tips, credit_card_tips = predicted_values[i]
+                start_time = dp.data["start_time"]
+                end_time = dp.data["end_time"]
+
+                current_predictions.append({
+                    "start_time": f'{shift_date} {start_time[:2]}:{start_time[-2:]}:00',
+                    "end_time": f'{shift_date} {end_time[:2]}:{end_time[-2:]}:00',
+                    "cash_tips": cash_tips,
+                    "credit_card_tips": credit_card_tips
+                })
+            
+            result[shift_date] = current_predictions
+
+        return {
+            "result": result
+        }

@@ -1,8 +1,8 @@
 import pandas as pd
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 from tqdm import tqdm
-from util import week_of_month
+from util import get_week_of_month, get_split_shift_time
 
 TIPS_RANGE = (30, 180)
 WEEKEND_TIPS_RANGE = (100, 250)
@@ -13,8 +13,6 @@ START_MINUTE = ['00', '30']
 SHIFT_LENGTH_INTERVAL = (4, 6)
 
 INDUSTRY = 'Restaurant'
-SHIFT_INTERVAL_MINUTES = 30
-
 
 # Generate shift data between the specified intervals
 
@@ -66,29 +64,12 @@ def get_shift_data(start_date, end_date):
             'month': parsed_shift_date.month,
             'day': parsed_shift_date.day,
             'year': parsed_shift_date.year,
-            'week_of_month': week_of_month(parsed_shift_date)
+            'week_of_month': get_week_of_month(parsed_shift_date)
         }
 
         data.append(shift_data)
 
     return data
-
-
-# Given the start and end time, create equal intervals of 30 minutes
-def get_split_shift_time(start_time: datetime, end_time: datetime):
-    shift_times = []
-    current_start_time = start_time
-    current_end_time = start_time + timedelta(minutes=SHIFT_INTERVAL_MINUTES)
-
-    # Do while loop since we want atleast one interval
-    while True:
-        shift_times.append((current_start_time, current_end_time))
-        current_start_time = current_end_time
-        current_end_time += timedelta(minutes=SHIFT_INTERVAL_MINUTES)
-        if current_start_time >= end_time:
-            break
-
-    return shift_times
 
 
 def get_processed_shift_data(shift_data):
