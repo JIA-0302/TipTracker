@@ -9,7 +9,10 @@ const futureTrendsSchema = new Schema({
   credit_card_tips: { type: Number, default: 0 },
   cash_tips: { type: Number, default: 0 },
   hourly_wage: { type: Number, required: true },
+  week_of_month: { type: String, required: true },
   day_of_week: { type: String, required: true },
+  month: { type: String, required: true },
+  year: { type: String, required: true },
   industry: { type: String, required: true },
   hash: { type: String, required: true },
 });
