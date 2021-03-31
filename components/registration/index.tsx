@@ -3,7 +3,6 @@ import styles from "styles/Registration.module.css";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Link from "next/link";
 
 const Registration: React.FunctionComponent = () => {
   const { register, handleSubmit, errors, reset } = useForm();
@@ -171,12 +170,18 @@ const Registration: React.FunctionComponent = () => {
           Register
         </Button>
       </Row>
-
       <hr />
 
-      <div className="text-primary text-center">
-        <Link href="/login">Login to TipTracker</Link>
-      </div>
+      <Row className="text-primary text-center">
+        <Button
+          className={styles.button}
+          variant="warning"
+          type="submit"
+          href="/login"
+        >
+          Login
+        </Button>
+      </Row>
     </form>
   );
 };

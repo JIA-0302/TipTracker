@@ -124,7 +124,7 @@ export default function StickyHeadTable({
             ".csv"
           }
         >
-          <Button variant="outline-dark" className={styles.buttonSpreadsheet}>
+          <Button variant="warning" className={styles.buttonSpreadsheet}>
             Export
           </Button>
         </CSVLink>
