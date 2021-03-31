@@ -2,12 +2,13 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { getSession } from "next-auth/client";
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import PrivateLayout from "components/layouts/private-layout";
-import styles from "styles/Home.module.css";
-import WorkSchedule from "components/work-schedule/display";
+import styles from "styles/User.module.css";
+import UserDetails from "components/user-details/";
+import ModalController from "components/work-schedule/";
 
-interface HomeProps {
+interface UserProps {
   session: {
     user: {
       name: string;
@@ -18,13 +19,13 @@ interface HomeProps {
   };
 }
 
-export function Home(props: HomeProps): JSX.Element {
+export function User(props: UserProps): JSX.Element {
   const { session } = props;
 
   return (
     <PrivateLayout backgroundStyle={styles.dashboard}>
       <Head>
-        <title>Home | TipTracker</title>
+        <title>User | TipTracker</title>
       </Head>
 
       <div>
@@ -41,20 +42,30 @@ export function Home(props: HomeProps): JSX.Element {
             </div>
 
             <h2 className="ml-3">
-              Welcome back <b>{session?.user?.name.split(" ")[0]}</b>
+              <b>{session?.user?.name.split(" ")[0] || "John Doe"}</b>
             </h2>
           </div>
-
-          <Button variant="warning" href="/api/auth/signout" className="mt-5">
-            Sign out
-          </Button>
-
-          <WorkSchedule
-            workDay="04/01/2021"
-            startTime="11:30"
-            endTime="21:00"
-          />
         </Container>
+        <div>
+          <Container className="mt-3">
+            <div>
+              <div>
+                <UserDetails
+                  name={session?.user?.name || "John Doe"}
+                  email={session?.user?.email || "jdoe@tiptracker.com"}
+                />
+              </div>
+
+              <div>
+                <h3 className={styles.h3}>Work Schedule</h3>
+                <div className={styles.buttonDiv}>
+                  {" "}
+                  <ModalController></ModalController>{" "}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </div>
       </div>
     </PrivateLayout>
   );
@@ -67,4 +78,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default Home;
+export default User;

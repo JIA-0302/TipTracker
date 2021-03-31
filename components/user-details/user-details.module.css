@@ -1,0 +1,37 @@
+.div {
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+  
+  .list {
+    height: 180px;
+    width: 25%;
+    background: #ffffff;
+    z-index: 4;
+    border-radius: 10px;
+  }
+  
+  .list:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: transparent;
+  }
+  
+  .listItem:hover {
+    box-shadow: 0 10px 30px #cc970d;
+    border-color: transparent;
+    border-radius: 10px;
+  }
+  
+  .icon {
+    color: #212529;
+  }
+  
+  .h3 {
+    font-weight: 100;
+    color: #000000;
+    font-size: 70%;
+    margin-left: 3em;
+    font: normal normal normal 18px/24px Roboto Slab;
+    letter-spacing: 0px;
+  }
+  

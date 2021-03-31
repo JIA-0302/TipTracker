@@ -1,13 +1,12 @@
 .div {
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;
+  width: 25%;
+  height: 230px;
 }
 
 .list {
-  height: 230px;
-  width: 25%;
   background: #ffffff;
-  z-index: 4;
   border-radius: 10px;
 }
 
