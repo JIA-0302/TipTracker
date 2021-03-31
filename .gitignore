@@ -37,3 +37,4 @@ yarn-error.log*
 
 # Machine Learning Service
 ml/**/*.csv
+**/__pycache__

@@ -2,6 +2,7 @@ import pandas as pd
 import random
 from datetime import datetime, timedelta
 from tqdm import tqdm
+from util import week_of_month
 
 TIPS_RANGE = (30, 180)
 WEEKEND_TIPS_RANGE = (100, 250)
@@ -13,6 +14,7 @@ SHIFT_LENGTH_INTERVAL = (4, 6)
 
 INDUSTRY = 'Restaurant'
 SHIFT_INTERVAL_MINUTES = 30
+
 
 # Generate shift data between the specified intervals
 
@@ -60,7 +62,11 @@ def get_shift_data(start_date, end_date):
             'credit_card_tips': random.randint(*WEEKEND_TIPS_RANGE) if is_weekend else random.randint(*TIPS_RANGE),
             'cash_tips': random.randint(*WEEKEND_TIPS_RANGE) if is_weekend else random.randint(*TIPS_RANGE),
             'industry': INDUSTRY,
-            'day_of_week': day_of_week
+            'day_of_week': day_of_week,
+            'month': parsed_shift_date.month,
+            'day': parsed_shift_date.day,
+            'year': parsed_shift_date.year,
+            'week_of_month': week_of_month(parsed_shift_date)
         }
 
         data.append(shift_data)
@@ -103,8 +109,8 @@ def get_processed_shift_data(shift_data):
             shift_data['credit_card_tips'] / total_intervals)
         new_shift_data['cash_tips'] = int(
             shift_data['cash_tips'] / total_intervals)
-        new_shift_data['start_time'] = shift[0]
-        new_shift_data['end_time'] = shift[1]
+        new_shift_data['start_time'] = shift[0].strftime('%H%M')
+        new_shift_data['end_time'] = shift[1].strftime('%H%M')
 
         processed_data.append(new_shift_data)
 
@@ -112,8 +118,8 @@ def get_processed_shift_data(shift_data):
 
 
 def generate_csv(filename, shift_data):
-    headers = ['shift_date', 'start_time', 'end_time', 'hourly_wage',
-               'credit_card_tips', 'cash_tips', 'industry', 'day_of_week']
+    headers = ['month', 'day', 'year', 'day_of_week', 'week_of_month', 'start_time', 'end_time', 'hourly_wage',
+               'credit_card_tips', 'cash_tips', 'industry']
 
     print('Exporting data to csv...')
     with open(filename, 'w') as fp:
@@ -131,7 +137,7 @@ def generate_csv(filename, shift_data):
 
 if __name__ == "__main__":
     import argparse
-    
+
     # Default arguments
     start_date = '1/1/2020'
     end_date = '3/16/2021'
