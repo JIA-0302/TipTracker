@@ -69,8 +69,8 @@ class Predictor:
 
             db = FutureTrendsDatabase()
             data = db.get_future_trends_by_filter({"user_id": self.user_id})
-
             self._dataset = pd.DataFrame(data)
+
             self.validate_dataset()
 
         return self._dataset
