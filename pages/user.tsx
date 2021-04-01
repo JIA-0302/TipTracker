@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { getSession } from "next-auth/client";
 import { Container } from "react-bootstrap";
 import PrivateLayout from "components/layouts/private-layout";
@@ -31,18 +30,8 @@ export function User(props: UserProps): JSX.Element {
       <div>
         <Container className="mt-3">
           <div className="d-flex align-items-center">
-            <div className={styles.avatarContainer}>
-              <Image
-                src={session?.user?.image || "/images/avatar.png"}
-                alt="Picture of the user"
-                width={128}
-                height={128}
-                className={styles.avatar}
-              />
-            </div>
-
             <h2 className="ml-3">
-              <b>{session?.user?.name.split(" ")[0] || "John"}</b>
+              <b>{"User Details"}</b>
             </h2>
           </div>
         </Container>

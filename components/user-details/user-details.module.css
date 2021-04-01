@@ -1,19 +1,29 @@
 .div {
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;
-}
-
-.list {
-  height: 160px;
-  width: 25%;
   background: #ffffff;
   z-index: 4;
   border-radius: 10px;
+  width: 300px;
+  grid-gap: 5px;  
+  grid-template-columns: repeat(auto-fit, 100px);
+  grid-template-rows: repeat(2, 100px);
 }
 
-.list:hover {
+.div:hover {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   border-color: transparent;
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  border-radius: 50%;
 }
 
 .listItem:hover {

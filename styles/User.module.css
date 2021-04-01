@@ -21,18 +21,6 @@
   text-align: left;
 }
 
-.avatarContainer {
-  border-radius: 50%;
-  box-shadow: 0 10px 30px rgba(151, 151, 151, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.avatar {
-  border-radius: 50%;
-}
-
 .dashboard {
   background: url(/images/banner.png) no-repeat scroll center top #fff;
 }

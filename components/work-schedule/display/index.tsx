@@ -19,35 +19,39 @@ export interface WorkScheduleProp {
 
 const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
   return (
-    <div className={styles.div}>
-      <h3 className={styles.h3}>Upcoming Shift</h3>
-      <List className={styles.list}>
-        <ListItem className={styles.listItem}>
-          <ListItemAvatar>
-            <Avatar>
-              <AlarmRoundedIcon className={styles.icon} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Work Day" secondary={props.workDay} />
-        </ListItem>
-        <ListItem className={styles.listItem}>
-          <ListItemAvatar>
-            <Avatar>
-              <HourglassEmptyRoundedIcon className={styles.icon} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Start Time" secondary={props.startTime} />
-        </ListItem>
-        <ListItem className={styles.listItem}>
-          <ListItemAvatar>
-            <Avatar>
-              <HourglassFullRoundedIcon className={styles.icon} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="End Time" secondary={props.endTime} />
-        </ListItem>
-      </List>
-    </div>
+    <>
+      <div className={styles.div}>
+        <List>
+          <div className={styles.divH3}>
+            <h3 className={styles.h3}>Upcoming Shift</h3>
+          </div>
+          <ListItem className={styles.listItem}>
+            <ListItemAvatar>
+              <Avatar>
+                <AlarmRoundedIcon className={styles.icon} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Work Day" secondary={props.workDay} />
+          </ListItem>
+          <ListItem className={styles.listItem}>
+            <ListItemAvatar>
+              <Avatar>
+                <HourglassEmptyRoundedIcon className={styles.icon} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Start Time" secondary={props.startTime} />
+          </ListItem>
+          <ListItem className={styles.listItem}>
+            <ListItemAvatar>
+              <Avatar>
+                <HourglassFullRoundedIcon className={styles.icon} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="End Time" secondary={props.endTime} />
+          </ListItem>
+        </List>
+      </div>
+    </>
   );
 };
 

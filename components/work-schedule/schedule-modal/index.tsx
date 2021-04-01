@@ -14,8 +14,8 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
   onButtonSelect,
 }) => {
   const [date, setDate] = useState(new Date());
-  const [startTime, setStartTime] = useState("10:00");
-  const [endTime, setEndTime] = useState("18:00");
+  const [startTime, setStartTime] = useState("10:30");
+  const [endTime, setEndTime] = useState("18:30");
 
   return (
     <div>
@@ -64,13 +64,6 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
       <div className="py-2 d-flex justify-content-around">
         {
           <>
-            <Button
-              variant="success"
-              className={styles.scheduleAddSubmitButton}
-              onClick={onButtonSelect}
-            >
-              Submit
-            </Button>
             <Button
               variant="danger"
               className={styles.scheduleEditDeleteButton}

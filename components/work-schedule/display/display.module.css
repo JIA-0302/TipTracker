@@ -1,16 +1,16 @@
 .div {
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;
-  width: 25%;
-  height: 230px;
-}
-
-.list {
   background: #ffffff;
+  z-index: 4;
   border-radius: 10px;
+  width: 300px;
+  grid-gap: 5px;  
+  grid-template-columns: repeat(auto-fit, 100px);
+  grid-template-rows: repeat(2, 100px);
 }
 
-.list:hover {
+.div:hover {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   border-color: transparent;
 }
@@ -25,11 +25,15 @@
   color: #212529;
 }
 
+.divH3 {
+  display: flex;
+  justify-content: center;
+}
+
 .h3 {
   font-weight: 100;
   color: #000000;
   font-size: 70%;
-  margin-left: 3em;
   font: normal normal normal 18px/24px Roboto Slab;
   letter-spacing: 0px;
 }
