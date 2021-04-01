@@ -1,55 +1,38 @@
-import React from "react";
-import styles from "../work-schedule/work-schedule.module.css";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-} from "@material-ui/core/";
-import AlarmRoundedIcon from "@material-ui/icons/AlarmRounded";
-import HourglassEmptyRoundedIcon from "@material-ui/icons/HourglassEmptyRounded";
-import HourglassFullRoundedIcon from "@material-ui/icons/HourglassFullRounded";
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import styles from "styles/Schedule.module.css";
+import Schedule from "./schedule-modal";
 
-export interface WorkScheduleProp {
-  workDay: string;
-  startTime: string;
-  endTime: string;
-}
+const ModalController = (): JSX.Element => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
+  const formToShow = <Schedule onButtonSelect={handleClose} />;
+  const modalTitle = "Work Schedule";
+
   return (
-    <div className={styles.div}>
-      <h3 className={styles.h3}>Upcoming Shift</h3>
-
-      <List className={styles.list}>
-        <ListItem className={styles.listItem}>
-          <ListItemAvatar>
-            <Avatar>
-              <AlarmRoundedIcon className={styles.icon} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Work Day" secondary={props.workDay} />
-        </ListItem>
-        <ListItem className={styles.listItem}>
-          <ListItemAvatar>
-            <Avatar>
-              <HourglassEmptyRoundedIcon className={styles.icon} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Start Time" secondary={props.startTime} />
-        </ListItem>
-        <ListItem className={styles.listItem}>
-          <ListItemAvatar>
-            <Avatar>
-              <HourglassFullRoundedIcon className={styles.icon} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="End Time" secondary={props.endTime} />
-        </ListItem>
-      </List>
-    </div>
+    <>
+      <Button variant="warning" onClick={handleShow} className={styles.button}>
+        Edit Work Schedule
+      </Button>
+      <Modal
+        size="lg"
+        contentClassName={styles.modelStyle}
+        backdrop="static"
+        centered
+        onHide={handleClose}
+        show={show}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title className={styles.mainTitle}>
+            <h2>{modalTitle}</h2>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{formToShow}</Modal.Body>
+      </Modal>
+    </>
   );
 };
 
-export default WorkSchedule;
+export default ModalController;
