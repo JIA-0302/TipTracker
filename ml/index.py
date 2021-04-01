@@ -1,10 +1,14 @@
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
+import os
 
 from util import parse_request_body, DatasetError
 from predictor import Predictor
 
-app = Flask(__name__)
+# Loads the environment variables from .env file for development 
+load_dotenv()
 
+app = Flask(__name__)
 
 @app.route('/')
 def index():

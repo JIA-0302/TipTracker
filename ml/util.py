@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
-from typing import List
 import math
 import re
+import os
 
 # List of features and labels for ML model
 SELECTED_FEATURES = ["month", "year", "day_of_week",
@@ -11,11 +11,12 @@ SELECTED_LABELS = ['cash_tips', 'credit_card_tips']
 
 SEARCH_DATE_FORMAT = 'yyyy-MM-dd'  # All dates should be formatted as such
 
-SHIFT_INTERVAL_MINUTES = 30  # Interval to make prediction on
+# Interval to make prediction on
+SHIFT_INTERVAL_MINUTES = int(os.environ.get('SHIFT_INTERVAL_MINUTES', '30'))
 
 # Start and End time to make predictions on
-SHIFT_START_TIME = 10
-SHIFT_END_TIME = 23
+SHIFT_START_TIME = int(os.environ.get('SHIFT_START_TIME', '10'))
+SHIFT_END_TIME = int(os.environ.get('SHIFT_END_TIME', '23'))
 
 
 def parse_search_date(search_date: str) -> datetime:

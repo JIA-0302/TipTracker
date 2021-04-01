@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime
+import os
 
 from regressor import Regressor
+from database import FutureTrendsDatabase
 from util import get_data_points_for_day, SELECTED_FEATURES, DatasetError
 
 
@@ -63,7 +65,12 @@ class Predictor:
         """
         if self._dataset is None:
             # TODO - Retrieve dataset from database
-            self._dataset = pd.read_csv('./shift_data.csv')
+            # self._dataset = pd.read_csv('./shift_data.csv')
+
+            db = FutureTrendsDatabase()
+            data = db.get_future_trends_by_filter({"user_id": self.user_id})
+
+            self._dataset = pd.DataFrame(data)
             self.validate_dataset()
 
         return self._dataset
@@ -80,15 +87,18 @@ class Predictor:
 
         weekday_count = dataset.day_of_week.value_counts().to_dict()
 
+        # Make sure to convert all the week days value to string in key for consistency
+        weekday_count = {str(k): v for k, v in weekday_count.items()}
+
         result = {}
 
         for date in self.search_dates:
             shift_date = date.strftime('%Y-%m-%d')
 
-            # Check if we have at least 16 data points for the day of the week
-            #   2 same day * 4 hour shift * 2 intervals in an hour = 16 datapoints
+            # Check if we have at least 20 data points for the day of the week
+            #   2 same day * 5 hour shift * 2 intervals in an hour = 20 datapoints
             # If there isn't sufficient datapoints, return set the predicted value to None
-            if weekday_count.get(date.isoweekday(), 0) < 16:
+            if weekday_count.get(str(date.isoweekday()), 0) < 20:
                 result[shift_date] = None
                 continue
 
