@@ -137,3 +137,10 @@ def get_data_points_for_day(shift_date: datetime):
         })
 
     return datapoints
+
+
+class DatasetError(Exception):
+    """
+    Custom Exception to identify errors in dataset
+    """
+    pass

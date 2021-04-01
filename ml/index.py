@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-from util import parse_request_body
+
+from util import parse_request_body, DatasetError
 from predictor import Predictor
 
 app = Flask(__name__)
@@ -28,6 +29,8 @@ def predict_tips():
         # Get predicted tips for each specified day
         predictor = Predictor(user_id=user_id, search_dates=search_dates)
         return predictor.get_predicted_tips(), 200
+    except DatasetError as err:
+        return {'error': str(err)}, 500
     except Exception as err:
         print(err)
         return {'error': 'Failed to predict tips for the user. Please try again later'}, 500

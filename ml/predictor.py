@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 
 from regressor import Regressor
-from util import get_data_points_for_day, SELECTED_FEATURES
+from util import get_data_points_for_day, SELECTED_FEATURES, DatasetError
 
 
 class Predictor:
@@ -18,8 +18,6 @@ class Predictor:
         list of datetime representing days to make predictions for
     _dataset : pandas.DataFrame
         dataset for the ML model
-
-
 
     """
 
@@ -50,6 +48,15 @@ class Predictor:
         self.search_dates = search_dates
         self._dataset = None
 
+    def validate_dataset(self):
+        """
+        Perform validation on the dataset.
+        If there are certain exceptions, it throws DatabaseError
+        """
+        if len(self._dataset) <= 100:
+            raise DatasetError(
+                'We do not have sufficient data to make accurate predictions. Please continue entering shift data.')
+
     def get_dataset(self):
         """
         Retrieve the dataset for the based on the specified user_id
@@ -57,6 +64,7 @@ class Predictor:
         if self._dataset is None:
             # TODO - Retrieve dataset from database
             self._dataset = pd.read_csv('./shift_data.csv')
+            self.validate_dataset()
 
         return self._dataset
 
@@ -70,10 +78,20 @@ class Predictor:
         dataset = self.get_dataset()
         model = Regressor(dataset=dataset)
 
+        weekday_count = dataset.day_of_week.value_counts().to_dict()
+
         result = {}
 
         for date in self.search_dates:
             shift_date = date.strftime('%Y-%m-%d')
+
+            # Check if we have at least 16 data points for the day of the week
+            #   2 same day * 4 hour shift * 2 intervals in an hour = 16 datapoints
+            # If there isn't sufficient datapoints, return set the predicted value to None
+            if weekday_count.get(date.isoweekday(), 0) < 16:
+                result[shift_date] = None
+                continue
+
             datapoints = get_data_points_for_day(date)
 
             input_values = [
