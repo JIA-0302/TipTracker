@@ -11,6 +11,12 @@
   color: black;
   margin-right: 0px;
 }
+
+.button {
+  width: 100%;
+  text-align: center;
+}
+
 /* Extra small devices (phones, 600px and down) */
 
 @media only screen and (max-width: 600px) {

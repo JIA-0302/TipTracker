@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core/";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import EmailIcon from "@material-ui/icons/Email";
+import EventIcon from "@material-ui/icons/Event";
+import ModalController from "components/work-schedule/";
 
 export interface UserDetailsProp {
   name: string;
@@ -44,6 +46,14 @@ const UserDetails: React.FunctionComponent<UserDetailsProp> = (props) => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary={props.email} />
+        </ListItem>
+        <ListItem className={styles.listItem}>
+          <ListItemAvatar>
+            <Avatar>
+              <EventIcon className={styles.icon} />
+            </Avatar>
+          </ListItemAvatar>
+          <ModalController></ModalController>
         </ListItem>
       </List>
     </div>

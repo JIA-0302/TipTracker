@@ -24,20 +24,3 @@
 .dashboard {
   background: url(/images/banner.png) no-repeat scroll center top #fff;
 }
-
-.h3 {
-  font-weight: 100;
-  color: #000000;
-  font-size: 70%;
-  margin-left: 3em;
-  font: normal normal normal 18px/24px Roboto Slab;
-  letter-spacing: 0px;
-}
-
-.div {
-  float: left;
-}
-
-.buttonDiv {
-  margin-left: 3em;
-}

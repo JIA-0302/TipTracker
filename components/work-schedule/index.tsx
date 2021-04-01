@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import styles from "styles/ScheduleModal.module.css";
+import styles from "styles/Schedule.module.css";
 import Schedule from "./schedule-modal";
 
 const ModalController = (): JSX.Element => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -14,8 +13,8 @@ const ModalController = (): JSX.Element => {
 
   return (
     <>
-      <Button variant="warning" onClick={handleShow}>
-        Edit
+      <Button variant="warning" onClick={handleShow} className={styles.button}>
+        Edit Work Schedule
       </Button>
       <Modal
         size="lg"

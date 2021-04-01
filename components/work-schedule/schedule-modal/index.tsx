@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import TimePicker from "react-time-picker/dist/entry.nostyle";
 import { FcClock, FcCalendar } from "react-icons/fc";
-import styles from "styles/ShiftModal.module.css";
+import styles from "./schedule-modal.module.css";
 import DateSelector from "../date-selector";
 
 interface ScheduleProps {

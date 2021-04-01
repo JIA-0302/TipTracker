@@ -5,7 +5,6 @@ import { Container } from "react-bootstrap";
 import PrivateLayout from "components/layouts/private-layout";
 import styles from "styles/User.module.css";
 import UserDetails from "components/user-details/";
-import ModalController from "components/work-schedule/";
 
 interface UserProps {
   session: {
@@ -38,20 +37,10 @@ export function User(props: UserProps): JSX.Element {
         <div>
           <Container className="mt-3">
             <div>
-              <div>
-                <UserDetails
-                  name={session?.user?.name || "John Doe"}
-                  email={session?.user?.email || "jdoe@tiptracker.com"}
-                />
-              </div>
-
-              <div>
-                <h3 className={styles.h3}>Work Schedule</h3>
-                <div className={styles.buttonDiv}>
-                  {" "}
-                  <ModalController></ModalController>{" "}
-                </div>
-              </div>
+              <UserDetails
+                name={session?.user?.name || "John Doe"}
+                email={session?.user?.email || "jdoe@tiptracker.com"}
+              />
             </div>
           </Container>
         </div>

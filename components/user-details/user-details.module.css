@@ -4,8 +4,8 @@
   background: #ffffff;
   z-index: 4;
   border-radius: 10px;
-  width: 300px;
-  grid-gap: 5px;  
+  width: 400px;
+  grid-gap: 5px;
   grid-template-columns: repeat(auto-fit, 100px);
   grid-template-rows: repeat(2, 100px);
 }
