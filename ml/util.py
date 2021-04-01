@@ -41,8 +41,8 @@ def parse_request_body(req_body: dict):
     -------
     user_id : str
         Specified User Id
-    parsed_search_dates : list[datetime]
-        Datetime object based on provided search dates
+    parsed_dates : list[datetime]
+        Datetime object based on provided dates
 
 
     """
@@ -54,12 +54,12 @@ def parse_request_body(req_body: dict):
     else:
         user_id = req_body.get('user_id')
 
-    if req_body.get('search_dates') is None or not isinstance(req_body.get('search_dates'), list):
-        raise ValueError('Please specify valid search dates')
+    if req_body.get('dates') is None or not isinstance(req_body.get('dates'), list):
+        raise ValueError('Please specify valid dates')
     else:
-        search_dates = req_body.get('search_dates')
+        search_dates = req_body.get('dates')
         if len(search_dates) == 0:
-            raise ValueError("Please provide at least one search date")
+            raise ValueError("Please provide at least one date")
 
         parsed_search_dates = [parse_search_date(x) for x in search_dates]
 

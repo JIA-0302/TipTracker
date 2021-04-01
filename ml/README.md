@@ -52,3 +52,88 @@ We are using Google Colab as a playground. Use TipTracker account to access it [
 
 
 
+# Usage
+These API endpoints are protected and only authorized apps are allowed access based on the token issued.
+
+The following API endpoints are available:
+
+## `/predict_tips`
+
+#### **POST** `/predict_tips`
+
+This endpoint is used to predict tips for the user for the given days.
+The body parameters to request the data are following:
+
+| Parameter | Description | Required |
+|-----------|-------------|----------|
+| access_token | Access Token to authenticate and authorize app | Yes |
+| user_id | `id` assigned to the user for whom we need to predict tips | Yes |
+| dates | List of dates for which we need to predict tips. Each date should be formatted as `yyyy-MM-dd`. | Yes |
+
+Example Request Body:
+
+```
+{
+    "access_token": "i7pXBg7YhTCXvVKqXfTAl1obHuGCcmts",
+    "user_id": 18,
+    "dates": ["2021-02-20", "2021-02-21", "2021-02-22", "2021-02-23"]
+}
+```
+
+If the request is successful, it returns the predicted values in a dictionary in following scheme:
+```
+{
+    // Each day represents the date passed in the request
+    day: [
+        // For a given day, different intervals that are specified by start and end time are given with predicted tip values
+        {
+            cash_tips,
+            credit_card_tips,
+            end_time,
+            start_time
+        },
+        ...
+    ],
+    ...
+}
+
+```
+
+
+Example Response:
+
+```
+{
+    "result": {
+        "2021-02-20": [
+            {
+                "cash_tips": 10.9,
+                "credit_card_tips": 17.16,
+                "end_time": "2021-04-01 10:30:00",
+                "start_time": "2021-04-01 10:00:00"
+            },
+            {
+                "cash_tips": 10.87,
+                "credit_card_tips": 17.29,
+                "end_time": "2021-04-01 11:00:00",
+                "start_time": "2021-04-01 10:30:00"
+            },
+            {
+                "cash_tips": 11.23,
+                "credit_card_tips": 20.53,
+                "end_time": "2021-04-01 11:30:00",
+                "start_time": "2021-04-01 11:00:00"
+            },
+            ...
+        ],
+        "2021-02-20": [
+            {
+                "cash_tips": 15.35,
+                "credit_card_tips": 14.4,
+                ...
+            },
+            ...
+        ],
+        ...
+}
+```
