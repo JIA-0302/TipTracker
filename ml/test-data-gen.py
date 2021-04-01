@@ -43,8 +43,7 @@ def get_shift_data(start_date, end_date):
         shift_date = str(day).split(' ')[0]
         parsed_shift_date = datetime.strptime(shift_date, '%Y-%m-%d')
 
-        # 0 - Monday, 1 - Tuesday, ...
-        day_of_week = parsed_shift_date.weekday()
+        day_of_week = parsed_shift_date.isoweekday()
 
         # Generate slightly different data for weekend
         is_weekend = day_of_week >= 4

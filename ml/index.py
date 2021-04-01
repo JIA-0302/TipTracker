@@ -12,17 +12,20 @@ def index():
 
 @app.route('/predict-tips', methods=["POST"])
 def predict_tips():
+    # Retrieve the request body
     req_body = request.get_json()
     if req_body is None:
         return {'error': 'Please provide necessary parameters'}, 400
 
     try:
+        # Parse the request body to retreive required parameters
         user_id, search_dates = parse_request_body(req_body)
     except Exception as err:
         print(err)
         return {'error': str(err)}, 400
 
     try:
+        # Get predicted tips for each specified day
         predictor = Predictor(user_id=user_id, search_dates=search_dates)
         return predictor.get_predicted_tips(), 200
     except Exception as err:

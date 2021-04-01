@@ -7,7 +7,7 @@ from util import SELECTED_FEATURES, SELECTED_LABELS
 n_trees = 100
 max_depth = None
 samples_split = 2
-verbose = 1
+verbose = 0
 
 class Regressor:
     def __init__(self, dataset):
