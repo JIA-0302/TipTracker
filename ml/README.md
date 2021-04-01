@@ -18,6 +18,10 @@
 
     `pip install -r requirements.txt`
 
+4. Start the server:
+
+    `python index.py`
+
 
 # Utils
 ## Generating Test Dataset
