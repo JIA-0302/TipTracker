@@ -102,7 +102,7 @@ If the request is successful, it returns the predicted values in a dictionary in
 }
 
 ```
-
+If for a given day, the value is set to `null`, it means there isn't sufficient data to make predictions for that day.
 
 Example Response:
 
@@ -130,7 +130,7 @@ Example Response:
             },
             ...
         ],
-        "2021-02-20": [
+        "2021-02-21": [
             {
                 "cash_tips": 15.35,
                 "credit_card_tips": 14.4,
@@ -138,6 +138,14 @@ Example Response:
             },
             ...
         ],
+        "2021-02-22": null,
         ...
+}
+```
+
+If there are any errors, the response will contain a description about the error. An example error response is:
+```
+{
+    "error": "We do not have sufficient data to make accurate predictions. Please continue entering shift data."
 }
 ```
