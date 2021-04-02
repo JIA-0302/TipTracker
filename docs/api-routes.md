@@ -10,7 +10,7 @@ Some available API endpoints are:
 - [`/shift-details/worked`](#shift-details-worked)
 - [`/shift-details/hourly/:id`](#shift-details-hourly)
 - [`/shift-details/non-hourly/:id`](#shift-details-non-hourly)
-- [`/future-trends/](#future-trends)
+- [`/future-trends`](#future-trends)
 
 <hr />
 
