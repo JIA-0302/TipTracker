@@ -27,14 +27,14 @@ const analytics: React.FunctionComponent = () => {
         <Button
           className={styles.seePastTrendsButton}
           variant="warning"
-          type="submit"
+          href="/analyticsPast"
         >
           Past Trends
         </Button>
         <Button
           className={styles.seeFutureTrendsButton}
           variant="warning"
-          type="submit"
+          href="/analyticsFuture"
         >
           Future Trends
         </Button>

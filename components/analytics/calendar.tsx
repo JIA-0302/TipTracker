@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { addDays, endOfWeek, format, startOfWeek, addWeeks } from "date-fns";
 import DateChangePanel from "components/work-calendar/date-change-panel";
 import WeekHeader from "components/work-calendar/week-header";
-
+import { FcCancel } from "react-icons/fc";
 import styles from "styles/Calendar.module.css";
 
 const WorkCalendar = (): JSX.Element => {
@@ -30,7 +30,9 @@ const WorkCalendar = (): JSX.Element => {
           <div className={`${styles.column} ${styles.cell}`}>
             <div className="d-flex flex-column" style={{ width: "100%" }}>
               <p className={styles.number}>{format(day, "dd")}</p>
-              {/* put data here */}
+              <div className={`${styles.check} align-self-center mt-0`}>
+                <FcCancel />
+              </div>
             </div>
           </div>
         );

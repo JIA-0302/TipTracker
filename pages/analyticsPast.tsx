@@ -12,7 +12,7 @@ const analytics: React.FunctionComponent = () => {
       <Button
         className={styles.backButton}
         variant="warning"
-        type="submit"
+        href="/analytics"
         size="sm"
       >
         Back
