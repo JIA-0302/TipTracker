@@ -316,15 +316,15 @@ If the request is successful, it will return the details about the shift for eac
         "2021-04-01": {
             "start_time": "17:00:00",
             "end_time": "21:00:00",
-            "cash_tips": 155.33999999999997,
-            "credit_card_tips": 158.07999999999998,
+            "cash_tips": 155.34,
+            "credit_card_tips": 158.08,
             "hour": 4
         },
         "2021-04-05": {
             "start_time": "10:00:00",
             "end_time": "14:00:00",
             "cash_tips": 86.28,
-            "credit_card_tips": 85.11999999999999,
+            "credit_card_tips": 85.12,
             "hour": 4
         },
         "2021-04-06": null,

@@ -75,10 +75,15 @@ export function findProfitableInterval(shift_intervals, shift_hour) {
     endIndex++;
   } while (endIndex < total_intervals);
 
+  const { start_time, end_time, cash_tips, credit_card_tips } = max_interval;
   // Format the time to include time portion only
-  const { start_time, end_time } = max_interval;
   max_interval["start_time"] = stripDate(start_time);
   max_interval["end_time"] = stripDate(end_time);
+
+  // Round up the tips to 2 decimal places
+  max_interval["cash_tips"] = Math.round((cash_tips + 0.005) * 100) / 100;
+  max_interval["credit_card_tips"] =
+    Math.round((credit_card_tips + 0.005) * 100) / 100;
 
   return max_interval;
 }
