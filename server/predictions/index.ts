@@ -15,6 +15,7 @@ async function getPredictedTips(user_id: number, dates: string[]) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.ML_ACCESS_TOKEN}`,
     },
     body: JSON.stringify(requestData),
   })
