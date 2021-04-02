@@ -1,0 +1,106 @@
+.h3 {
+  letter-spacing: var(--unnamed-character-spacing-0);
+  /*text-align: center;*/
+  font: normal normal bold 11px/11px Roboto Slab;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin: 0;
+}
+
+.backButton {
+  size: 10%;
+}
+
+.trendsDiv {
+  display: flex;
+}
+
+.trends {
+  letter-spacing: var(--unnamed-character-spacing-0);
+  /*text-align: center;*/
+  text-decoration: underline;
+  font: normal normal bold 15px/15px Roboto Slab;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-bottom: 5;
+  align-self: flex-end;
+}
+
+.gridDatesContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.gridDatesContainer2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.gridDatesItem {
+  /*padding: 5px;
+  /*margin-left: 10px;*/
+  height: 50%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 12px;
+  text-align: center;
+  justify-content: center;
+}
+
+.dateSelector {
+  height: 8%;
+  width: 65%;
+  justify-content: center;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 20px;
+
+  /*background: #FFFFFF 0% 0% no-repeat padding-box;*/
+  box-shadow: 0px 3px 28px #ff0000a1; /*creates red box shadow*/
+  border-radius: 53px; /*curves box edges*/
+}
+
+.gridDatesHeader {
+  padding: 5px;
+  font-size: 18px;
+  text-align: center;
+  color: dimgrey;
+  display: inline-flex;
+  justify-content: space-evenly;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+.seePastTrendsButton {
+  width: 200px;
+  height: 40px;
+  background: transparent linear-gradient(98deg, #41d578 0%, #35b371 100%) 0% 0%
+    no-repeat padding-box;
+  box-shadow: 0px 3px 27px #00000029;
+  border-radius: 15px;
+  margin-top: 30px;
+  margin-right: 15px;
+  opacity: 1;
+  text-align: center;
+  display: inline-flex;
+  justify-content: space-evenly;
+}
+
+.seeFutureTrendsButton {
+  width: 200px;
+  height: 40px;
+  background: transparent linear-gradient(98deg, #41d578 0%, #35b371 100%) 0% 0%
+    no-repeat padding-box;
+  box-shadow: 0px 3px 27px #00000029;
+  border-radius: 15px;
+  margin-top: 30px;
+  margin-left: 15px;
+  opacity: 1;
+  text-align: center;
+  display: inline-flex;
+  justify-content: space-evenly;
+}
