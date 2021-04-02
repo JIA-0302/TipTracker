@@ -29,6 +29,12 @@ If you have Adobe XD installed, you can download the XD file from [here](https:/
 
 The web app should now be accessible at `http://localhost:3000`.
 
+To enable the Analytics functionality, we need to add a [different repo](https://github.com/JIA-0302/Analytics). This is already included as submodule in this repo.
+1. Load the submodule `git submodule update --init`
+2. Run `git submodule update --remote` in the future to ensure you have the latest data
+3. For more information on running the service, view instructions [here](https://github.com/JIA-0302/Analytics#setup).
+
+
 ### API Routes
 All API routes should be created under `/pages/api/`.
 The documentation for existing API endpoints can be found [here](docs/api-routes.md). If you are adding new endpoints, please update the documentation.
