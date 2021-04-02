@@ -53,7 +53,6 @@
 
 .calendar {
   width: 100%;
-  background: white;
   margin: 0 auto;
 }
 
@@ -114,6 +113,7 @@
 }
 
 .calendar .body .cell {
+  border-radius: 10px;
   position: relative;
   display: flex;
   height: 6.25em;
@@ -145,7 +145,7 @@
   text-align: left;
   font: normal normal normal 15px/20px Roboto Slab;
   letter-spacing: 0px;
-  color: #000000;
+  /*color: #000000;*/
   opacity: 1;
 }
 

@@ -20,7 +20,7 @@ import DateCell from "./date-cell";
 import styles from "styles/Calendar.module.css";
 
 interface WorkCalendarProps {
-  onDateSelect: (date: string) => void;
+  onDateSelect?: (date: string) => void;
 }
 
 const WorkCalendar = ({ onDateSelect }: WorkCalendarProps): JSX.Element => {
