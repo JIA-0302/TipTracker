@@ -1,4 +1,9 @@
 import { format, endOfMonth } from "date-fns";
+import {
+  addNewShiftData,
+  deleteExistingShiftData,
+  updateExistingShiftData,
+} from "server/pipeline";
 import { query } from "../index";
 import {
   IHourlyShiftDetails,
@@ -6,6 +11,28 @@ import {
 } from "../models/shiftData";
 
 const SHIFT_DATE_FORMAT = "yyyy-MM-dd";
+
+export async function getAllShiftDetailsByUserIdWithinDateRange(
+  userId: number,
+  start_date: string,
+  end_date: string
+) {
+  const hourlyShiftDetails = await query(
+    `select * from hourly_shift_details where user_id = ?
+                                          AND (shift_date >= ? AND shift_date <= ?)`,
+    [userId, start_date, end_date]
+  );
+  const nonHourlyShiftDetails = await query(
+    `select * from non_hourly_shift_details where user_id = ?
+                                     AND (shift_date >= ? AND shift_date <= ?)`,
+    [userId, start_date, end_date]
+  );
+
+  return {
+    hourlyShiftDetails,
+    nonHourlyShiftDetails,
+  };
+}
 
 export async function getAllShiftDetailsByUserId(userId: number) {
   const hourlyShiftDetails = await query(
@@ -62,8 +89,8 @@ export async function getWorkedDaysForMonth(
 
 export async function getShiftDetail(
   userId: number,
-  shiftId: string,
-  wageType: string
+  shiftId: string | number,
+  wageType: "HOURLY" | "NON_HOURLY"
 ) {
   switch (wageType) {
     case "HOURLY":
@@ -110,6 +137,12 @@ export async function addHourlyShiftData(
     ]
   );
 
+  // Hook to process new data for ML
+  shiftData.shift_id = result.insertId;
+  shiftData.user_id = userId;
+  shiftData.employer_id = employerId;
+  addNewShiftData(shiftData);
+
   return result.insertId;
 }
 
@@ -148,6 +181,21 @@ export async function deleteShiftForUser(
 ) {
   switch (wageType) {
     case "HOURLY":
+      try {
+        // Retrieve data to delete from ML
+        const existingShiftData = await getShiftDetail(
+          userId,
+          shiftId,
+          "HOURLY"
+        );
+        if (existingShiftData.length > 0) {
+          deleteExistingShiftData(existingShiftData[0] as IHourlyShiftDetails);
+        }
+      } catch (err) {
+        // Skip on error, nightly validation will remove inconsistent data
+        console.error(err);
+      }
+
       await query(
         `delete from hourly_shift_details where user_id = ? and shift_id = ?`,
         [userId, shiftId]
@@ -200,6 +248,12 @@ export async function updateHourlyShiftData(
   if (result.affectedRows === 0) {
     throw Error("Could not update the specified shift");
   }
+
+  // Hook to process update data for ML
+  shiftData.shift_id = shiftId as number;
+  shiftData.user_id = userId as number;
+  shiftData.employer_id = employerId;
+  updateExistingShiftData(shiftData);
 }
 
 export async function updateNonHourlyShiftData(

@@ -1,27 +1,35 @@
 import PrivateLayout from "../components/layouts/private-layout";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../styles/Summary.module.css";
+import stylesBackground from "styles/Home.module.css";
 import Spreadsheet from "components/summary/spreadsheet";
 import DSelector from "components/summary/dateSelector";
-import React, { useState } from "react";
-import rows from "utils/dummyData";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
+import { getFilteredShiftData } from "../src/actions/shift-details";
+import { format } from "date-fns";
+import { Spinner } from "react-bootstrap";
 
-function stringToDate(_date, _format, _delimiter) {
-  const formatLowerCase = _format.toLowerCase();
-  const formatItems = formatLowerCase.split(_delimiter);
-  const dateItems = _date.split(_delimiter);
-  const monthIndex = formatItems.indexOf("mm");
-  const dayIndex = formatItems.indexOf("dd");
-  const yearIndex = formatItems.indexOf("yyyy");
-  let month = parseInt(dateItems[monthIndex]);
-  month -= 1;
-  const formatedDate = new Date(
-    dateItems[yearIndex],
-    month,
-    dateItems[dayIndex]
-  );
-  return formatedDate;
+function createData(
+  date: string,
+  day: string,
+  shiftTime: string,
+  totalHours: number,
+  hourlyWages: number,
+  cashTips: number,
+  ccTips: number,
+  totalTips: number
+) {
+  return {
+    date,
+    day,
+    shiftTime,
+    totalHours,
+    hourlyWages,
+    cashTips,
+    ccTips,
+    totalTips,
+  };
 }
 
 const summary: React.FunctionComponent = () => {
@@ -39,40 +47,91 @@ const summary: React.FunctionComponent = () => {
   startDate.setHours(0, 0, 0, 0);
   endDate.setHours(0, 0, 0, 0);
 
-  const timeDiff = (shiftTime) => {
-    const time = shiftTime.split("-");
+  function getDayOfWeek(date) {
+    const dayOfWeek = new Date(date).getDay();
+    return isNaN(dayOfWeek)
+      ? null
+      : [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ][dayOfWeek];
+  }
 
-    return moment(time[1], "HH:mm").diff(
-      moment(time[0], "HH:mm"),
+  const timeDiff = (start_time, end_time) => {
+    return moment(end_time, "HH:mm").diff(
+      moment(start_time, "HH:mm"),
       "hours",
       true
     );
   };
 
-  const rows_filtered = rows.filter(function (data) {
-    const date = stringToDate(data.date, "mm-dd-yyyy", "-");
-    date.setHours(0, 0, 0, 0);
-    if (date >= startDate && date <= endDate) {
-      hoursWorked += timeDiff(data.shiftTime);
-      daysWorked++;
-      ccTips += data.ccTips;
-      cTips += data.cashTips;
-      return true;
-    } else return false;
+  const [rows_filtered, setRowsArr] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      setLoading(true);
+      getFilteredShiftData(
+        format(startDate, "yyyy-MM-dd"),
+        format(endDate, "yyyy-MM-dd")
+      )
+        .then((data) => setRowsArr(data))
+        .catch((error) => {
+          console.error(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [startDate, endDate]);
+
+  const rows = [];
+  rows_filtered.forEach((data) => {
+    let time_range;
+    let time_diff;
+    if (data.start_time && data.end_time) {
+      time_range = `${data.start_time}-${data.end_time}`;
+      time_diff = timeDiff(data.start_time, data.end_time);
+    } else {
+      time_range = " ";
+      time_diff = 0;
+    }
+    rows.push(
+      createData(
+        data.shift_date,
+        getDayOfWeek(data.shift_date),
+        time_range,
+        parseFloat(time_diff.toFixed(2)),
+        parseFloat(data.hourly_wage.toFixed(2)),
+        data.cash_tips,
+        data.credit_card_tips,
+        data.cash_tips + data.credit_card_tips
+      )
+    );
+    hoursWorked += time_diff;
+    daysWorked++;
+    ccTips += data.credit_card_tips;
+    cTips += data.cash_tips;
+    hourlyWages += data.hourly_wage;
   });
 
   tips = ccTips + cTips;
-  hourlyWages =
-    10 * hoursWorked; /*The 10 is a place holder for hourly pay rate.*/
   earnings = tips + hourlyWages;
 
+  hoursWorked = parseFloat(hoursWorked.toFixed(2));
+  hourlyWages = parseFloat(hourlyWages.toFixed(2));
   cTips = parseFloat(cTips.toFixed(2));
   ccTips = parseFloat(ccTips.toFixed(2));
   earnings = parseFloat(earnings.toFixed(2));
   tips = parseFloat(tips.toFixed(2));
 
   return (
-    <PrivateLayout>
+    <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
       <h1 className={styles.summaryHeader}>Summary For</h1>
       <DSelector
         startDate={startDate}
@@ -80,13 +139,19 @@ const summary: React.FunctionComponent = () => {
         setStartDate={setStartDate}
         setEndDate={setEndDate}
       />
+      {loading && (
+        <div className="d-flex align-self-center ml-md-5 mb-3 text-muted">
+          <Spinner animation="border" className="mr-3" />
+          Retrieving shift data
+        </div>
+      )}
       <div className={styles.gridContainer}>
         <div className={styles.gridHeader}>{"Total Days Worked"}</div>
         <div className={styles.gridHeader}>{"Total Hours Worked"}</div>
         <div className={styles.gridHeader}>{"Total Hourly Wages"}</div>
         <div className={styles.gridItem}>{daysWorked}</div>
         <div className={styles.gridItem}>{hoursWorked}</div>
-        <div className={styles.gridItem}>{hourlyWages}</div>
+        <div className={styles.gridItem}>{"$" + hourlyWages}</div>
         <div className={styles.gridHeader}>{"Total Credit Card Tips"}</div>
         <div className={styles.gridHeader}>{"Total Cash Tips"}</div>
         <div className={styles.gridHeader}>{"Total Tips"}</div>
@@ -102,7 +167,7 @@ const summary: React.FunctionComponent = () => {
       </div>
       <div className={styles.spreadsheet}>
         <Spreadsheet
-          rows_filtered={rows_filtered}
+          rows_filtered={rows}
           startDate={startDate}
           endDate={endDate}
         />

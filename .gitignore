@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+**/venv
 
 # testing
 /coverage
@@ -18,6 +19,7 @@
 # misc
 .DS_Store
 *.pem
+.vscode/
 
 # debug
 npm-debug.log*
@@ -29,6 +31,12 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+**/.env
 
 # vercel
 .vercel
+/.idea/.gitignore
+
+# Machine Learning Service
+ml/**/*.csv
+**/__pycache__
