@@ -10,6 +10,7 @@ Some available API endpoints are:
 - [`/shift-details/worked`](#shift-details-worked)
 - [`/shift-details/hourly/:id`](#shift-details-hourly)
 - [`/shift-details/non-hourly/:id`](#shift-details-non-hourly)
+- [`/future-trends`](#future-trends)
 
 <hr />
 
@@ -285,5 +286,70 @@ If the request is successful, it will return a success message.
 ```
 {
     "success": true
+}
+```
+
+<div id="#future-trends"></div>
+
+## `/future-trends`
+These routes are used to predict tips for a user.
+
+#### **POST** `/future-trends`
+
+This is used to retrieve the predicted most profitable shifts for the specified dates. The body parameters for the request are as follows:
+
+| Parameter | Description | Required |
+|-----------|-------------|----------|
+| shift_dates | List of dates for which we need to predict tips. Each date should be formatted as `yyyy-MM-dd` | Yes |
+
+Example Request Body:
+```
+{
+    "shift_dates": ["2021-04-01", "2021-04-05", "2021-04-06", "2021-04-07"]
+}
+```
+
+If the request is successful, it will return the details about the shift for each day as follows:
+```
+{
+    "result": {
+        "2021-04-01": {
+            "start_time": "17:00:00",
+            "end_time": "21:00:00",
+            "cash_tips": 155.34,
+            "credit_card_tips": 158.08,
+            "hour": 4
+        },
+        "2021-04-05": {
+            "start_time": "10:00:00",
+            "end_time": "14:00:00",
+            "cash_tips": 86.28,
+            "credit_card_tips": 85.12,
+            "hour": 4
+        },
+        "2021-04-06": null,
+        "2021-04-07": {
+            "start_time": "18:00:00",
+            "end_time": "22:00:00",
+            "cash_tips": 103.95,
+            "credit_card_tips": 83.86,
+            "hour": 4
+        }
+    }
+}
+```
+
+If `null` is set for any of the shift day, it means there wasn't sufficient data to make accurate predictions for that day.
+
+In addition, we cannot make predictions for new users without having sufficient data about their earnings. On such instances, the following response is returned:
+```
+{
+    "error": "We do not have sufficient data to make accurate predictions. Please continue entering shift data."
+}
+```
+To improve preformance of web application, we created a separate microservice to predict tips ([more info here](https://github.com/JIA-0302/Analytics)). Hence, for cases when the service is unavailable, the following response can be seen:
+```
+{
+    "error": "Error connecting to the server. Please try again later"
 }
 ```

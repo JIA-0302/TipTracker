@@ -11,6 +11,27 @@ export function generateHashForShiftData(shiftId, employerId, userId) {
 }
 
 /**
+ * We need to round up/down the shift time as follows:
+ *     0 - 15  |  Round down to 0 minutes
+ *    16 - 45  |  Round down/up to 30 minutes
+ *    46 - 59  |  Round up to 0 minutes and increment hour by 1
+ *
+ * @param shiftTime Date that needs to be adjusted
+ * @returns Adjusted date
+ */
+function adjustShiftTime(shiftTime: Date) {
+  const minutes = shiftTime.getMinutes();
+  if (minutes <= 15) {
+    shiftTime.setMinutes(0);
+  } else if (minutes <= 45) {
+    shiftTime.setMinutes(30);
+  } else {
+    shiftTime.setHours(shiftTime.getHours() + 1, 0);
+  }
+  return shiftTime;
+}
+
+/**
  * Split the start time and end time based on the defined interval
  * TODO - FUTURE GOAL, perform OCR on receipts to get accurate time ranges to find tip amounts
  *
@@ -25,7 +46,9 @@ export function splitShiftTime(
   intervalTime: number
 ) {
   const shiftTimes = [];
-  let currentStartTime = startTime;
+  let currentStartTime = adjustShiftTime(startTime);
+  const adjustedEndTime = adjustShiftTime(endTime);
+
   let currentEndTime = addMinutes(
     startTime,
     Number(process.env.SHIFT_INTERVAL_MINUTES)
@@ -39,7 +62,7 @@ export function splitShiftTime(
     });
     currentStartTime = currentEndTime;
     currentEndTime = addMinutes(currentStartTime, intervalTime);
-  } while (currentStartTime < endTime);
+  } while (currentStartTime < adjustedEndTime);
 
   return shiftTimes;
 }
