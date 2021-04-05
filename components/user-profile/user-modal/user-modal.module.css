@@ -1,22 +1,21 @@
 .modalLabel {
-    width: max-content;
-    font-family: "Roboto Slab", serif;
-    font-size: 0.8em;
+  width: max-content;
+  font-family: "Roboto Slab", serif;
+  font-size: 0.8em;
 }
 
 .button {
-    margin: auto;
-    width: 100px;
+  margin: auto;
+  width: 100px;
 }
 
 /* Extra small devices (phones, 600px and down) */
-  
+
 @media only screen and (max-width: 600px) {
-    .mainTitle {
-      margin: auto;
-      color: black;
-      font-size: 20px;
-      margin-right: 0px;
-    }
+  .mainTitle {
+    margin: auto;
+    color: black;
+    font-size: 20px;
+    margin-right: 0px;
+  }
 }
-  
