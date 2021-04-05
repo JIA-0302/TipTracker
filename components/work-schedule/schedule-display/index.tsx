@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./display.module.css";
+import styles from "./schedule-display.module.css";
 import {
   List,
   ListItem,
@@ -23,7 +23,7 @@ const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
       <div className={styles.div}>
         <List>
           <div className={styles.divH3}>
-            <h3 className={styles.h3}>Upcoming Shift</h3>
+            <h3 className={styles.h3}>You have an upcoming shift</h3>
           </div>
           <ListItem className={styles.listItem}>
             <ListItemAvatar>
