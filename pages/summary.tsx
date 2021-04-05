@@ -92,8 +92,8 @@ const summary: React.FunctionComponent = () => {
 
   const rows = [];
   rows_filtered.forEach((data) => {
-    let time_range;
-    let time_diff;
+    let time_range, time_diff, hourly_wages;
+
     if (data.start_time && data.end_time) {
       time_range = `${data.start_time}-${data.end_time}`;
       time_diff = timeDiff(data.start_time, data.end_time);
@@ -101,13 +101,16 @@ const summary: React.FunctionComponent = () => {
       time_range = " ";
       time_diff = 0;
     }
+    if (data.hourly_wage) hourly_wages = data.hourly_wage;
+    else hourly_wages = 0;
+
     rows.push(
       createData(
         data.shift_date,
         getDayOfWeek(data.shift_date),
         time_range,
         parseFloat(time_diff.toFixed(2)),
-        parseFloat(data.hourly_wage.toFixed(2)),
+        parseFloat(hourly_wages.toFixed(2)),
         data.cash_tips,
         data.credit_card_tips,
         data.cash_tips + data.credit_card_tips
@@ -117,7 +120,7 @@ const summary: React.FunctionComponent = () => {
     daysWorked++;
     ccTips += data.credit_card_tips;
     cTips += data.cash_tips;
-    hourlyWages += data.hourly_wage;
+    hourlyWages += hourly_wages;
   });
 
   tips = ccTips + cTips;
