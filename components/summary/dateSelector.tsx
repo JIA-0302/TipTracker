@@ -18,8 +18,8 @@ const DSelector = ({
   return (
     <>
       <div className={styles.gridDatesContainer}>
-        <div className={styles.gridDatesHeader}>{"Start Date"}</div>
-        <div className={styles.gridDatesHeader}>{"End Date"}</div>
+        <div className={styles.gridDatesHeaderDates}>{"Start Date"}</div>
+        <div className={styles.gridDatesHeaderDates}>{"End Date"}</div>
       </div>
       <div className={styles.gridDatesContainer}>
         <DatePicker

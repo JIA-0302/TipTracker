@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { getFilteredShiftData } from "../src/actions/shift-details";
 import { format } from "date-fns";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 function createData(
   date: string,
@@ -136,6 +136,9 @@ const summary: React.FunctionComponent = () => {
   return (
     <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
       <h1 className={styles.summaryHeader}>Summary For</h1>
+      <Button className={styles.backButton} variant="warning" href="/calendar">
+        Back
+      </Button>
       <DSelector
         startDate={startDate}
         endDate={endDate}
