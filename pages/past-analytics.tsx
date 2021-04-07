@@ -11,6 +11,7 @@ import PrivateLayout from "../components/layouts/private-layout";
 import styles from "../styles/analytics.module.css";
 import stylesBackground from "styles/Home.module.css";
 import Trends from "components/analytics/trends-container";
+import { getPastTrends } from "src/actions/trends";
 
 const PastAnalytics: React.FunctionComponent = () => {
   return (
@@ -27,7 +28,7 @@ const PastAnalytics: React.FunctionComponent = () => {
       <ShiftTrendsProvider>
         <div className="d-flex align-items-end">
           <Trends data={trendsTemplate} />
-          <WeekCalendar title="Past Trends" />
+          <WeekCalendar title="Past Trends" retrieveData={getPastTrends} />
         </div>
       </ShiftTrendsProvider>
     </PrivateLayout>

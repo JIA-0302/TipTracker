@@ -7,8 +7,12 @@ export interface IShiftTrendData {
   cashTips: string | number;
 }
 
+export interface IShiftTrendError {
+  message: string;
+}
+
 export interface IShiftTrends {
-  [shiftDate: string]: IShiftTrendData;
+  [shiftDate: string]: IShiftTrendData | IShiftTrendError;
 }
 
 export const trendsTemplate: IShiftTrendData = {
@@ -29,24 +33,19 @@ export const ShiftTrendsContext = createContext<
 
 export const ShiftTrendsProvider = ({ children }) => {
   const [shiftTrends, setShiftTrends] = useState<IShiftTrends>({
-    "2021-04-04": {
-      shiftTime: "10:00 AM - 5:00 PM",
-      hourlyWages: 123,
-      creditCardTips: 54,
-      cashTips: 45,
-    },
-    "2021-04-05": {
-      shiftTime: "12:00 PM - 6:00 PM",
-      hourlyWages: 54,
-      creditCardTips: 323,
-      cashTips: 64,
-    },
-    "2021-04-08": {
-      shiftTime: "2:00 PM - 8:00 PM",
-      hourlyWages: 87,
-      creditCardTips: 32,
-      cashTips: 75,
-    },
+    // Example of Provider state
+    // "2021-04-04": {
+    //   shiftTime: "10:00 AM - 5:00 PM",
+    //   hourlyWages: 123,
+    //   creditCardTips: 54,
+    //   cashTips: 45,
+    // },
+    // "2021-04-05": {
+    //   shiftTime: "12:00 PM - 6:00 PM",
+    //   hourlyWages: 54,
+    //   creditCardTips: 323,
+    //   cashTips: 64,
+    // }
   });
 
   const addShiftTrend = (data: IShiftTrends) => {

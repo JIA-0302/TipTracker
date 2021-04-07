@@ -11,6 +11,7 @@ import WeekCalendar from "components/analytics/calendar";
 
 import stylesBackground from "styles/Home.module.css";
 import styles from "../styles/analytics.module.css";
+import { getFutureTrends } from "src/actions/trends";
 
 const FutureAnalytics: React.FunctionComponent = () => {
   return (
@@ -27,7 +28,7 @@ const FutureAnalytics: React.FunctionComponent = () => {
       <ShiftTrendsProvider>
         <div className="d-flex align-items-end">
           <Trends data={trendsTemplate} />
-          <WeekCalendar title="Future Trends" />
+          <WeekCalendar title="Future Trends" retrieveData={getFutureTrends} />
         </div>
       </ShiftTrendsProvider>
     </PrivateLayout>

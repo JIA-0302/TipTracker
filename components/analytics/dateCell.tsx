@@ -1,19 +1,40 @@
+import React from "react";
+import { Spinner } from "react-bootstrap";
 import { format } from "date-fns";
-import { FcCancel } from "react-icons/fc";
-import { IShiftTrendData } from "src/providers/ShiftTrendsContext";
+
+import {
+  IShiftTrendData,
+  IShiftTrendError,
+} from "src/providers/ShiftTrendsContext";
 import Trends from "./trends-container";
+
 import styles from "./styles.module.css";
+import ErrorTrends from "./trends-container/error";
 
 interface DateCellProps {
   currentDate: Date;
   trendsData: IShiftTrendData;
+  errorData: IShiftTrendError;
   loading?: boolean;
 }
 
-const DateCell = ({ currentDate, trendsData }: DateCellProps) => {
-  let dataToDisplay = <FcCancel fontSize={48} />;
+const DateCell = ({
+  currentDate,
+  trendsData,
+  errorData,
+  loading,
+}: DateCellProps) => {
+  let dataToDisplay;
   if (trendsData) {
     dataToDisplay = <Trends data={trendsData} />;
+  } else if (errorData) {
+    dataToDisplay = <ErrorTrends message={errorData.message} />;
+  } else if (loading) {
+    dataToDisplay = <Spinner animation="border" />;
+  } else {
+    const defaultMessage =
+      "Data could not be retrieved. Please try again later.";
+    dataToDisplay = <ErrorTrends message={defaultMessage} />;
   }
 
   return (

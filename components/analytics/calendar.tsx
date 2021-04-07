@@ -1,7 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { addDays, endOfWeek, startOfWeek, addWeeks, format } from "date-fns";
 
-import { ShiftTrendsContext } from "src/providers/ShiftTrendsContext";
+import {
+  IShiftTrendData,
+  IShiftTrends,
+  ShiftTrendsContext,
+} from "src/providers/ShiftTrendsContext";
 import DateChangePanel from "components/work-calendar/date-change-panel";
 import WeekHeader from "components/work-calendar/week-header";
 import DateCell from "./dateCell";
@@ -11,13 +15,42 @@ import customStyles from "./styles.module.css";
 
 interface WeekCalendarProps {
   title: string;
-  onDateChange?: (currentDate: Date) => void;
+  retrieveData: (requestDates: string[]) => Promise<IShiftTrends>;
 }
 
-const WeekCalendar = ({ title }: WeekCalendarProps): JSX.Element => {
-  const { shiftTrends } = useContext(ShiftTrendsContext);
+const WeekCalendar = ({
+  title,
+  retrieveData,
+}: WeekCalendarProps): JSX.Element => {
+  const { shiftTrends, addShiftTrend } = useContext(ShiftTrendsContext);
   const [currentDate, setCurrentDate] = useState(new Date());
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Finds days for which we need to request data
+    const startDate = startOfWeek(currentDate);
+    const endDate = endOfWeek(currentDate);
+    const requestDates = [];
+    let day = startDate;
+
+    while (day <= endDate) {
+      const formattedDate = format(day, "yyyy-MM-dd");
+      if (!(formattedDate in shiftTrends)) {
+        requestDates.push(formattedDate);
+      }
+      day = addDays(day, 1);
+    }
+
+    if (requestDates.length > 0) {
+      setLoading(true);
+
+      // Retrieve relevant data
+      retrieveData(requestDates)
+        .then((data) => addShiftTrend(data))
+        .catch((error) => window.alert(error))
+        .finally(() => setLoading(false));
+    }
+  }, [currentDate]);
 
   const nextWeek = () => {
     setCurrentDate(addWeeks(currentDate, 1));
@@ -36,12 +69,23 @@ const WeekCalendar = ({ title }: WeekCalendarProps): JSX.Element => {
 
     while (day <= endDate) {
       const formattedDate = format(day, "yyyy-MM-dd");
-      const trendsData = shiftTrends[formattedDate];
+      const currentData = shiftTrends[formattedDate];
+
+      let trendsData, errorData;
+      if (currentData) {
+        if ((currentData as IShiftTrendData).shiftTime) {
+          trendsData = currentData;
+        } else {
+          errorData = currentData;
+        }
+      }
+
       weekDays.push(
         <DateCell
           currentDate={day}
           trendsData={trendsData}
-          loading={false}
+          errorData={errorData}
+          loading={loading}
           key={formattedDate}
         />
       );

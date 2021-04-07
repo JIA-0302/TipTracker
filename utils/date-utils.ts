@@ -17,3 +17,23 @@ export function getFormattedShiftTime(shiftTime: string): string {
   const parsedDate = parseISODate(shiftTime);
   return format(parsedDate, "HH:mm");
 }
+
+export function parseTimeString(time: string): string {
+  const splitTime = time.split(":").map((x) => Number(x));
+  let hour = splitTime[0];
+  const minutes = splitTime[1];
+
+  // Adjust hour to PM if needed
+  let timeOfDay = "AM";
+  if (hour >= 12) {
+    timeOfDay = "PM";
+    if (hour > 12) {
+      hour = hour % 12;
+    }
+  }
+
+  // Pad minutes with leading 0
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : String(minutes);
+
+  return `${hour}:${formattedMinutes} ${timeOfDay}`;
+}
