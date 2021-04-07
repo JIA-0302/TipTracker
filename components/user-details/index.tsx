@@ -12,10 +12,12 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import EmailIcon from "@material-ui/icons/Email";
 import EventIcon from "@material-ui/icons/Event";
 import ModalController from "components/work-schedule/";
+import UserProfile from "components/user-profile/";
 
 export interface UserDetailsProp {
   name: string;
   email: string;
+  image: string;
 }
 
 const UserDetails: React.FunctionComponent<UserDetailsProp> = (props) => {
@@ -24,12 +26,19 @@ const UserDetails: React.FunctionComponent<UserDetailsProp> = (props) => {
       <List>
         <div className={styles.avatarContainer}>
           <Image
-            src={"/images/avatar.png"}
+            src={props.image}
             alt="Picture of the user"
             width={128}
             height={128}
             className={styles.avatar}
           />
+        </div>
+        <div className={styles.avatarContainer}>
+          <UserProfile
+            userId={0}
+            userName={props.name}
+            userEmail={props.email}
+          ></UserProfile>
         </div>
         <ListItem className={styles.listItem}>
           <ListItemAvatar>

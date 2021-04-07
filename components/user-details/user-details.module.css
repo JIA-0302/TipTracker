@@ -4,7 +4,6 @@
   background: #ffffff;
   z-index: 4;
   border-radius: 10px;
-  width: 400px;
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fit, 100px);
   grid-template-rows: repeat(2, 100px);
@@ -19,11 +18,16 @@
   display: flex;
   justify-content: center;
   margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
 .avatar {
   border-radius: 50%;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
 .listItem:hover {

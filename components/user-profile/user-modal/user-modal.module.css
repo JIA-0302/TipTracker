@@ -1,20 +1,12 @@
-.scheduleEditDeleteButton {
-  margin: auto;
-  width: 100px;
-}
-
-.scheduleEditDeleteButton:hover {
-  background-color: red;
-}
-
-.scheduleEditUpdateButton {
-  margin: auto;
-}
-
 .modalLabel {
   width: max-content;
   font-family: "Roboto Slab", serif;
   font-size: 0.8em;
+}
+
+.button {
+  margin: auto;
+  width: 100px;
 }
 
 /* Extra small devices (phones, 600px and down) */
