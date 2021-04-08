@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { addDays, endOfWeek, startOfWeek, addWeeks, format } from "date-fns";
+import { Button } from "react-bootstrap";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 import {
   IShiftTrendData,
   IShiftTrends,
   ShiftTrendsContext,
 } from "src/providers/ShiftTrendsContext";
-import DateChangePanel from "components/work-calendar/date-change-panel";
 import WeekHeader from "components/work-calendar/week-header";
 import DateCell from "./dateCell";
+import MonthDisplay from "./monthDisplay";
 
 import styles from "styles/Calendar.module.css";
 import customStyles from "./styles.module.css";
@@ -98,11 +100,25 @@ const WeekCalendar = ({
   return (
     <div className={`${styles.calendar} mt-4`}>
       <h1 className="text-center">{title}</h1>
-      <DateChangePanel
-        currentDate={currentDate}
-        prevMonth={prevWeek}
-        nextMonth={nextWeek}
-      />
+      <div className="d-flex flex-column flex-md-row justify-content-between my-3">
+        <MonthDisplay currentDate={currentDate} />
+        <div>
+          <Button variant="success" className="mr-3" onClick={prevWeek}>
+            <div className="d-flex justify-content-around align-items-center">
+              <BsArrowLeft fontSize={24} />
+              Previous
+            </div>
+          </Button>
+
+          <Button variant="success" onClick={nextWeek}>
+            <div className="d-flex justify-content-around align-items-center">
+              Next
+              <BsArrowRight fontSize={24} />
+            </div>
+          </Button>
+        </div>
+      </div>
+
       <WeekHeader currentDate={currentDate} />
       <div className="mt-2">{cells()}</div>
     </div>

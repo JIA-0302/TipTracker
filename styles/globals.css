@@ -132,6 +132,23 @@ h5 {
   border-color: transparent;
 }
 
+.btn-light {
+  border: 2px double transparent;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  background-origin: border-box;
+  box-shadow: 0 10px 30px rgba(54, 54, 54, 0.3);
+  transition: all 0.5s linear;
+  min-width: 150px;
+}
+
+.btn-light:hover {
+  box-shadow: 0 10px 30px rgba(126, 126, 126, 0.6);
+  border-color: transparent;
+}
+
 .form-control {
   border-radius: 8px;
   height: 50px;

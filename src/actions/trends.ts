@@ -57,14 +57,14 @@ export const getFutureTrends = async (
           if (parse(shiftDate, "yyyy-MM-dd", currentDate) < currentDate) {
             futureTrends[shiftDate] = {
               message:
-                "We cannot show predictions for past dates. Please visit Past Trends.",
+                "We cannot show predictions for past dates. Please visit Past Trends to view data.",
             };
           }
           // There is no data for this day
           else if (!result[shiftDate]) {
             futureTrends[shiftDate] = {
               message:
-                "We do not have sufficient data to make predictions for the day",
+                "We do not have sufficient data to make predictions for the day. Please continue entering shift data.",
             };
           }
           // Valid data, retrieve relevant data
