@@ -7,14 +7,7 @@ import {
 } from "utils/date-utils";
 
 export const getPastTrends = async (dates: string[]): Promise<IShiftTrends> => {
-  dates.sort((a, b) => {
-    const a_date = new Date(a);
-    const b_date = new Date(b);
-
-    if (a_date < b_date) return -1;
-    if (a_date > b_date) return 1;
-    return 0;
-  });
+  sortSearchDates(dates);
 
   const baseUrl = "api/summary/summary-data";
   const queries = `start_date=${encodeURIComponent(
@@ -96,8 +89,28 @@ export const getPastTrends = async (dates: string[]): Promise<IShiftTrends> => {
 export const getFutureTrends = async (
   dates: string[]
 ): Promise<IShiftTrends> => {
+  const currentDate: Date = new Date();
+
+  // Do not send API requests for dates that has already passed
+  const pastDates = dates.filter((x) => new Date(x) < currentDate);
+  const futureDates = dates.filter((x) => new Date(x) >= currentDate);
+
+  const futureTrends: IShiftTrends = {};
+
+  pastDates.forEach((date) => {
+    futureTrends[date] = {
+      message:
+        "We cannot show predictions for past dates. Please visit Past Trends to view data.",
+    };
+  });
+
+  // No more dates to query. All dates were past dates
+  if (futureDates.length == 0) {
+    return futureTrends;
+  }
+
   const data = {
-    shift_dates: dates,
+    shift_dates: futureDates,
   };
 
   return fetch("api/future-trends", {
@@ -114,9 +127,6 @@ export const getFutureTrends = async (
         throw new Error(json.message);
       } else if (json.result) {
         const { result } = json;
-        const futureTrends: IShiftTrends = {};
-        const currentDate: Date = new Date();
-
         for (const shiftDate in result) {
           // Do not display past date's predictions to the user
           if (parse(shiftDate, "yyyy-MM-dd", currentDate) < currentDate) {
@@ -162,4 +172,15 @@ export const getFutureTrends = async (
         );
       }
     });
+};
+
+const sortSearchDates = (dates: string[]) => {
+  dates.sort((a, b) => {
+    const a_date = new Date(a);
+    const b_date = new Date(b);
+
+    if (a_date < b_date) return -1;
+    if (a_date > b_date) return 1;
+    return 0;
+  });
 };
