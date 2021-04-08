@@ -1,31 +1,95 @@
-import { parse } from "date-fns";
+import { differenceInMinutes, format, parse } from "date-fns";
 import { IShiftTrends } from "src/providers/ShiftTrendsContext";
-import { parseTimeString } from "utils/date-utils";
+import {
+  getFormattedShiftDate,
+  parseISODate,
+  parseTimeString,
+} from "utils/date-utils";
 
 export const getPastTrends = async (dates: string[]): Promise<IShiftTrends> => {
-  dates.map((x) => x.trim()); // Added to ignore lint error
-  const data: IShiftTrends = {
-    "2021-04-11": {
-      shiftTime: "10:00 AM - 5:00 PM",
-      hourlyWages: 123,
-      creditCardTips: 54,
-      cashTips: 45,
-    },
-    "2021-04-12": {
-      shiftTime: "12:00 PM - 6:00 PM",
-      hourlyWages: 54,
-      creditCardTips: 323,
-      cashTips: 64,
-    },
-    "2021-04-13": {
-      shiftTime: "2:00 PM - 8:00 PM",
-      hourlyWages: 87,
-      creditCardTips: 32,
-      cashTips: 75,
-    },
-  };
+  dates.sort((a, b) => {
+    const a_date = new Date(a);
+    const b_date = new Date(b);
 
-  return data;
+    if (a_date < b_date) return -1;
+    if (a_date > b_date) return 1;
+    return 0;
+  });
+
+  const baseUrl = "api/summary/summary-data";
+  const queries = `start_date=${encodeURIComponent(
+    dates[0]
+  )}&end_date=${encodeURIComponent(dates[dates.length - 1])}`;
+
+  return fetch(`${baseUrl}?${queries}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const pastTrends: IShiftTrends = {};
+
+      dates.forEach((date) => {
+        pastTrends[date] = {
+          message:
+            "No data found for the specified day. Make sure you have entered the data on the calendar screen",
+        };
+      });
+
+      data.shiftDetail?.hourlyShiftDetails.forEach((shiftDetail) => {
+        const {
+          shift_date,
+          start_time,
+          end_time,
+          hourly_wage,
+          credit_card_tips,
+          cash_tips,
+        } = shiftDetail;
+
+        const formattedShiftDate = getFormattedShiftDate(shift_date);
+
+        const parsedStartTime = parseISODate(start_time);
+        const parsedEndTime = parseISODate(end_time);
+
+        const shiftInterval =
+          differenceInMinutes(parsedEndTime, parsedStartTime) / 60;
+
+        const formattedStartTime = format(parsedStartTime, "HH:mm:ss");
+        const formattedEndTime = format(parsedEndTime, "HH:mm:ss");
+
+        pastTrends[formattedShiftDate] = {
+          creditCardTips: credit_card_tips,
+          cashTips: cash_tips,
+          shiftTime: `${parseTimeString(
+            formattedStartTime
+          )} - ${parseTimeString(formattedEndTime)}`,
+          hourlyWages: shiftInterval * hourly_wage,
+        };
+      });
+
+      data.shiftDetail?.nonHourlyShiftDetails.forEach((shiftDetail) => {
+        const {
+          shift_date,
+          total_base_earning,
+          credit_card_tips,
+          cash_tips,
+        } = shiftDetail;
+
+        const formattedShiftDate = getFormattedShiftDate(shift_date);
+
+        pastTrends[formattedShiftDate] = {
+          creditCardTips: credit_card_tips,
+          cashTips: cash_tips,
+          shiftTime: `N/A`,
+          hourlyWages: total_base_earning,
+        };
+      });
+
+      return pastTrends;
+    });
 };
 
 export const getFutureTrends = async (

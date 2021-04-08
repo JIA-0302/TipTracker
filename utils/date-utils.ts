@@ -1,6 +1,6 @@
 import { addMinutes, format, parseISO } from "date-fns";
 
-function parseISODate(isoDate: string): Date {
+export function parseISODate(isoDate: string): Date {
   const parsedDate = parseISO(isoDate);
   if (process.env.NODE_ENV === "production") {
     return addMinutes(parsedDate, parsedDate.getTimezoneOffset());
