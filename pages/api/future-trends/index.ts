@@ -15,7 +15,7 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "POST":
       try {
-        const result = await findProfitableShifts(userId, shift_dates, 4);
+        const result = await findProfitableShifts(userId, shift_dates);
         if (!result) {
           throw "No prediction data found. Please try again later";
         }

@@ -30,11 +30,7 @@ async function getPredictedTips(user_id: number, dates: string[]) {
 
 // Returns a dict with list of shift date and the most profitable shift time for each day.
 // If null, it means there was not sufficient data to make predictions
-export async function findProfitableShifts(
-  user_id: number,
-  dates: string[],
-  shift_hour: number
-) {
+export async function findProfitableShifts(user_id: number, dates: string[]) {
   try {
     const { result, error } = await getPredictedTips(user_id, dates);
 
@@ -42,11 +38,19 @@ export async function findProfitableShifts(
       throw error;
     }
 
+    const possibleShiftHours = [4, 5, 6];
+
     const profitableShifts = {};
     for (const shiftDay in result) {
+      // TODO: Retrieve User's desired shift hour for each weekday from settings once implemented
+      const shiftHour =
+        possibleShiftHours[
+          Math.floor(Math.random() * possibleShiftHours.length)
+        ];
+
       profitableShifts[shiftDay] = findProfitableInterval(
         result[shiftDay],
-        shift_hour
+        shiftHour
       );
     }
 
