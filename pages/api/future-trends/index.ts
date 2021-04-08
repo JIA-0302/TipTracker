@@ -15,13 +15,13 @@ const handler = async (req, res) => {
   switch (req.method) {
     case "POST":
       try {
-        const result = await findProfitableShifts(userId, shift_dates, 4);
+        const result = await findProfitableShifts(userId, shift_dates);
         if (!result) {
           throw "No prediction data found. Please try again later";
         }
         return res.status(200).json({ result });
       } catch (e) {
-        return res.status(500).json({ error: e.message || e });
+        return res.status(500).json({ message: e.message || e });
       }
     default:
       res.setHeader("Allow", ["POST"]);

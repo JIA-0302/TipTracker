@@ -1,12 +1,60 @@
-import React, { useState } from "react";
-import { addDays, endOfWeek, format, startOfWeek, addWeeks } from "date-fns";
-import DateChangePanel from "components/work-calendar/date-change-panel";
-import WeekHeader from "components/work-calendar/week-header";
-import { FcCancel } from "react-icons/fc";
-import styles from "styles/Calendar.module.css";
+import React, { useContext, useEffect, useState } from "react";
+import { addDays, endOfWeek, startOfWeek, addWeeks, format } from "date-fns";
+import { Button } from "react-bootstrap";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
-const WorkCalendar = (): JSX.Element => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+import {
+  IShiftTrendData,
+  IShiftTrends,
+  ShiftTrendsContext,
+} from "src/providers/ShiftTrendsContext";
+import WeekHeader from "components/work-calendar/week-header";
+import DateCell from "./dateCell";
+import MonthDisplay from "./monthDisplay";
+
+import styles from "styles/Calendar.module.css";
+import customStyles from "./styles.module.css";
+
+interface WeekCalendarProps {
+  title: string;
+  retrieveData: (requestDates: string[]) => Promise<IShiftTrends>;
+  startDate?: Date;
+}
+
+const WeekCalendar = ({
+  title,
+  retrieveData,
+  startDate,
+}: WeekCalendarProps): JSX.Element => {
+  const { shiftTrends, addShiftTrend } = useContext(ShiftTrendsContext);
+  const [currentDate, setCurrentDate] = useState(startDate || new Date());
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Finds days for which we need to request data
+    const startDate = startOfWeek(currentDate);
+    const endDate = endOfWeek(currentDate);
+    const requestDates = [];
+    let day = startDate;
+
+    while (day <= endDate) {
+      const formattedDate = format(day, "yyyy-MM-dd");
+      if (!(formattedDate in shiftTrends)) {
+        requestDates.push(formattedDate);
+      }
+      day = addDays(day, 1);
+    }
+
+    if (requestDates.length > 0) {
+      setLoading(true);
+
+      // Retrieve relevant data
+      retrieveData(requestDates)
+        .then((data) => addShiftTrend(data))
+        .catch((error) => window.alert(error))
+        .finally(() => setLoading(false));
+    }
+  }, [currentDate]);
 
   const nextWeek = () => {
     setCurrentDate(addWeeks(currentDate, 1));
@@ -20,50 +68,74 @@ const WorkCalendar = (): JSX.Element => {
     const startDate = startOfWeek(currentDate);
     const endDate = endOfWeek(currentDate);
 
-    const rows = [];
-    let days = [];
     let day = startDate;
+    const weekDays = [];
 
     while (day <= endDate) {
-      for (let i = 0; i < 7; i++) {
-        days.push(
-          <div className={`${styles.column} ${styles.cell}`}>
-            <div className="d-flex flex-column" style={{ width: "100%" }}>
-              <p className={styles.number}>{format(day, "dd")}</p>
-              <div className={`${styles.check} align-self-center mt-0`}>
-                <FcCancel />
-              </div>
-            </div>
-          </div>
-        );
-        day = addDays(day, 1);
+      const formattedDate = format(day, "yyyy-MM-dd");
+      const currentData = shiftTrends[formattedDate];
+
+      let trendsData, errorData;
+      if (currentData) {
+        if ((currentData as IShiftTrendData).shiftTime) {
+          trendsData = currentData;
+        } else {
+          errorData = currentData;
+        }
       }
 
-      rows.push(
-        <div className={styles.row} key={day.toDateString()}>
-          {days}
-        </div>
+      weekDays.push(
+        <DateCell
+          currentDate={day}
+          trendsData={trendsData}
+          errorData={errorData}
+          loading={loading}
+          key={formattedDate}
+        />
       );
-      days = [];
+      day = addDays(day, 1);
     }
-    return <div className={styles.body}>{rows}</div>;
+
+    return <div className={customStyles.week}>{weekDays}</div>;
   };
 
   return (
     <div className={`${styles.calendar} mt-4`}>
-      <div className="d-flex flex-column flex-md-row">
-        <DateChangePanel
-          currentDate={currentDate}
-          /*prevMonth={prevMonth}
-          nextMonth={nextMonth}*/
-          prevMonth={prevWeek}
-          nextMonth={nextWeek}
-        />
+      <h1 className="text-center">{title}</h1>
+      <div className="d-flex flex-column flex-md-row justify-content-between my-3">
+        <MonthDisplay currentDate={currentDate} />
+        <div>
+          <Button variant="success" className="mr-3" onClick={prevWeek}>
+            <div className="d-flex justify-content-around align-items-center">
+              <BsArrowLeft fontSize={24} />
+              Previous
+            </div>
+          </Button>
+
+          <Button variant="success" onClick={nextWeek}>
+            <div className="d-flex justify-content-around align-items-center">
+              Next
+              <BsArrowRight fontSize={24} />
+            </div>
+          </Button>
+        </div>
       </div>
-      <WeekHeader currentDate={currentDate} />
-      <div>{cells()}</div>
+
+      <div className="d-flex align-items-end">
+        <div className={customStyles.template}>
+          <span style={{ color: "green" }}>Shift Time</span>
+          <span style={{ color: "red" }}>Wages</span>
+          <span style={{ color: "blue" }}>C.C. Tips</span>
+          <span style={{ color: "blue" }}>Cash Tips</span>
+          <span style={{ color: "black" }}>Total Tips</span>
+        </div>
+        <div style={{ width: "100%" }}>
+          <WeekHeader currentDate={currentDate} />
+          <div className="mt-2">{cells()}</div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default WorkCalendar;
+export default WeekCalendar;

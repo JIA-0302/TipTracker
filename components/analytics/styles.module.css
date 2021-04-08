@@ -1,0 +1,51 @@
+.calendar {
+  width: 100%;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day {
+  width: 97%;
+  margin: auto;
+  background-color: #fff;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
+  transition: 0.25s ease-out;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  font: normal normal normal 15px/20px Roboto Slab;
+}
+
+.day:hover {
+  background: whitesmoke;
+  transition: 0.5s ease-out;
+}
+
+.date {
+  margin: 10px;
+  margin-bottom: 0;
+  text-align: left;
+  letter-spacing: 0px;
+  opacity: 1;
+}
+
+.template {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font: normal normal normal 15px/20px Roboto Slab;
+  min-width: 140px;
+  padding-bottom: 20px;
+  padding: 20px;
+  padding-bottom: 10px;
+  background-color: white;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
+}
