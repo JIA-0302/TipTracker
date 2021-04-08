@@ -34,8 +34,7 @@ export const getPastTrends = async (dates: string[]): Promise<IShiftTrends> => {
 
       dates.forEach((date) => {
         pastTrends[date] = {
-          message:
-            "No data found for the specified day. Make sure you have entered the data on the calendar screen",
+          message: "No data found for the specified day",
         };
       });
 
