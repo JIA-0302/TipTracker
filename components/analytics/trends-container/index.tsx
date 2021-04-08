@@ -5,7 +5,7 @@ interface TrendsProps {
 }
 
 const Trends = ({ data }: TrendsProps) => {
-  const { shiftTime, creditCardTips, cashTips, hourlyWages } = data;
+  const { shiftTime, creditCardTips, cashTips, hourlyWages, totalTips } = data;
 
   const formatValue = (value: string | number) => {
     if (typeof value === "number") {
@@ -21,6 +21,7 @@ const Trends = ({ data }: TrendsProps) => {
       <span style={{ color: "red" }}>{formatValue(hourlyWages)}</span>
       <span style={{ color: "blue" }}>{formatValue(creditCardTips)}</span>
       <span style={{ color: "blue" }}>{formatValue(cashTips)}</span>
+      <span style={{ color: "black" }}>{formatValue(totalTips)}</span>
     </div>
   );
 };

@@ -5,6 +5,7 @@ export interface IShiftTrendData {
   hourlyWages: string | number;
   creditCardTips: string | number;
   cashTips: string | number;
+  totalTips: string | number;
 }
 
 export interface IShiftTrendError {
@@ -14,13 +15,6 @@ export interface IShiftTrendError {
 export interface IShiftTrends {
   [shiftDate: string]: IShiftTrendData | IShiftTrendError;
 }
-
-export const trendsTemplate: IShiftTrendData = {
-  shiftTime: "Shift Time",
-  hourlyWages: "Hourly Wages",
-  creditCardTips: "CC Tips",
-  cashTips: "Cash Tips",
-};
 
 interface ShiftTrendsContextProps {
   shiftTrends: IShiftTrends;

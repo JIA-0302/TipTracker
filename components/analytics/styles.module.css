@@ -18,6 +18,7 @@
   min-height: 150px;
   display: flex;
   flex-direction: column;
+  font: normal normal normal 15px/20px Roboto Slab;
 }
 
 .day:hover {
@@ -29,7 +30,22 @@
   margin: 10px;
   margin-bottom: 0;
   text-align: left;
-  font: normal normal normal 15px/20px Roboto Slab;
   letter-spacing: 0px;
   opacity: 1;
+}
+
+.template {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font: normal normal normal 15px/20px Roboto Slab;
+  min-width: 140px;
+  padding-bottom: 20px;
+  padding: 20px;
+  padding-bottom: 10px;
+  background-color: white;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
 }

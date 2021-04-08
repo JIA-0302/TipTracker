@@ -66,6 +66,7 @@ export const getPastTrends = async (dates: string[]): Promise<IShiftTrends> => {
             formattedStartTime
           )} - ${parseTimeString(formattedEndTime)}`,
           hourlyWages: shiftInterval * hourly_wage,
+          totalTips: credit_card_tips + cash_tips,
         };
       });
 
@@ -84,6 +85,7 @@ export const getPastTrends = async (dates: string[]): Promise<IShiftTrends> => {
           cashTips: cash_tips,
           shiftTime: `N/A`,
           hourlyWages: total_base_earning,
+          totalTips: credit_card_tips + cash_tips,
         };
       });
 
@@ -148,6 +150,7 @@ export const getFutureTrends = async (
               hourlyWages: hour * 9, // TODO - Calculate wage based on user default once implemented
               creditCardTips: credit_card_tips,
               cashTips: cash_tips,
+              totalTips: credit_card_tips + cash_tips,
             };
           }
         }

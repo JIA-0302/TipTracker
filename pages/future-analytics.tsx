@@ -1,18 +1,14 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { useRouter } from "next/router";
 
-import {
-  ShiftTrendsProvider,
-  trendsTemplate,
-} from "src/providers/ShiftTrendsContext";
-import Trends from "components/analytics/trends-container";
+import { ShiftTrendsProvider } from "src/providers/ShiftTrendsContext";
+import { getFutureTrends } from "src/actions/trends";
 import PrivateLayout from "components/layouts/private-layout";
 import WeekCalendar from "components/analytics/calendar";
 
 import stylesBackground from "styles/Home.module.css";
 import styles from "../styles/analytics.module.css";
-import { getFutureTrends } from "src/actions/trends";
-import { useRouter } from "next/router";
 
 const FutureAnalytics: React.FunctionComponent = () => {
   const router = useRouter();
@@ -40,7 +36,6 @@ const FutureAnalytics: React.FunctionComponent = () => {
 
       <ShiftTrendsProvider>
         <div className="d-flex align-items-end">
-          <Trends data={trendsTemplate} />
           <WeekCalendar
             title="Future Trends"
             retrieveData={getFutureTrends}
