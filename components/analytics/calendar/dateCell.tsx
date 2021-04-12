@@ -6,10 +6,10 @@ import {
   IShiftTrendData,
   IShiftTrendError,
 } from "src/providers/ShiftTrendsContext";
-import Trends from "./trends-container";
+import Trends from "../trends-container";
 
 import styles from "./styles.module.css";
-import ErrorTrends from "./trends-container/error";
+import ErrorTrends from "../trends-container/error";
 
 interface DateCellProps {
   currentDate: Date;
@@ -30,7 +30,7 @@ const DateCell = ({
   } else if (errorData) {
     dataToDisplay = <ErrorTrends message={errorData.message} />;
   } else if (loading) {
-    dataToDisplay = <Spinner animation="border" />;
+    dataToDisplay = <Spinner animation="border" style={{ margin: "auto" }} />;
   } else {
     const defaultMessage =
       "Data could not be retrieved. Please try again later.";
@@ -42,7 +42,7 @@ const DateCell = ({
       <p className={styles.date}>{format(currentDate, "dd")}</p>
       <div
         className="align-self-center d-flex flex-column justify-content-center mt-0"
-        style={{ height: "100%" }}
+        style={{ height: "100%", width: "100%" }}
       >
         {dataToDisplay}
       </div>

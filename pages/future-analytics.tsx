@@ -8,7 +8,7 @@ import PrivateLayout from "components/layouts/private-layout";
 import WeekCalendar from "components/analytics/calendar";
 
 import stylesBackground from "styles/Home.module.css";
-import styles from "../styles/analytics.module.css";
+import styles from "styles/analytics.module.css";
 
 const FutureAnalytics: React.FunctionComponent = () => {
   const router = useRouter();
@@ -34,13 +34,9 @@ const FutureAnalytics: React.FunctionComponent = () => {
         Back
       </Button>
 
-      <ShiftTrendsProvider>
+      <ShiftTrendsProvider defaultCurrentDate={startDate}>
         <div className="d-flex align-items-end">
-          <WeekCalendar
-            title="Future Trends"
-            retrieveData={getFutureTrends}
-            startDate={startDate}
-          />
+          <WeekCalendar title="Future Trends" retrieveData={getFutureTrends} />
         </div>
       </ShiftTrendsProvider>
     </PrivateLayout>

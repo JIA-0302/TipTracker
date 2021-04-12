@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import styles from "../../styles/analytics.module.css";
+import styles from "styles/analytics.module.css";
 
 interface dateSelectorProps {
   startDate: Date;

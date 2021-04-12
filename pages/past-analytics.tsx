@@ -7,7 +7,7 @@ import { getPastTrends } from "src/actions/trends";
 import WeekCalendar from "components/analytics/calendar";
 import PrivateLayout from "components/layouts/private-layout";
 
-import styles from "../styles/analytics.module.css";
+import styles from "styles/analytics.module.css";
 import stylesBackground from "styles/Home.module.css";
 
 const PastAnalytics: React.FunctionComponent = () => {
@@ -34,13 +34,9 @@ const PastAnalytics: React.FunctionComponent = () => {
         Back
       </Button>
 
-      <ShiftTrendsProvider>
+      <ShiftTrendsProvider defaultCurrentDate={startDate}>
         <div className="d-flex align-items-end">
-          <WeekCalendar
-            title="Past Trends"
-            retrieveData={getPastTrends}
-            startDate={startDate}
-          />
+          <WeekCalendar title="Past Trends" retrieveData={getPastTrends} />
         </div>
       </ShiftTrendsProvider>
     </PrivateLayout>

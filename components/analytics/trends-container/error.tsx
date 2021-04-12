@@ -12,7 +12,7 @@ const ErrorTrends = ({ message }: ErrorTrendsProps) => {
       placement={"top"}
       overlay={<Tooltip id={`tooltip-top`}>{message}</Tooltip>}
     >
-      <FcCancel fontSize={48} />
+      <FcCancel fontSize={48} style={{ margin: "auto" }} />
     </OverlayTrigger>
   );
 };
