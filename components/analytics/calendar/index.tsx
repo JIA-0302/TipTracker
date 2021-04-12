@@ -14,6 +14,7 @@ import MonthDisplay from "./monthDisplay";
 
 import styles from "styles/Calendar.module.css";
 import customStyles from "./styles.module.css";
+import IconLegend from "./iconLegend";
 
 interface WeekCalendarProps {
   title: string;
@@ -127,6 +128,8 @@ const WeekCalendar = ({
         <WeekHeader currentDate={currentDate} />
         <div className="mt-2">{cells()}</div>
       </div>
+
+      <IconLegend />
     </div>
   );
 };
