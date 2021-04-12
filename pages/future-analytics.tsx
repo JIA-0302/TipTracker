@@ -8,7 +8,7 @@ import PrivateLayout from "components/layouts/private-layout";
 import WeekCalendar from "components/analytics/calendar";
 
 import stylesBackground from "styles/Home.module.css";
-import styles from "../styles/analytics.module.css";
+import styles from "styles/analytics.module.css";
 
 const FutureAnalytics: React.FunctionComponent = () => {
   const router = useRouter();

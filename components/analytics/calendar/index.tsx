@@ -123,18 +123,9 @@ const WeekCalendar = ({
         </div>
       </div>
 
-      <div className="d-flex align-items-end">
-        <div className={customStyles.template}>
-          <span style={{ color: "green" }}>Shift Time</span>
-          <span style={{ color: "red" }}>Wages</span>
-          <span style={{ color: "blue" }}>C.C. Tips</span>
-          <span style={{ color: "blue" }}>Cash Tips</span>
-          <span style={{ color: "black" }}>Total Tips</span>
-        </div>
-        <div style={{ width: "100%" }}>
-          <WeekHeader currentDate={currentDate} />
-          <div className="mt-2">{cells()}</div>
-        </div>
+      <div style={{ width: "100%" }}>
+        <WeekHeader currentDate={currentDate} />
+        <div className="mt-2">{cells()}</div>
       </div>
     </div>
   );
