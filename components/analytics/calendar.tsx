@@ -18,16 +18,18 @@ import customStyles from "./styles.module.css";
 interface WeekCalendarProps {
   title: string;
   retrieveData: (requestDates: string[]) => Promise<IShiftTrends>;
-  startDate?: Date;
 }
 
 const WeekCalendar = ({
   title,
   retrieveData,
-  startDate,
 }: WeekCalendarProps): JSX.Element => {
-  const { shiftTrends, addShiftTrend } = useContext(ShiftTrendsContext);
-  const [currentDate, setCurrentDate] = useState(startDate || new Date());
+  const {
+    shiftTrends,
+    addShiftTrend,
+    currentDate,
+    setCurrentDate,
+  } = useContext(ShiftTrendsContext);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

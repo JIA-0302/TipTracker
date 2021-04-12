@@ -34,13 +34,9 @@ const PastAnalytics: React.FunctionComponent = () => {
         Back
       </Button>
 
-      <ShiftTrendsProvider>
+      <ShiftTrendsProvider defaultCurrentDate={startDate}>
         <div className="d-flex align-items-end">
-          <WeekCalendar
-            title="Past Trends"
-            retrieveData={getPastTrends}
-            startDate={startDate}
-          />
+          <WeekCalendar title="Past Trends" retrieveData={getPastTrends} />
         </div>
       </ShiftTrendsProvider>
     </PrivateLayout>

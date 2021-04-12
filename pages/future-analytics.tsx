@@ -34,13 +34,9 @@ const FutureAnalytics: React.FunctionComponent = () => {
         Back
       </Button>
 
-      <ShiftTrendsProvider>
+      <ShiftTrendsProvider defaultCurrentDate={startDate}>
         <div className="d-flex align-items-end">
-          <WeekCalendar
-            title="Future Trends"
-            retrieveData={getFutureTrends}
-            startDate={startDate}
-          />
+          <WeekCalendar title="Future Trends" retrieveData={getFutureTrends} />
         </div>
       </ShiftTrendsProvider>
     </PrivateLayout>

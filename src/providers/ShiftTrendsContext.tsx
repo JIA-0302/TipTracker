@@ -16,16 +16,26 @@ export interface IShiftTrends {
   [shiftDate: string]: IShiftTrendData | IShiftTrendError;
 }
 
-interface ShiftTrendsContextProps {
+export interface ShiftTrendsContextProps {
   shiftTrends: IShiftTrends;
   addShiftTrend: (data: IShiftTrends) => void;
+  currentDate: Date;
+  setCurrentDate: (newDate: Date) => void;
 }
 
 export const ShiftTrendsContext = createContext<
   Partial<ShiftTrendsContextProps>
 >({});
 
-export const ShiftTrendsProvider = ({ children }) => {
+interface ShiftTrendsProviderProps {
+  defaultCurrentDate: Date;
+  children: React.ReactNode;
+}
+
+export const ShiftTrendsProvider = ({
+  defaultCurrentDate,
+  children,
+}: ShiftTrendsProviderProps) => {
   const [shiftTrends, setShiftTrends] = useState<IShiftTrends>({
     // Example of Provider state
     // "2021-04-04": {
@@ -42,6 +52,8 @@ export const ShiftTrendsProvider = ({ children }) => {
     // }
   });
 
+  const [currentDate, setCurrentDate] = useState<Date>(defaultCurrentDate);
+
   const addShiftTrend = (data: IShiftTrends) => {
     setShiftTrends({
       ...shiftTrends,
@@ -50,7 +62,9 @@ export const ShiftTrendsProvider = ({ children }) => {
   };
 
   return (
-    <ShiftTrendsContext.Provider value={{ shiftTrends, addShiftTrend }}>
+    <ShiftTrendsContext.Provider
+      value={{ shiftTrends, addShiftTrend, currentDate, setCurrentDate }}
+    >
       {children}
     </ShiftTrendsContext.Provider>
   );
