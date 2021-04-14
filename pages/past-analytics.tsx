@@ -9,6 +9,7 @@ import PrivateLayout from "components/layouts/private-layout";
 
 import styles from "styles/analytics.module.css";
 import stylesBackground from "styles/Home.module.css";
+import PastTrendsVis from "../components/analytics/trends-visualization/pastTrendsDataVis";
 
 const PastAnalytics: React.FunctionComponent = () => {
   const router = useRouter();
@@ -38,6 +39,7 @@ const PastAnalytics: React.FunctionComponent = () => {
         <div className="d-flex align-items-end">
           <WeekCalendar title="Past Trends" retrieveData={getPastTrends} />
         </div>
+        <PastTrendsVis />
       </ShiftTrendsProvider>
     </PrivateLayout>
   );
