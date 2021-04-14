@@ -58,7 +58,7 @@ export const getPastTrends = async (dates: string[]): Promise<IShiftTrends> => {
           shiftTime: `${parseTimeString(
             formattedStartTime
           )} - ${parseTimeString(formattedEndTime)}`,
-          hourlyWages: shiftInterval * hourly_wage,
+          hourlyWages: (shiftInterval * hourly_wage).toFixed(2),
           totalTips: credit_card_tips + cash_tips,
         };
       });
