@@ -27,7 +27,7 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
       .finally(() => {
         setLoading(false);
       });
-  });
+  }, []);
 
   const getParsedUserDetails = () => {
     return {
@@ -36,8 +36,8 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
   };
 
   const updateUserDetails = (event) => {
-    const { id, value } = event.target;
-    setUserDetail({ ...userDetail, [id]: value });
+    const { name, value } = event.target;
+    setUserDetail({ ...userDetail, [name]: value });
   };
 
   const updateEditedUserData = async () => {
@@ -45,6 +45,7 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
     try {
       setLoading(true);
       await updateUserData(newUserDetails);
+      window.location.href = "/login";
       onButtonSelect();
     } catch (e) {
       window.alert(e.message);
@@ -65,9 +66,10 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
               <Form.Label className={styles.modalLabel}>Name</Form.Label>
               <Form.Control
                 onChange={updateUserDetails}
-                type="string"
+                type="text"
+                name="name"
                 value={userDetail?.name}
-                required
+                disabled={loading}
               />
             </Form.Group>
           </Col>
@@ -81,9 +83,10 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
               <Form.Label className={styles.modalLabel}>Email</Form.Label>
               <Form.Control
                 onChange={updateUserDetails}
-                type="string"
+                type="text"
+                name="email"
                 value={userDetail?.email}
-                required
+                disabled={loading}
               />
             </Form.Group>
           </Col>

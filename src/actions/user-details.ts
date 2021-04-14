@@ -9,14 +9,7 @@ export const getUserData = async () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      const userDetail = data.userDetail;
-      if (userDetail) {
-        return {
-          name: userDetail["name"],
-          email: userDetail["email"],
-        };
-      }
-      return {};
+      return data.user;
     });
 };
 
