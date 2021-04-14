@@ -34,11 +34,7 @@ const UserDetails: React.FunctionComponent<UserDetailsProp> = (props) => {
           />
         </div>
         <div className={styles.avatarContainer}>
-          <UserProfile
-            userId={0}
-            userName={props.name}
-            userEmail={props.email}
-          ></UserProfile>
+          <UserProfile></UserProfile>
         </div>
         <ListItem className={styles.listItem}>
           <ListItemAvatar>

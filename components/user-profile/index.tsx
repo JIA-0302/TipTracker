@@ -4,25 +4,12 @@ import styles from "styles/UserProfile.module.css";
 import EditIcon from "@material-ui/icons/Edit";
 import UserForm from "./user-modal/";
 
-interface UserProps {
-  userId: number;
-  userName: string;
-  userEmail: string;
-}
-
-const ModalController = (props: UserProps): JSX.Element => {
+const ModalController = (): JSX.Element => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const formToShow = (
-    <UserForm
-      userId={props.userId}
-      userName={props.userName}
-      userEmail={props.userEmail}
-      onButtonSelect={handleClose}
-    ></UserForm>
-  );
+  const formToShow = <UserForm onButtonSelect={handleClose}></UserForm>;
   const modalTitle = "User Profile";
 
   return (
