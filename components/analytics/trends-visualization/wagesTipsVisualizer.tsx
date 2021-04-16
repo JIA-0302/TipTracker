@@ -4,7 +4,7 @@ import { ShiftTrendsContext } from "src/providers/ShiftTrendsContext";
 import styles from "styles/analytics.module.css";
 import { getVisualizationDataForWeek } from "./utils";
 
-const PastTrendsVis: React.FunctionComponent = () => {
+const WagesTipsVisualizer: React.FunctionComponent = () => {
   const { currentDate, shiftTrends } = useContext(ShiftTrendsContext);
   const visData = getVisualizationDataForWeek(currentDate, shiftTrends);
 
@@ -78,4 +78,4 @@ const PastTrendsVis: React.FunctionComponent = () => {
   );
 };
 
-export default PastTrendsVis;
+export default WagesTipsVisualizer;
