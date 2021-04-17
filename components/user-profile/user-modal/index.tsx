@@ -19,21 +19,12 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
     setLoading(true);
     getUserData()
       .then((data) => {
-        setUserDetail({
-          name: data["name"],
-          email: data["email"],
-        });
+        setUserDetail(data);
       })
       .finally(() => {
         setLoading(false);
       });
   }, []);
-
-  const getParsedUserDetails = () => {
-    return {
-      ...userDetail,
-    };
-  };
 
   const updateUserDetails = (event) => {
     const { name, value } = event.target;
@@ -41,10 +32,9 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
   };
 
   const updateEditedUserData = async () => {
-    const newUserDetails = getParsedUserDetails();
     try {
       setLoading(true);
-      await updateUserData(newUserDetails);
+      await updateUserData(userDetail);
       window.location.href = "/api/auth/signout";
       onButtonSelect();
     } catch (e) {
