@@ -23,3 +23,8 @@
     rgba(0, 0, 0, 0)
   );
 }
+.pastTrendVisPosition {
+  width: 1000px;
+  height: 500px;
+  margin: auto;
+}

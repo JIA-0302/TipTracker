@@ -6,6 +6,7 @@ import { ShiftTrendsProvider } from "src/providers/ShiftTrendsContext";
 import { getPastTrends } from "src/actions/trends";
 import WeekCalendar from "components/analytics/calendar";
 import PrivateLayout from "components/layouts/private-layout";
+import WagesTipsVisualizer from "components/analytics/trends-visualization/wagesTipsVisualizer";
 
 import styles from "styles/analytics.module.css";
 import stylesBackground from "styles/Home.module.css";
@@ -38,6 +39,7 @@ const PastAnalytics: React.FunctionComponent = () => {
         <div className="d-flex align-items-end">
           <WeekCalendar title="Past Trends" retrieveData={getPastTrends} />
         </div>
+        <WagesTipsVisualizer />
       </ShiftTrendsProvider>
     </PrivateLayout>
   );
