@@ -28,7 +28,7 @@ const TrendsLine = ({ value, color, item }: TrendsLineProps) => (
         {KEY_ICONS[item].icon}
       </OverlayTrigger>
     </Col>
-    <Col xs={9} style={{ color }}>
+    <Col xs={10} style={{ color }}>
       {value}
     </Col>
   </Row>

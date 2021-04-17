@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 import { ShiftTrendsProvider } from "src/providers/ShiftTrendsContext";
 import { getPastTrends } from "src/actions/trends";
+import { getDateFromRequestQuery } from "utils/date-utils";
 import WeekCalendar from "components/analytics/calendar";
 import PrivateLayout from "components/layouts/private-layout";
 import WagesTipsVisualizer from "components/analytics/trends-visualization/wagesTipsVisualizer";
@@ -13,16 +14,7 @@ import stylesBackground from "styles/Home.module.css";
 
 const PastAnalytics: React.FunctionComponent = () => {
   const router = useRouter();
-
-  let startDate = new Date();
-  if (router.query?.date) {
-    const { date } = router.query;
-    if (typeof date === "string") {
-      startDate = new Date(date);
-    } else {
-      startDate = new Date(date[0]);
-    }
-  }
+  const startDate = getDateFromRequestQuery(router.query);
 
   return (
     <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
