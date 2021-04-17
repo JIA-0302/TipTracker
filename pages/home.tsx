@@ -6,6 +6,8 @@ import PrivateLayout from "components/layouts/private-layout";
 import styles from "styles/Home.module.css";
 import WorkSchedule from "components/work-schedule/schedule-display";
 import UserDetails from "components/user-details/";
+import WagesDistribution from "components/visualizations/monthly-summary/wagesDistribution";
+import WagesTrends from "components/visualizations/monthly-summary/wagesTrends";
 
 interface HomeProps {
   session: {
@@ -60,6 +62,14 @@ export function Home(props: HomeProps): JSX.Element {
                   endTime="21:00"
                 />
               </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} xl={5} className="my-3">
+              <WagesDistribution />
+            </Col>
+            <Col xs={12} xl={7} className="my-3">
+              <WagesTrends />
             </Col>
           </Row>
         </Container>

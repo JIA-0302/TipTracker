@@ -1,5 +1,4 @@
 import { ResponsivePie } from "@nivo/pie";
-import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import Loader from "../loader";
 
@@ -26,8 +25,6 @@ const data = [
 const WagesDistribution = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [earningsData, setEarningsData] = useState([]);
-
-  const currentDate = new Date();
 
   useEffect(() => {
     setLoading(true);
