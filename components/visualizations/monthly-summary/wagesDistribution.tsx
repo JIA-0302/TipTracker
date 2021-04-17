@@ -1,37 +1,27 @@
 import { ResponsivePie } from "@nivo/pie";
 import React, { useEffect, useState } from "react";
+import { getEarningsDistributionData } from "src/actions/visualizations";
 import Loader from "../loader";
 
 import styles from "./styles.module.css";
-
-const data = [
-  {
-    id: "wages",
-    label: "Wages",
-    value: 537,
-  },
-  {
-    id: "cashTips",
-    label: "Cash Tips",
-    value: 354,
-  },
-  {
-    id: "ccTips",
-    label: "Credit Card Tips",
-    value: 467,
-  },
-];
 
 const WagesDistribution = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [earningsData, setEarningsData] = useState([]);
 
+  const days = 30;
+
   useEffect(() => {
     setLoading(true);
-    setTimeout(function () {
-      setEarningsData(data);
-      setLoading(false);
-    }, 1000);
+    getEarningsDistributionData(30)
+      .then((data) => setEarningsData(data))
+      .catch(() => {
+        setEarningsData([]);
+        window.alert(
+          "We could not retrieve the earnings distribution data. Please try again later"
+        );
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -41,7 +31,7 @@ const WagesDistribution = (): JSX.Element => {
       ) : (
         <div style={{ height: 400, width: "100%" }} className="text-center">
           <h5>Earnings Distribution for</h5>
-          <h3>past 30 days</h3>
+          <h3>past {days} days</h3>
           <ResponsivePie
             data={earningsData}
             valueFormat={(v) => `$ ${v}`}
