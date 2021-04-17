@@ -1,4 +1,4 @@
-import { addMinutes, format, parseISO } from "date-fns";
+import { addMinutes, format, parse, parseISO } from "date-fns";
 
 export function parseISODate(isoDate: string): Date {
   const parsedDate = parseISO(isoDate);
@@ -36,4 +36,24 @@ export function parseTimeString(time: string): string {
   const formattedMinutes = minutes < 10 ? `0${minutes}` : String(minutes);
 
   return `${hour}:${formattedMinutes} ${timeOfDay}`;
+}
+
+export function getDateFromRequestQuery(query) {
+  let currentDate = new Date();
+  if (query?.date) {
+    const { date } = query;
+    let rawStartDate = "";
+    if (typeof date === "string") {
+      rawStartDate = date;
+    } else {
+      rawStartDate = date[0];
+    }
+    try {
+      currentDate = parse(rawStartDate, "yyyy-MM-dd", currentDate);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  return currentDate;
 }

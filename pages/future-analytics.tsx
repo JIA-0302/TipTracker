@@ -10,19 +10,11 @@ import WagesTipsVisualizer from "components/analytics/trends-visualization/wages
 
 import stylesBackground from "styles/Home.module.css";
 import styles from "styles/analytics.module.css";
+import { getDateFromRequestQuery } from "utils/date-utils";
 
 const FutureAnalytics: React.FunctionComponent = () => {
   const router = useRouter();
-
-  let startDate = new Date();
-  if (router.query?.date) {
-    const { date } = router.query;
-    if (typeof date === "string") {
-      startDate = new Date(date);
-    } else {
-      startDate = new Date(date[0]);
-    }
-  }
+  const startDate = getDateFromRequestQuery(router.query);
 
   return (
     <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
