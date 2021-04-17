@@ -45,7 +45,7 @@ const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
     try {
       setLoading(true);
       await updateUserData(newUserDetails);
-      window.location.href = "/login";
+      window.location.href = "/api/auth/signout";
       onButtonSelect();
     } catch (e) {
       window.alert(e.message);

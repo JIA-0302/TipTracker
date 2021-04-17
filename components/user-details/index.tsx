@@ -28,8 +28,8 @@ const UserDetails: React.FunctionComponent<UserDetailsProp> = (props) => {
           <Image
             src={props.image}
             alt="Picture of the user"
-            width={128}
-            height={128}
+            width={115}
+            height={135}
             className={styles.avatar}
           />
         </div>

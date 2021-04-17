@@ -48,14 +48,14 @@ export function Home(props: HomeProps): JSX.Element {
                 <UserDetails
                   name={session?.user?.name || "John Doe"}
                   email={session?.user?.email || "jdoe@tiptracker.com"}
-                  image={session?.user?.image || "/images/avatar.png"}
+                  image={session?.user?.image || "/images/user-image.jpg"}
                 />
               </div>
             </Col>
             <Col xs={7}>
               <div className="ml-4">
                 <WorkSchedule
-                  workDay="04/01/2021"
+                  workDay="04/26/2021"
                   startTime="11:30"
                   endTime="21:00"
                 />
