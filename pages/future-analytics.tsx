@@ -6,6 +6,7 @@ import { ShiftTrendsProvider } from "src/providers/ShiftTrendsContext";
 import { getFutureTrends } from "src/actions/trends";
 import PrivateLayout from "components/layouts/private-layout";
 import WeekCalendar from "components/analytics/calendar";
+import WagesTipsVisualizer from "components/analytics/trends-visualization/wagesTipsVisualizer";
 
 import stylesBackground from "styles/Home.module.css";
 import styles from "styles/analytics.module.css";
@@ -38,6 +39,7 @@ const FutureAnalytics: React.FunctionComponent = () => {
         <div className="d-flex align-items-end">
           <WeekCalendar title="Future Trends" retrieveData={getFutureTrends} />
         </div>
+        <WagesTipsVisualizer />
       </ShiftTrendsProvider>
     </PrivateLayout>
   );
