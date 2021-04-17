@@ -131,11 +131,11 @@ export const getEarningsTrendsData = async (days: number) => {
         };
       });
 
-      const result = [
-        { id: "Wages", data: [] },
-        { id: "Cash Tips", data: [] },
-        { id: "Credit Card Tips", data: [] },
-      ];
+      const trends = {
+        wages: [],
+        "Cash Tips": [],
+        "Credit Card Tips": [],
+      };
 
       const today = new Date();
       let currentDate = addDays(today, -days);
@@ -144,17 +144,17 @@ export const getEarningsTrendsData = async (days: number) => {
         const day = format(currentDate, "yyyy-MM-dd");
         const index = format(currentDate, "d");
 
-        result[0].data.push({
+        trends.wages.push({
           x: index,
           y: dataByDays[day]?.wages?.toFixed(2) || 0,
         });
 
-        result[1].data.push({
+        trends["Cash Tips"].push({
           x: index,
           y: dataByDays[day]?.cashTips?.toFixed(2) || 0,
         });
 
-        result[2].data.push({
+        trends["Credit Card Tips"].push({
           x: index,
           y: dataByDays[day]?.ccTips?.toFixed(2) || 0,
         });
@@ -162,6 +162,8 @@ export const getEarningsTrendsData = async (days: number) => {
         currentDate = addDays(currentDate, 1);
       }
 
-      return result;
+      return Object.keys(trends).map((x) => {
+        return { id: x, data: trends[x] };
+      });
     });
 };
