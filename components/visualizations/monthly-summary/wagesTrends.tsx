@@ -1,47 +1,29 @@
 import { ResponsiveLine } from "@nivo/line";
-import { addDays, format } from "date-fns";
 import React, { useEffect, useState } from "react";
+import { getEarningsTrendsData } from "src/actions/visualizations";
 import Loader from "../loader";
 
 import styles from "./styles.module.css";
-
-const getDummyData = () => {
-  const dummyData = [
-    { id: "Wages", data: [] },
-    { id: "Cash Tips", data: [] },
-    { id: "Credit Card Tips", data: [] },
-  ];
-
-  const today = new Date();
-  let currentDate = addDays(today, -15);
-
-  while (currentDate <= today) {
-    const day = format(currentDate, "d");
-
-    for (let i = 0; i < dummyData.length; i++) {
-      dummyData[i].data.push({
-        x: day,
-        y: (Math.random() * 200).toFixed(2),
-      });
-    }
-
-    currentDate = addDays(currentDate, 1);
-  }
-
-  return dummyData;
-};
 
 const WagesTrends = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [earningsData, setEarningsData] = useState([]);
 
+  const days = 15;
+
   useEffect(() => {
     setLoading(true);
-    setTimeout(function () {
-      const data = getDummyData();
-      setEarningsData(data);
-      setLoading(false);
-    }, 500);
+    getEarningsTrendsData(days)
+      .then((data) => {
+        setEarningsData(data);
+      })
+      .catch(() => {
+        setEarningsData([]);
+        window.alert(
+          "We could not retrieve the earnings trends data. Please try again later"
+        );
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -51,7 +33,7 @@ const WagesTrends = (): JSX.Element => {
       ) : (
         <div style={{ height: 400, width: "100%" }} className="text-center">
           <h5>Earnings Trends for</h5>
-          <h3>past 15 days</h3>
+          <h3>past {days} days</h3>
           <ResponsiveLine
             data={earningsData}
             margin={{ top: 50, right: 15, bottom: 75, left: 50 }}
@@ -65,7 +47,7 @@ const WagesTrends = (): JSX.Element => {
               reverse: false,
             }}
             yFormat=" >-.2f"
-            curve="cardinal"
+            curve="linear"
             lineWidth={1}
             axisTop={null}
             axisRight={null}
