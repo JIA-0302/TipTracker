@@ -1,20 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { MdAccountBox, MdEmail } from "react-icons/md";
 import styles from "./user-modal.module.css";
+import { updateUserData, getUserData } from "src/actions/user-details";
 
 interface UserProps {
-  userId?: number;
-  userName: string;
-  userEmail: string;
   onButtonSelect: () => void;
 }
 
-const UserForm: React.FunctionComponent<UserProps> = ({
-  onButtonSelect,
-  userName,
-  userEmail,
-}) => {
+const UserForm: React.FunctionComponent<UserProps> = ({ onButtonSelect }) => {
+  const [userDetail, setUserDetail] = useState({
+    name: "",
+    email: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getUserData()
+      .then((data) => {
+        setUserDetail(data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  const updateUserDetails = (event) => {
+    const { name, value } = event.target;
+    setUserDetail({ ...userDetail, [name]: value });
+  };
+
+  const updateEditedUserData = async () => {
+    try {
+      setLoading(true);
+      await updateUserData(userDetail);
+      window.location.href = "/api/auth/signout";
+      onButtonSelect();
+    } catch (e) {
+      window.alert(e.message);
+    } finally {
+      setLoading(true);
+    }
+  };
+
   return (
     <div>
       <Form>
@@ -25,7 +54,13 @@ const UserForm: React.FunctionComponent<UserProps> = ({
           <Col xs={4}>
             <Form.Group controlId="name">
               <Form.Label className={styles.modalLabel}>Name</Form.Label>
-              <Form.Control type="string" value={userName} required />
+              <Form.Control
+                onChange={updateUserDetails}
+                type="text"
+                name="name"
+                value={userDetail?.name}
+                disabled={loading}
+              />
             </Form.Group>
           </Col>
         </Form.Row>
@@ -36,7 +71,13 @@ const UserForm: React.FunctionComponent<UserProps> = ({
           <Col xs={5}>
             <Form.Group controlId="email">
               <Form.Label className={styles.modalLabel}>Email</Form.Label>
-              <Form.Control type="string" value={userEmail} required />
+              <Form.Control
+                onChange={updateUserDetails}
+                type="text"
+                name="email"
+                value={userDetail?.email}
+                disabled={loading}
+              />
             </Form.Group>
           </Col>
         </Form.Row>
@@ -49,7 +90,8 @@ const UserForm: React.FunctionComponent<UserProps> = ({
             <Button
               variant="success"
               className={styles.button}
-              onClick={onButtonSelect}
+              onClick={updateEditedUserData}
+              disabled={loading}
             >
               Update
             </Button>
