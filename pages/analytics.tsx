@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import { FcCalendar, FcStatistics } from "react-icons/fc";
@@ -10,9 +10,16 @@ import PrivateLayout from "../components/layouts/private-layout";
 import styles from "../styles/analytics.module.css";
 import stylesBackground from "styles/Home.module.css";
 
-const analytics: React.FunctionComponent = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const formattedDate = format(startDate, "yyyy-MM-dd");
+const Analytics = (): JSX.Element => {
+  const [startDate, setStartDate] = useState(null);
+  let formattedDate = "";
+  if (startDate) {
+    formattedDate = format(startDate, "yyyy-MM-dd");
+  }
+
+  useEffect(() => {
+    setStartDate(new Date());
+  }, []);
 
   return (
     <PrivateLayout backgroundStyle={stylesBackground.dashboard}>
@@ -50,4 +57,4 @@ const analytics: React.FunctionComponent = () => {
   );
 };
 
-export default analytics;
+export default Analytics;
