@@ -56,3 +56,28 @@ export async function getUserByEmail(email: string) {
   }
   throw Error("No user found in the current session");
 }
+
+export async function getUserById(id: number) {
+  const user = await query("SELECT name, email FROM users WHERE id = ?", [id]);
+
+  if (user.length == 1) {
+    return user[0];
+  }
+  throw Error("No user found in the current session");
+}
+
+export async function updateUserData(
+  id: number | string,
+  name: string,
+  email: string
+) {
+  const result = await query(
+    `update users set name = ?, email = ? 
+    where id = ?`,
+    [name, email, id]
+  );
+
+  if (result.affectedRows == 0) {
+    throw Error("Could not update the specified user");
+  }
+}

@@ -28,17 +28,13 @@ const UserDetails: React.FunctionComponent<UserDetailsProp> = (props) => {
           <Image
             src={props.image}
             alt="Picture of the user"
-            width={128}
-            height={128}
+            width={115}
+            height={135}
             className={styles.avatar}
           />
         </div>
         <div className={styles.avatarContainer}>
-          <UserProfile
-            userId={0}
-            userName={props.name}
-            userEmail={props.email}
-          ></UserProfile>
+          <UserProfile></UserProfile>
         </div>
         <ListItem className={styles.listItem}>
           <ListItemAvatar>
