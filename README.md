@@ -187,7 +187,7 @@ All of the required depended libraries are listed in `package.json` file. Runnin
 
     Note, these variables can be set directly. However, by using `.env.local`, these variables are only available during runtime of the application and is easier to manage.
 
-    In production environment, make sure to update the `http://localhost:*` with the url of the deployed application. 
+    In production environment, make sure to update `http://localhost:*` with the url of the deployed application. 
 
 2. Build the application
     To build the application, simply run the following command:
@@ -230,7 +230,59 @@ Loaded env from D:\...\TipTracker\.env.local
 ready - started server on http://localhost:3000
 ```
 
-This will start the application at `http://localhost:3000` by default. For cases when the application runs on a different port number, it will be shown above accordingly.
+This will start the application at `http://localhost:3000` by default.
+
+For cases when the application runs on a different port number, it will be shown above accordingly.
+
+<br />
+
+### Troubleshooting
+
+Some common errors are documented below:
+
+1. `Error: connect ECONNREFUSED 127.0.0.1:3306`
+
+    This typically means the MySQL database is not running. See installation guide [here](#installation-guide) to start the database.
+
+    Also ensure the [environment variables](#build-instructions) for MySQL database has been set properly.
+
+2. `module not found. Error: Cannot resolve module ...`
+
+    This means one of the dependent library was not installed. To fix this issue run the following command:
+
+    ```
+    $ npm install
+    ```
+
+    This will automatically install all the missing dependencies and also update existing packages if required.
+
+    If the error still persists, run the following command:
+    ```
+    $ rm package-lock.json
+    $ rm -r node-modules
+    $ npm install
+    ```
+
+    This will remove all of the existing dependencies and perform a fresh install.
+
+3. `Port 3000 is already in use`
+
+    By default, Next.js starts the server on port number 3000. Since only one process can run on a port number, we cannot run this new processing to this occupies port. To fix this issue there are two approaches:
+      - Kill other process running on port number 3000
+        - For Windows, view instructions [here](https://stackoverflow.com/questions/39632667/how-do-i-kill-the-process-currently-using-a-port-on-localhost-in-windows).
+        - For Mac and Linux, view instructions [here](https://stackoverflow.com/questions/3855127/find-and-kill-process-locking-port-3000-on-mac)
+
+      - Run the application on a different port
+
+        To run application in a different unoccupied port, run the following command:
+        ```
+        $ next -p <PORT_NUMBER>
+        ```
+        Note, the application will now be available on the specified port number.
+
+4. `Error: connect ECONNREFUSED 127.0.0.1:5000`
+
+    This typically means the Flask application for Machine Learning is not running. See run instructions [here](https://github.com/JIA-0302/Analytics#setup) to start the application.    
 
 
 <br /><br />
