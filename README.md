@@ -6,32 +6,43 @@
 
 TipTracker is an app that allows users to strategically select the most profitable shifts.
 
+This is the first wage and tip-tracking app on the market that not only allows users to store shifts and calculate their total profit but also utilizes machine learning backed analytics to empower the user to strategically select the most profitable shifts to maximize their earnings.
+
+
 ## Release Notes
-> ## v1.0 (02/05/2021)
+> ### v1.0.1 (02/05/2021)
 > - Initial web application infrastructure has been created to allow access to TipTracker via url or locally.
-> - The interface for the Work Calendar Screen and the interfaces for creating, deleting, and editing shifts have been created.
-> # Bugs
-> - The layout of the Work Calendar Screen has not been optimized for smaller screen sizes.
-> ## v1.1 (02/25/2021)
+> - A Calendar component has been added for the Work Calendar screen.
+> - A modal to view, add, edit, and delete shift data has been added.
+> ### v1.0.2 (02/26/2021)
 > - Work shifts can now be logged, edited, deleted from the Work Calendar Screen.
 > - The interface for the Work Summary Screen has been created.
-> - Login and Registration pages have been added. Users must register an account and login in order to use TipTracker.
+> - Login and Registration pages have been added. Users can now register an account and login to the application.
 > - Security measures have been implemented to protect user login and registration information.
->  # Bug Fixes
+>  - Unauthenticated visitors are prevented from visiting protected pages.
+>  - Data from Work Summary Screen can be exported to a `csv` file.
+>  - The interface for the Upcoming Work Schedule has been created.
+>  #### Bug Fixes
 >  - The layout of the Work Calendar Screen has been reworked to be compatiable with smaller screen sizes.
->  ## v1.2 (03/2/2021)
+>  ### v1.0.3 (03/12/2021)
 >  - An initial prototype interface for the Analytics Screen has been created.
->  - The work summary of a particular week can now be viewed on the Work Summary Screen.
->  ## v1.3 (04/02/2021)
->  - The interface for the Analytics Screen has been reworked and updated.
->  The interface for the User Profile and Upcomming Work Schedule has been created.
->   ## v1.4 (04/23/2021)
->   - The summary of a work week can now be downloaded as csv file from the Work Summary Screen.
+>  - The work summary for selected date range can now be viewed on the Work Summary Screen.
+>  - Data pipeline has been added using database hooks to process shift data for Machine Learning model.
+>  #### Bug Fixes
+>  - The timezone difference issue has been fixed when saving shift data.
+>  ### v1.0.4 (04/02/2021)
+>  - The interface for the Analytics Screen has been updated with improved keys and color scheme.
+>  - The interface for the User Profile has been created.
+>  - Deployed microservice for Machine Learning model and integrated with the app.
+>  #### Bug Fixes
+>   - Fixed the hourly wages display on Work Summary Screen.
+>   - Updated UI elements to have consistency between screens.
+>   ### v1.1.0 (04/23/2021)
 >   - The User Profile information can now be edited.
->   - The Upcomming Work Schedule information can now be created, edited, and deleted.
+>   - The Upcoming Work Schedule information can now be created, edited, and deleted.
 >   -  Analytics of past worked shifts and future work shifts can now be viewed on the Analytics Screen.
 >   -  Data visualizations for past worked shifts and future work shifts have been added to the Analytics Screen.
->   - The Home Screen has been reworked and updated.
+>   - Data Visualization for earnings distribution and trends have been added to the Home Screen.
 
 ## Prototype
 Mockup for the application can be found at [Adobe XD](https://xd.adobe.com/view/c908069f-5a1f-4986-9a9e-ffe590407367-9c5b/?fullscreen)
