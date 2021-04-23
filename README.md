@@ -56,7 +56,7 @@ If you have Adobe XD installed, you can download the XD file from [here](https:/
 The following tools, software, and technologies are needed to run the application:
 <ol>
 
-<li> Install Node.js
+<li> <b>Install Node.js</b>
 
   Node.js is a JavaScript runtime that allows us to run Next.js application. <br />
   For this project, please download 14.x LTS version from [here](https://nodejs.org/en/) and perform installation.<br />
@@ -74,7 +74,8 @@ The following tools, software, and technologies are needed to run the applicatio
 
 </li>
 
- <li> Install npm (Node Package manager)
+
+ <li> <b>Install npm (Node Package manager)</b>
 
  We are using `npm` to install and manage "packages" (dependencies). <br />
  Node.js installs NPM by default. To verify if NPM is already installed, run the following command:
@@ -88,7 +89,7 @@ If successful, it should display the version (eg: `6.14.11` shown above)
 
  </li>
 
- <li> Docker (Optional)
+ <li> <b>Docker</b> (Optional)
 
 Docker allows to easily use Docker images to setup database required for this application.
 
@@ -98,7 +99,7 @@ Docker Desktop can be downloaded from [here](https://www.docker.com/products/doc
 
  </li>
 
-<li> Install and configure MySQL
+<li> <b>Install and configure MySQL</b>
 
 The primary database used in the application is `MySQL 5.7`. <br />
 Please download MySQL from [here](https://dev.mysql.com/downloads/mysql/5.7.html).
@@ -110,7 +111,7 @@ This installer contains all detailed instruction to setup the database. It is se
 
 </li>
 
-<li> MongoDB
+<li> <b>MongoDB</b>
 
 We are using `MongoDB` to store data for our Machine Learning model to power our Analytics feature. <br />
 If you do not have a MongoDB database, MongoDB provides free cloud database service [here](https://www.mongodb.com/cloud/atlas/signup).
@@ -118,6 +119,24 @@ If you do not have a MongoDB database, MongoDB provides free cloud database serv
 </li>
 
 </ol>
+
+### Download Instructions
+
+Simply clone this repository to get all the required source code. 
+
+You can also download a ZIP file from [here](https://github.com/JIA-0302/TipTracker/archive/refs/heads/main.zip)
+
+### Installing dependent libraries
+
+**NOTE:** Make sure you have Node.js and npm installed. See pre-requisites for installation instructions.
+
+From the root directory of the project run the following command:
+
+```
+npm install
+```
+
+This will automatically install all the dependent libraries listed in `package.json` file. A new folder `node_modules` will be created with all these libraries.
 
 ### Setup
 1. Run `npm install`
