@@ -16,6 +16,9 @@ View the application - [tiptracker.vercel.app](https://tiptracker.vercel.app)
 > - Initial web application infrastructure has been created to allow access to TipTracker via url or locally.
 > - A Calendar component has been added for the Work Calendar screen.
 > - A modal to view, add, edit, and delete shift data has been added.
+>
+> <hr/>
+>
 > ### v1.0.2 (02/26/2021)
 > - Work shifts can now be logged, edited, deleted from the Work Calendar Screen.
 > - The interface for the Work Summary Screen has been created.
@@ -26,31 +29,41 @@ View the application - [tiptracker.vercel.app](https://tiptracker.vercel.app)
 >  - The interface for the Upcoming Work Schedule has been created.
 >  #### Bug Fixes
 >  - The layout of the Work Calendar Screen has been reworked to be compatiable with smaller screen sizes.
+>  - Unused icons from Navigation bar has been removed.
+>
+> <hr/>
+>
 >  ### v1.0.3 (03/12/2021)
 >  - An initial prototype interface for the Analytics Screen has been created.
 >  - The work summary for selected date range can now be viewed on the Work Summary Screen.
 >  - Data pipeline has been added using database hooks to process shift data for Machine Learning model.
 >  #### Bug Fixes
 >  - The timezone difference issue has been fixed when saving shift data.
+>
+> <hr/>
+>
 >  ### v1.0.4 (04/02/2021)
 >  - The interface for the Analytics Screen has been updated with improved keys and color scheme.
 >  - The interface for the User Profile has been created.
->  - Deployed microservice for Machine Learning model and integrated with the app.
+>  - Microservice for Machine Learning model has been integrated with the app.
 >  #### Bug Fixes
->   - Fixed the hourly wages display on Work Summary Screen.
->   - Updated UI elements to have consistency between screens.
+>   - Display the hourly wages on the Work Summary Screen accurately.
+>   - UI elements have been updated to have consistency between screens.
+>   - Data processing pipeline has been updated to split the shifts accurately.
+>
+> <hr/>
+>
 >   ### v1.1.0 (04/23/2021)
 >   - The User Profile information can now be edited.
 >   - The Upcoming Work Schedule information can now be created, edited, and deleted.
 >   -  Analytics of past worked shifts and future work shifts can now be viewed on the Analytics Screen.
 >   -  Data visualizations for past worked shifts and future work shifts have been added to the Analytics Screen.
 >   - Data Visualization for earnings distribution and trends have been added to the Home Screen.
+>  #### Bug Fixes
+>   - Correct week on the Past/Future Analytics Page is shown when the first day of the week is selected on the previous screen.
 
-## Prototype
-Mockup for the application can be found at [Adobe XD](https://xd.adobe.com/view/c908069f-5a1f-4986-9a9e-ffe590407367-9c5b/?fullscreen)
-If you have Adobe XD installed, you can download the XD file from [here](https://github.com/JIA-0302/TipTracker/blob/main/docs/TipTracker.xd).
 
-## Install Notes
+## Install Guide
 
 ### Pre-requisites
 The following tools, software, and technologies are needed to run the application:
@@ -123,15 +136,37 @@ This is used to visual database tool to easily access the MySQL database. You ca
 
 </li>
 
+<li> <b>Git</b> (Optional)
+
+This is a version control system to track changes to files. It can be downloaded from [here](https://git-scm.com/downloads).
+
+**NOTE:** This is not required if you are using downloading the project as ZIP file instead of cloning the repository.
+
+</li>
+
 </ol>
 
 <br />
 
 ### Download Instructions
 
-Simply clone this repository to get all the required source code. 
+The source code can be downloaded any one of the steps:
 
-You can also download a ZIP file from [here](https://github.com/JIA-0302/TipTracker/archive/refs/heads/main.zip)
+1. Cloning the repository
+
+    To clone the repository using HTTPS, run the following command from the desired directory:
+    ```
+    $ git clone https://github.com/JIA-0302/TipTracker.git
+    ```
+    This will download all the source code from the repository.
+    
+    If you want to run the Future Analytics feature, you need to load the submodules as follows:
+    ```
+    $ git submodule update --init
+    $ git submodule update --remote
+    ```
+
+2. Download the ZIP file from [here](https://github.com/JIA-0302/TipTracker/archive/refs/heads/main.zip)
 
 <br />
 
@@ -203,7 +238,7 @@ All of the required depended libraries are listed in `package.json` file. Runnin
 ### Installation Guide
 1. Start the MySQL server.
     - If using Docker, simply run `docker-compose up` from the root directory. This will start the database locally.
-    - If using MySQL directly, verify in the Task Manager that it is running. If not, you can run the open `\bin\mysqld` file on the installation directory. For more instructions on running the database, view [here](https://dev.mysql.com/doc/refman/8.0/en/windows-start-command-line.html)
+    - If using MySQL directly, verify in the Task Manager that it is running. If not, you can open `\bin\mysqld` file on the installation directory. For more instructions on running the database, view [here](https://dev.mysql.com/doc/refman/8.0/en/windows-start-command-line.html).
 
 2. Setup the database schema
     - **NOTE:** This step can be run only once. If you already setup the schema previously, no action is needed.
@@ -230,9 +265,9 @@ Loaded env from D:\...\TipTracker\.env.local
 ready - started server on http://localhost:3000
 ```
 
-This will start the application at `http://localhost:3000` by default.
+This will start the application at `http://localhost:3000` by default. Simply visit this URL on your browser to view the application.
 
-For cases when the application runs on a different port number, it will be shown above accordingly.
+For cases when the application runs on a different port number, the appropriate URL will be shown above accordingly.
 
 <br />
 
@@ -310,6 +345,9 @@ To enable the Analytics functionality, we need to add a [different repo](https:/
 2. Run `git submodule update --remote` in the future to ensure you have the latest data
 3. For more information on running the service, view instructions [here](https://github.com/JIA-0302/Analytics#setup).
 
+### Prototype
+Mockup for the application can be found at [Adobe XD](https://xd.adobe.com/view/c908069f-5a1f-4986-9a9e-ffe590407367-9c5b/?fullscreen)
+If you have Adobe XD installed, you can download the XD file from [here](https://github.com/JIA-0302/TipTracker/blob/main/docs/TipTracker.xd).
 
 ### API Routes
 All API routes should be created under `/pages/api/`.
