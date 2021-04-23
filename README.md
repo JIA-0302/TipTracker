@@ -143,8 +143,9 @@ This is a version control system to track changes to files. It can be downloaded
 **NOTE:** This is not required if you are using downloading the project as ZIP file instead of cloning the repository.
 
 </li>
-
 </ol>
+
+If you want to use Future Analytics feature, see additional pre-requisites [here](https://github.com/JIA-0302/Analytics#pre-prequisites).
 
 <br />
 
@@ -181,6 +182,8 @@ $ npm install
 ```
 
 All of the required depended libraries are listed in `package.json` file. Running this command will automatically install all of these libraries. A new directory called `node_modules` will be created with all of these libraries.
+
+If you want to use Future Analytics feature, see additional instructions [here](https://github.com/JIA-0302/Analytics#installing-dependent-libraries) to install additional dependent libraries.
 
 <br />
 
@@ -246,6 +249,11 @@ All of the required depended libraries are listed in `package.json` file. Runnin
     - Go to `File -> Run SQL Script` to run the following scripts:
       - `/scripts/database/schema.sql`: This will setup all required schema in the database
       - `/scripts/database/db-seed.sql`: This will populate the database with required database.
+
+3. Setup the Machine Learning Microservice
+    - To prevent having a Monolithic repo, all source code pertaining to ML model is in [Analytics submodule](https://github.com/JIA-0302/Analytics).
+    - Visit the [Install Guide](https://github.com/JIA-0302/Analytics#install-guide) to run the microservice.
+    - **NOTE**: This step is required only if accessing the Future Analytics feature.
 
 <br />
 
@@ -317,7 +325,7 @@ Some common errors are documented below:
 
 4. `Error: connect ECONNREFUSED 127.0.0.1:5000`
 
-    This typically means the Flask application for Machine Learning is not running. See run instructions [here](https://github.com/JIA-0302/Analytics#setup) to start the application.    
+    This typically means the Flask application for Machine Learning is not running. See run instructions [here](https://github.com/JIA-0302/Analytics#install-guide) to start the application.    
 
 
 <br /><br />
