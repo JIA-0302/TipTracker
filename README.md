@@ -8,6 +8,8 @@ TipTracker is an app that allows users to strategically select the most profitab
 
 This is the first wage and tip-tracking app on the market that not only allows users to store shifts and calculate their total profit but also utilizes machine learning backed analytics to empower the user to strategically select the most profitable shifts to maximize their earnings.
 
+View the application - [tiptracker.vercel.app](https://tiptracker.vercel.app)
+
 
 ## Release Notes
 > ### v1.0.1 (02/05/2021)
@@ -48,7 +50,74 @@ This is the first wage and tip-tracking app on the market that not only allows u
 Mockup for the application can be found at [Adobe XD](https://xd.adobe.com/view/c908069f-5a1f-4986-9a9e-ffe590407367-9c5b/?fullscreen)
 If you have Adobe XD installed, you can download the XD file from [here](https://github.com/JIA-0302/TipTracker/blob/main/docs/TipTracker.xd).
 
-## Development
+## Install Notes
+
+### Pre-requisites
+The following tools, software, and technologies are needed to run the application:
+<ol>
+
+<li> Install Node.js
+
+  Node.js is a JavaScript runtime that allows us to run Next.js application. <br />
+  For this project, please download 14.x LTS version from [here](https://nodejs.org/en/) and perform installation.<br />
+  To verify the installation, run the following command:
+
+  ```
+  $ node -v
+    v14.16.1
+  ```
+
+  If sucessful, it should dislay the version number (eg: `v14.16.1` shown above). If there are errors performing installation, some helpful guides are listed below:
+
+  - [Installing Node.js on Windows 10](https://stackoverflow.com/questions/27344045/installing-node-js-and-npm-on-windows-10)
+  - [Installing Node.js on Mac](https://treehouse.github.io/installation-guides/mac/node-mac.html)
+
+</li>
+
+ <li> Install npm (Node Package manager)
+
+ We are using `npm` to install and manage "packages" (dependencies). <br />
+ Node.js installs NPM by default. To verify if NPM is already installed, run the following command:
+
+ ```
+$ npm -v
+6.14.11
+ ```
+If successful, it should display the version (eg: `6.14.11` shown above)
+ However, if it is missing, download npm from [here](https://www.npmjs.com/get-npm) (this includes all the installation guide).
+
+ </li>
+
+ <li> Docker (Optional)
+
+Docker allows to easily use Docker images to setup database required for this application.
+
+**Note:** This step is recommended but optional. If you skip this pre-requisite, make sure to complete the next pre-requisite.
+
+Docker Desktop can be downloaded from [here](https://www.docker.com/products/docker-desktop). It is available for Windows, Mac, and Linux.
+
+ </li>
+
+<li> Install and configure MySQL
+
+The primary database used in the application is `MySQL 5.7`. <br />
+Please download MySQL from [here](https://dev.mysql.com/downloads/mysql/5.7.html).
+This installer contains all detailed instruction to setup the database. It is set to start the database on Startup by default.
+
+**Note:**
+  - This step can be skipped if you are using your own remote MySQL database.
+  - This step can be skipped if you have installed Docker
+
+</li>
+
+<li> MongoDB
+
+We are using `MongoDB` to store data for our Machine Learning model to power our Analytics feature. <br />
+If you do not have a MongoDB database, MongoDB provides free cloud database service [here](https://www.mongodb.com/cloud/atlas/signup).
+
+</li>
+
+</ol>
 
 ### Setup
 1. Run `npm install`
