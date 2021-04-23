@@ -91,11 +91,10 @@ If successful, it should display the version (eg: `6.14.11` shown above)
 
  <li> <b>Docker</b> (Optional)
 
-Docker allows to easily use Docker images to setup database required for this application.
+Docker allows to easily use Docker images to setup database required for this application. <br />
+Docker Desktop can be downloaded from [here](https://www.docker.com/products/docker-desktop). It is available for Windows, Mac, and Linux.
 
 **Note:** This step is recommended but optional. If you skip this pre-requisite, make sure to complete the next pre-requisite.
-
-Docker Desktop can be downloaded from [here](https://www.docker.com/products/docker-desktop). It is available for Windows, Mac, and Linux.
 
  </li>
 
@@ -118,7 +117,15 @@ If you do not have a MongoDB database, MongoDB provides free cloud database serv
 
 </li>
 
+<li> <b>MySQL Workbench</b>
+
+This is used to visual database tool to easily access the MySQL database. You can download it directly from [here](https://dev.mysql.com/downloads/workbench/). It is availabe for most Operating Systems.
+
+</li>
+
 </ol>
+
+<br />
 
 ### Download Instructions
 
@@ -126,17 +133,108 @@ Simply clone this repository to get all the required source code.
 
 You can also download a ZIP file from [here](https://github.com/JIA-0302/TipTracker/archive/refs/heads/main.zip)
 
+<br />
+
 ### Installing dependent libraries
 
 **NOTE:** Make sure you have Node.js and npm installed. See pre-requisites for installation instructions.
 
-From the root directory of the project run the following command:
+From the root directory of the project, run the following command:
 
 ```
-npm install
+$ npm install
 ```
 
-This will automatically install all the dependent libraries listed in `package.json` file. A new folder `node_modules` will be created with all these libraries.
+All of the required depended libraries are listed in `package.json` file. Running this command will automatically install all of these libraries. A new directory called `node_modules` will be created with all of these libraries.
+
+<br />
+
+### Build Instructions
+
+1. Setup environment variables
+
+    - Create a new file `.env.local` in the root directory
+    - Copy all the contents of `.env.example` into `.env.local`
+    - Replace all the required fields (`xxxxxxx`) specific to your configurations.
+    
+    ```
+    # These variables can be accessed in the app from `process.env.`
+    # Example, to retreive MongoDB Url, use `process.env.MONGODB_URL`
+
+    # MongDB connection string
+    MONGODB_URL=xxxxxxxx
+
+    # MySQL Database
+    DB_HOSTNAME=xxxxxxxx
+    DB_NAME=xxxxxxxx
+    DB_USERNAME=xxxxxxxx
+    DB_PASSWORD=xxxxxxxx
+    DB_PORT=3306
+
+    # Authentication
+    BYCRYPT_SALT_ROUNDS=10
+    NEXTAUTH_URL=http://localhost:3000
+
+    # ML Pipeline
+    SHIFT_INTERVAL_MINUTES=30
+    ML_SERVICE_URL=http://localhost:5000
+    ML_ACCESS_TOKEN=xxxxxxxx
+
+    # Validator (required to run the nightly validator to have consistency between databases)
+    VALIDATOR_AUTH_TOKEN=xxxxxxxx # This is optional
+
+    ```
+
+    Note, these variables can be set directly. However, by using `.env.local`, these variables are only available during runtime of the application and is easier to manage.
+
+    In production environment, make sure to update the `http://localhost:*` with the url of the deployed application. 
+
+2. Build the application
+    To build the application, simply run the following command:
+
+    ```
+    $ npm run build
+    ```
+
+    This instruction will create production ready build for the application.
+
+<br />
+
+### Installation Guide
+1. Start the MySQL server.
+    - If using Docker, simply run `docker-compose up` from the root directory. This will start the database locally.
+    - If using MySQL directly, verify in the Task Manager that it is running. If not, you can run the open `\bin\mysqld` file on the installation directory. For more instructions on running the database, view [here](https://dev.mysql.com/doc/refman/8.0/en/windows-start-command-line.html)
+
+2. Setup the database schema
+    - **NOTE:** This step can be run only once. If you already setup the schema previously, no action is needed.
+    - Open `MySQL Workbench` and [connect to the MySQL server](https://dev.mysql.com/doc/workbench/en/wb-migration-wizard-connection.html).
+    - Go to `File -> Run SQL Script` to run the following scripts:
+      - `/scripts/database/schema.sql`: This will setup all required schema in the database
+      - `/scripts/database/db-seed.sql`: This will populate the database with required database.
+
+<br />
+
+### Run Instructions
+    
+Run the following command from the root directory:
+```
+$ npm run start
+```
+
+The output of the command will be as follows:
+```
+> tiptracker@0.1.0 start D:\...\TipTracker
+> next start
+
+Loaded env from D:\...\TipTracker\.env.local
+ready - started server on http://localhost:3000
+```
+
+This will start the application at `http://localhost:3000` by default. For cases when the application runs on a different port number, it will be shown above accordingly.
+
+
+<br /><br />
+## Developers Guide
 
 ### Setup
 1. Run `npm install`
@@ -144,11 +242,10 @@ This will automatically install all the dependent libraries listed in `package.j
     <br />
 
 2. Setup environment variables.
-    * Run `npm run secrets:login` and `npm run secrets:sync`. Contact in Teams for the password.
-    * This will create `.env.local` file with all necessary environment variables for development environment.
-    * See `.env.example` on how the environment variables are set.
+    * Create `.env.local` file to store all necessary environment variables for development environment.
+    * Copy contents from `.env.example` to `.env.local.` It has default environment variables set.
+    * Replace all occurence of `xxxxxxx` with values specific to your configuration.
     * After adding the environment variables, it can be accessed in the code using `process.env.<NEW_VARIABLE_KEY>`
-
 
     <br />
 
