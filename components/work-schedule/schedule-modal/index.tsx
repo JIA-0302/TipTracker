@@ -3,6 +3,7 @@ import { Button, Col, Form, Spinner } from "react-bootstrap";
 import { format } from "date-fns";
 import TimePicker from "react-time-picker/dist/entry.nostyle";
 import { FcClock, FcCalendar } from "react-icons/fc";
+import { isSameDay, isAfter } from "date-fns";
 
 import {
   addWorkSchedule,
@@ -24,7 +25,7 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
   onButtonSelect,
 }) => {
   const { refreshWorkSchedule } = useContext(WorkScheduleContext);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [workScheduleDetail, setWorkScheduleDetail] = useState({
     startTime: "",
@@ -32,7 +33,10 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
     isExistingData: false,
   });
 
-  const formattedDate = format(currentDate, "yyyy-MM-dd");
+  const formattedDate = format(selectedDate, "yyyy-MM-dd");
+  const todayDate = new Date();
+  const shouldRefreshSchedule =
+    isSameDay(todayDate, selectedDate) || isAfter(selectedDate, todayDate);
 
   useEffect(() => {
     setLoading(true);
@@ -51,7 +55,7 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
       .finally(() => {
         setLoading(false);
       });
-  }, [currentDate]);
+  }, [selectedDate]);
 
   const onDelete = async () => {
     if (workScheduleDetail.isExistingData) {
@@ -70,7 +74,9 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
         })
         .finally(() => {
           setLoading(false);
-          refreshWorkSchedule();
+          if (shouldRefreshSchedule) {
+            refreshWorkSchedule();
+          }
         });
     }
   };
@@ -93,7 +99,9 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
       })
       .finally(() => {
         setLoading(false);
-        refreshWorkSchedule();
+        if (shouldRefreshSchedule) {
+          refreshWorkSchedule();
+        }
       });
   };
 
@@ -107,7 +115,7 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
           <Col xs={3}>
             <Form.Group controlId="shift_date">
               <Form.Label className={styles.modalLabel}>Shift Date</Form.Label>
-              <DateSelector date={currentDate} setDate={setCurrentDate} />
+              <DateSelector date={selectedDate} setDate={setSelectedDate} />
             </Form.Group>
           </Col>
         </Form.Row>
