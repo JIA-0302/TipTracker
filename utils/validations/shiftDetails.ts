@@ -60,7 +60,7 @@ export function validateShiftDate(shift_date: string) {
   }
 }
 
-function validateTime(shift_time: string) {
+export function validateTime(shift_time: string) {
   if (!shift_time || shift_time.trim().length == 0) {
     throw Error(`Please specify the shift time`);
   } else if (!shift_time.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/)) {

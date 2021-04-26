@@ -1,58 +1,73 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { FcExpired, FcBriefcase } from "react-icons/fc";
+import { format, parse } from "date-fns";
+import { Spinner } from "react-bootstrap";
+
+import { getUpcomingWorkSchedule } from "src/actions/work-schedule";
+
 import styles from "./schedule-display.module.css";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-} from "@material-ui/core/";
-import AlarmRoundedIcon from "@material-ui/icons/AlarmRounded";
-import HourglassEmptyRoundedIcon from "@material-ui/icons/HourglassEmptyRounded";
-import HourglassFullRoundedIcon from "@material-ui/icons/HourglassFullRounded";
+import { WorkScheduleContext } from "src/providers/WorkScheduleContext";
 
-export interface WorkScheduleProp {
-  workDay: string;
-  startTime: string;
-  endTime: string;
-}
+const WorkSchedule = (): JSX.Element => {
+  const { hasNewSchedule, foundWorkSchedule } = useContext(WorkScheduleContext);
+  const [loading, setLoading] = useState(false);
+  const [workSchedule, setWorkSchedule] = useState(null);
 
-const WorkSchedule: React.FunctionComponent<WorkScheduleProp> = (props) => {
-  return (
-    <>
-      <div className={styles.div}>
-        <List>
-          <div className={styles.divH3}>
-            <h3 className={styles.h3}>You have an upcoming shift</h3>
-          </div>
-          <ListItem className={styles.listItem}>
-            <ListItemAvatar>
-              <Avatar>
-                <AlarmRoundedIcon className={styles.icon} />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Work Day" secondary={props.workDay} />
-          </ListItem>
-          <ListItem className={styles.listItem}>
-            <ListItemAvatar>
-              <Avatar>
-                <HourglassEmptyRoundedIcon className={styles.icon} />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Start Time" secondary={props.startTime} />
-          </ListItem>
-          <ListItem className={styles.listItem}>
-            <ListItemAvatar>
-              <Avatar>
-                <HourglassFullRoundedIcon className={styles.icon} />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="End Time" secondary={props.endTime} />
-          </ListItem>
-        </List>
+  useEffect(() => {
+    const formattedDate = format(new Date(), "yyyy-MM-dd");
+
+    if (hasNewSchedule) {
+      setLoading(true);
+
+      getUpcomingWorkSchedule(formattedDate)
+        .then((data) => {
+          setWorkSchedule(data);
+        })
+        .catch((e) => {
+          window.alert(e.message);
+          setWorkSchedule(null);
+        })
+        .finally(() => {
+          setLoading(false);
+          foundWorkSchedule();
+        });
+    }
+  }, [hasNewSchedule]);
+
+  let content;
+  if (loading) {
+    content = (
+      <Spinner animation="border" role="status" className="align-self-center">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    );
+  } else if (workSchedule) {
+    const { shiftDate, startTime, endTime } = workSchedule;
+    const parsedShiftDate = parse(shiftDate, "yyyy-MM-dd", new Date());
+    const formattedShiftDate = format(parsedShiftDate, "EEEE, MMMM d");
+
+    content = (
+      <div className="text-center d-flex flex-column justify-content-around align-items-center">
+        <h3>You have an upcoming work shift </h3>
+        <FcBriefcase fontSize="5rem" />
+        <div>
+          <h5>{formattedShiftDate}</h5>
+          <h2>
+            {startTime} - {endTime}
+          </h2>
+        </div>
       </div>
-    </>
-  );
+    );
+  } else {
+    content = (
+      <div className="d-flex flex-column justify-content-center align-items-center">
+        <h3 className="text-center">You do not have any upcoming work shift</h3>
+        <FcExpired fontSize="5rem" className="mt-3" />
+      </div>
+    );
+  }
+
+  return <div className={styles.div}>{content}</div>;
 };
 
 export default WorkSchedule;
