@@ -19,10 +19,16 @@ export const getWorkSchedule = async (shiftDate: string) => {
           shift_date: getFormattedShiftDate(data["shift_date"]),
           start_time: getFormattedShiftTime(data["start_time"]),
           end_time: getFormattedShiftTime(data["end_time"]),
+          isExistingData: true,
         };
       }
 
-      return {};
+      return {
+        shift_date: "",
+        start_time: "",
+        end_time: "",
+        isExistingData: false,
+      };
     });
 };
 
@@ -77,7 +83,7 @@ export const updateWorkSchedule = async (
     });
 };
 
-export const deleteShiftData = async (shiftDate: string) => {
+export const deleteWorkSchedule = async (shiftDate: string) => {
   const encodedShiftDate = encodeURIComponent(shiftDate);
   return fetch(`${BASE_URL}?shift_date=${encodedShiftDate}`, {
     method: "DELETE",
