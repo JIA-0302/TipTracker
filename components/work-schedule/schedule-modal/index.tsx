@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Form, Spinner } from "react-bootstrap";
+import { format } from "date-fns";
 import TimePicker from "react-time-picker/dist/entry.nostyle";
 import { FcClock, FcCalendar } from "react-icons/fc";
-import styles from "./schedule-modal.module.css";
-import DateSelector from "../date-selector";
-import { format } from "date-fns";
+
 import {
   addWorkSchedule,
   updateWorkSchedule,
   deleteWorkSchedule,
   getWorkSchedule,
 } from "src/actions/work-schedule";
+import { WorkScheduleContext } from "src/providers/WorkScheduleContext";
+import DateSelector from "../date-selector";
+
+import styles from "./schedule-modal.module.css";
 
 interface ScheduleProps {
   scheduleId?: number;
@@ -20,6 +23,7 @@ interface ScheduleProps {
 const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
   onButtonSelect,
 }) => {
+  const { refreshWorkSchedule } = useContext(WorkScheduleContext);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const [workScheduleDetail, setWorkScheduleDetail] = useState({
@@ -66,6 +70,7 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
         })
         .finally(() => {
           setLoading(false);
+          refreshWorkSchedule();
         });
     }
   };
@@ -88,6 +93,7 @@ const WorkScheduleForm: React.FunctionComponent<ScheduleProps> = ({
       })
       .finally(() => {
         setLoading(false);
+        refreshWorkSchedule();
       });
   };
 

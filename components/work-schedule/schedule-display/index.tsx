@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FcExpired, FcBriefcase } from "react-icons/fc";
 import { format, parse } from "date-fns";
 import { Spinner } from "react-bootstrap";
@@ -6,28 +6,33 @@ import { Spinner } from "react-bootstrap";
 import { getUpcomingWorkSchedule } from "src/actions/work-schedule";
 
 import styles from "./schedule-display.module.css";
+import { WorkScheduleContext } from "src/providers/WorkScheduleContext";
 
 const WorkSchedule = (): JSX.Element => {
+  const { hasNewSchedule, foundWorkSchedule } = useContext(WorkScheduleContext);
   const [loading, setLoading] = useState(false);
   const [workSchedule, setWorkSchedule] = useState(null);
 
   useEffect(() => {
     const formattedDate = format(new Date(), "yyyy-MM-dd");
 
-    setLoading(true);
+    if (hasNewSchedule) {
+      setLoading(true);
 
-    getUpcomingWorkSchedule(formattedDate)
-      .then((data) => {
-        setWorkSchedule(data);
-      })
-      .catch((e) => {
-        window.alert(e.message);
-        setWorkSchedule(null);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+      getUpcomingWorkSchedule(formattedDate)
+        .then((data) => {
+          setWorkSchedule(data);
+        })
+        .catch((e) => {
+          window.alert(e.message);
+          setWorkSchedule(null);
+        })
+        .finally(() => {
+          setLoading(false);
+          foundWorkSchedule();
+        });
+    }
+  }, [hasNewSchedule]);
 
   let content;
   if (loading) {
