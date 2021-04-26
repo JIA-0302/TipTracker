@@ -22,7 +22,7 @@ const handler = async (req, res) => {
         const result = await getWorkScheduleByDate(userId, shiftDate);
 
         if (!result || !Array.isArray(result)) {
-          throw Error("No specified shift details could be found");
+          throw Error("No specified work schedule could be found");
         }
 
         if (result.length == 0) {

@@ -12,6 +12,19 @@ export async function getWorkScheduleById(
   );
 }
 
+export async function getUpcomingWorkSchedule(
+  userId: number,
+  shiftDate: string,
+  employerId = 1
+) {
+  return await query(
+    `select * from work_schedule_details
+          where shift_date >= ? and user_id = ? and employer_id = ?
+          ORDER BY shift_date LIMIT 1`,
+    [shiftDate, userId, employerId]
+  );
+}
+
 export async function getWorkScheduleByDate(
   userId: number,
   shiftDate: string,
