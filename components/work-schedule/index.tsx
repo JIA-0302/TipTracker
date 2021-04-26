@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import styles from "styles/Schedule.module.css";
-import Schedule from "./schedule-modal";
 
-const ModalController = (): JSX.Element => {
+import Schedule from "./schedule-modal";
+import styles from "styles/Schedule.module.css";
+
+const WorkScheduleModalController = (): JSX.Element => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const formToShow = <Schedule onButtonSelect={handleClose} />;
-  const modalTitle = "Work Schedule";
-
   return (
-    <>
+    <div className="mt-2">
       <Button variant="warning" onClick={handleShow} className={styles.button}>
         Edit Work Schedule
       </Button>
@@ -26,13 +24,15 @@ const ModalController = (): JSX.Element => {
       >
         <Modal.Header closeButton>
           <Modal.Title className={styles.mainTitle}>
-            <h2>{modalTitle}</h2>
+            <h2>Work Schedule</h2>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>{formToShow}</Modal.Body>
+        <Modal.Body>
+          <Schedule onButtonSelect={handleClose} />
+        </Modal.Body>
       </Modal>
-    </>
+    </div>
   );
 };
 
-export default ModalController;
+export default WorkScheduleModalController;

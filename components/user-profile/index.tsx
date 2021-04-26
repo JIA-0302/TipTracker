@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import styles from "styles/UserProfile.module.css";
-import EditIcon from "@material-ui/icons/Edit";
 import UserForm from "./user-modal/";
 
-const ModalController = (): JSX.Element => {
+import styles from "styles/UserProfile.module.css";
+
+const UserProfileModalController = (): JSX.Element => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const formToShow = <UserForm onButtonSelect={handleClose}></UserForm>;
-  const modalTitle = "User Profile";
-
   return (
-    <>
-      <Button variant="link" onClick={handleShow} className={styles.button}>
-        <EditIcon className={styles.icon} />
+    <div className="my-2">
+      <Button variant="warning" onClick={handleShow} className={styles.button}>
         Edit Profile
       </Button>
       <Modal
@@ -28,13 +23,15 @@ const ModalController = (): JSX.Element => {
       >
         <Modal.Header closeButton>
           <Modal.Title className={styles.mainTitle}>
-            <h2>{modalTitle}</h2>
+            <h2>User Profile</h2>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>{formToShow}</Modal.Body>
+        <Modal.Body>
+          <UserForm onButtonSelect={handleClose} />
+        </Modal.Body>
       </Modal>
-    </>
+    </div>
   );
 };
 
-export default ModalController;
+export default UserProfileModalController;

@@ -8,6 +8,7 @@ import WorkSchedule from "components/work-schedule/schedule-display";
 import UserDetails from "components/user-details/";
 import WagesDistribution from "components/visualizations/monthly-summary/wagesDistribution";
 import WagesTrends from "components/visualizations/monthly-summary/wagesTrends";
+import { WorkScheduleProvider } from "src/providers/WorkScheduleContext";
 
 interface HomeProps {
   session: {
@@ -31,45 +32,39 @@ export function Home(props: HomeProps): JSX.Element {
 
       <div>
         <Container fluid="sm">
-          <Row>
-            <Col>
-              <div className="ml-4">
-                <h2>
-                  Welcome back{" "}
-                  <b>{session?.user?.name.split(" ")[0] || "John"}</b>
-                </h2>
-                <Button variant="warning" href="/api/auth/signout">
-                  Sign out
-                </Button>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div className="ml-4">
+          <WorkScheduleProvider>
+            <Row>
+              <Col>
+                <div className="ml-4">
+                  <h2>
+                    Welcome back{" "}
+                    <b>{session?.user?.name.split(" ")[0] || "John"}</b>
+                  </h2>
+                  <Button variant="warning" href="/api/auth/signout">
+                    Sign out
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+            <Row className="my-4">
+              <Col xs={12} xl={5} className="my-3">
                 <UserDetails
                   name={session?.user?.name || "John Doe"}
                   email={session?.user?.email || "jdoe@tiptracker.com"}
-                  image={session?.user?.image || "/images/user-image.jpg"}
+                  image={session?.user?.image || "/images/avatar.png"}
                 />
-              </div>
-            </Col>
-            <Col xs={7}>
-              <div className="ml-4">
-                <WorkSchedule
-                  workDay="04/26/2021"
-                  startTime="11:30"
-                  endTime="21:00"
-                />
-              </div>
-            </Col>
-          </Row>
+              </Col>
+              <Col xs={12} xl={7} className="my-3">
+                <WorkSchedule />
+              </Col>
+            </Row>
+          </WorkScheduleProvider>
           <Row>
-            <Col xs={12} xl={5} className="my-3">
-              <WagesDistribution />
-            </Col>
             <Col xs={12} xl={7} className="my-3">
               <WagesTrends />
+            </Col>
+            <Col xs={12} xl={5} className="my-3">
+              <WagesDistribution />
             </Col>
           </Row>
         </Container>
