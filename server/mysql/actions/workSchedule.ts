@@ -66,7 +66,7 @@ export async function deleteWorkSchedule(
   employerId = 1
 ) {
   await query(
-    `delete from non_hourly_shift_details where user_id = ? and employer_id = ? and shift_date = ? `,
+    `delete from work_schedule_details where user_id = ? and employer_id = ? and shift_date = ? `,
     [userId, employerId, shiftDate]
   );
 }
