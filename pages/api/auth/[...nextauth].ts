@@ -27,14 +27,7 @@ const options: InitOptions = {
       },
     }),
   ],
-  database: {
-    type: "mysql",
-    host: process.env.DB_HOSTNAME,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-  },
+  database: process.env.MONGODB_URL,
   session: {
     jwt: true,
     maxAge: 1 * 24 * 60 * 60, // 1 day

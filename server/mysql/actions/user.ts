@@ -1,13 +1,15 @@
 import { getPasswordHash, matchesPasswordHash } from "server/auth";
-import { query } from "../index";
+import { User } from "server/mysql/models/user";
+import mongoDB from "server/mongodb";
 
 export async function getUserByCredentials(email: string, password: string) {
-  const user = await query("SELECT * FROM users WHERE email = ?", [email]);
+  await mongoDB();
 
-  if (user.length == 1) {
-    const currentUser = user[0];
-    if (await matchesPasswordHash(password, currentUser["password_hash"])) {
-      return currentUser;
+  const user = await getUserByEmail(email);
+
+  if (user) {
+    if (await matchesPasswordHash(password, user.password_hash)) {
+      return user;
     }
   }
 
@@ -26,58 +28,57 @@ export async function registerUser(
   email: string,
   password: string
 ) {
+  await mongoDB();
   if (await isExistingEmail(email)) {
     throw Error(`${email} is already registered`);
   }
 
   try {
-    const passwordHash = await getPasswordHash(password.trim());
+    const password_hash = await getPasswordHash(password.trim());
 
-    await query(
-      "INSERT INTO users (name, email, password_hash) values (?, ?, ?)",
-      [name, email, passwordHash]
-    );
+    await User.create({
+      name,
+      email,
+      password_hash,
+    });
   } catch (err) {
     throw Error(`Couldn't Register Please try again later`);
   }
 }
 
 export async function isExistingEmail(email: string): Promise<boolean> {
-  const count = await query("SELECT 1 FROM users WHERE email = ?", [email]);
-
-  return count.length >= 1;
+  await mongoDB();
+  return User.exists({ email });
 }
 
 export async function getUserByEmail(email: string) {
-  const user = await query("SELECT * FROM users WHERE email = ?", [email]);
+  await mongoDB();
+  const user = await User.findOne({ email: email }).exec();
 
-  if (user.length == 1) {
-    return user[0];
+  if (user) {
+    return user;
+  }
+
+  throw Error("No user found in the current session");
+}
+
+export async function getUserById(id: string) {
+  await mongoDB();
+  const user = await User.findById(id).exec();
+
+  if (user) {
+    return user;
   }
   throw Error("No user found in the current session");
 }
 
-export async function getUserById(id: number) {
-  const user = await query("SELECT name, email FROM users WHERE id = ?", [id]);
+export async function updateUserData(id: string, name: string, email: string) {
+  await mongoDB();
 
-  if (user.length == 1) {
-    return user[0];
-  }
-  throw Error("No user found in the current session");
-}
+  const user = await getUserById(id);
 
-export async function updateUserData(
-  id: number | string,
-  name: string,
-  email: string
-) {
-  const result = await query(
-    `update users set name = ?, email = ? 
-    where id = ?`,
-    [name, email, id]
-  );
+  user.name = name;
+  user.email = email;
 
-  if (result.affectedRows == 0) {
-    throw Error("Could not update the specified user");
-  }
+  await user.save();
 }
