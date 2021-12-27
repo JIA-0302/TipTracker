@@ -16,12 +16,16 @@ const options: InitOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const { email, password } = credentials;
-        const user = await getUserByCredentials(email, password);
+        try {
+          const { email, password } = credentials;
+          const user = await getUserByCredentials(email, password);
 
-        if (user) {
-          return user;
-        } else {
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
+        } catch (err) {
           return null;
         }
       },
