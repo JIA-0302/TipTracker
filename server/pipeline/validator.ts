@@ -5,7 +5,7 @@ import {
   retrieveAllUnprocessedData,
 } from "server/mysql/actions/queue";
 import { getShiftDetail } from "server/mysql/actions/shiftData";
-import { IHourlyShiftDetails } from "server/mysql/models/shiftData";
+import { IHourlyShiftDetails } from "server/mysql/models/hourlyShiftDetails";
 import { addNewShiftData, deleteExistingShiftData } from ".";
 
 async function addMissingShiftDataToQueue() {
@@ -70,7 +70,8 @@ export async function processDeletedShiftData() {
 
       for (const data of deletedShiftData) {
         try {
-          await deleteExistingShiftData(data as IHourlyShiftDetails);
+          const { user_id, shift_id, employer_id } = data;
+          await deleteExistingShiftData(shift_id, user_id, employer_id);
         } catch (err) {
           // Even if error is detected, allow remaining data to be deleted in this batch
           hasErrors = true;

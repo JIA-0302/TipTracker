@@ -49,15 +49,17 @@ export async function updateExistingShiftData(
   }
 }
 
-export async function deleteExistingShiftData(shiftData: IHourlyShiftDetails) {
+export async function deleteExistingShiftData(
+  shiftId: string,
+  userId: string,
+  employerId: string
+) {
   try {
-    const { id, employer_id, user_id } = shiftData;
-
-    const shiftDataHash = generateHashForShiftData(id, employer_id, user_id);
+    const shiftDataHash = generateHashForShiftData(shiftId, employerId, userId);
     await deleteFutureTrendData(shiftDataHash);
 
     // On success, delete from queue
-    await deleteShiftInQueue(id, employer_id, user_id);
+    await deleteShiftInQueue(shiftId, employerId, userId);
   } catch (err) {
     // Skip on error, nightly validation will remove data that shouldn't be there
     console.error(err);

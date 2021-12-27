@@ -1,7 +1,5 @@
-import {
-  IHourlyShiftDetails,
-  INonHourlyShiftDetails,
-} from "server/mysql/models/shiftData";
+import { IHourlyShiftDetails } from "server/mysql/models/hourlyShiftDetails";
+import { INonHourlyShiftDetails } from "server/mysql/models/nonHourlyShiftDetails";
 import { parse, isSameDay } from "date-fns";
 
 export function parseHourlyShiftDetails(body): IHourlyShiftDetails {
@@ -34,7 +32,7 @@ export function parseHourlyShiftDetails(body): IHourlyShiftDetails {
     hourly_wage: Number(hourly_wage),
     credit_card_tips: Number(credit_card_tips || 0),
     cash_tips: Number(cash_tips || 0),
-  };
+  } as IHourlyShiftDetails;
 }
 
 export function parseNonHourlyShiftDetails(body): INonHourlyShiftDetails {
@@ -49,7 +47,7 @@ export function parseNonHourlyShiftDetails(body): INonHourlyShiftDetails {
     total_base_earning: Number(total_base_earning || 0),
     credit_card_tips: Number(credit_card_tips || 0),
     cash_tips: Number(cash_tips || 0),
-  };
+  } as INonHourlyShiftDetails;
 }
 
 export function validateShiftDate(shift_date: string) {
