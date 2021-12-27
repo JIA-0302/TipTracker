@@ -2,11 +2,9 @@ import {
   getAllShiftDetailsByUserId,
   addHourlyShiftData,
   addNonHourlyShiftData,
-} from "server/mysql/actions/shiftData";
-import {
-  IHourlyShiftDetails,
-  INonHourlyShiftDetails,
-} from "server/mysql/models/shiftData";
+} from "server/mongodb/actions/shiftData";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
+import { INonHourlyShiftDetails } from "server/mongodb/models/nonHourlyShiftDetails";
 import {
   parseHourlyShiftDetails,
   parseNonHourlyShiftDetails,
@@ -55,7 +53,7 @@ const handler = async (req, res) => {
 
         res.status(200).json({
           success: true,
-          shiftDetail: { shift_id: newShiftId, wageType },
+          shiftDetail: { _id: newShiftId, wageType },
         });
       } catch (e) {
         res.status(500).json({ message: e.message });

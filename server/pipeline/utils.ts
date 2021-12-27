@@ -1,7 +1,7 @@
 import { createHash } from "crypto";
 import { addMinutes, format, parse, getWeekOfMonth } from "date-fns";
-import { getEmployerById } from "server/mysql/actions/employers";
-import { IHourlyShiftDetails } from "server/mysql/models/shiftData";
+import { getEmployerById } from "server/mongodb/actions/employers";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
 
 // This will be used to uniquely identify shift data for ML to perform updates and deletes
 export function generateHashForShiftData(shiftId, employerId, userId) {
@@ -69,7 +69,7 @@ export function splitShiftTime(
 
 export async function getProcessedShiftData(shiftData: IHourlyShiftDetails) {
   const {
-    shift_id,
+    _id,
     user_id,
     employer_id,
     start_time,
@@ -118,7 +118,7 @@ export async function getProcessedShiftData(shiftData: IHourlyShiftDetails) {
     data["cash_tips"] = parseFloat((cash_tips / totalIntervals).toFixed(2));
 
     // This will uniquely identify a shift data which is required for updates/deletes
-    data["hash"] = generateHashForShiftData(shift_id, employer_id, user_id);
+    data["hash"] = generateHashForShiftData(_id, employer_id, user_id);
   });
 
   return splitShiftData;

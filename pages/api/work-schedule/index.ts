@@ -3,7 +3,7 @@ import {
   deleteWorkSchedule,
   getWorkScheduleByDate,
   updateWorkSchedule,
-} from "server/mysql/actions/workSchedule";
+} from "server/mongodb/actions/workSchedule";
 import withUser from "utils/user-middleware";
 import {
   validateShiftDate,
@@ -21,15 +21,11 @@ const handler = async (req, res) => {
 
         const result = await getWorkScheduleByDate(userId, shiftDate);
 
-        if (!result || !Array.isArray(result)) {
-          throw Error("No specified work schedule could be found");
+        if (result) {
+          return res.status(200).json({ data: result });
         }
 
-        if (result.length == 0) {
-          res.status(200).json({ data: {} });
-        } else {
-          res.status(200).json({ data: result[0] });
-        }
+        throw Error("No specified work schedule could be found");
       } catch (e) {
         res.status(500).json({ message: e.message });
       }
@@ -49,7 +45,7 @@ const handler = async (req, res) => {
 
         res.status(200).json({
           success: true,
-          workScheduleDetail: { schedule_id: workScheduleId },
+          workScheduleDetail: { _id: workScheduleId },
         });
       } catch (e) {
         res.status(500).json({ message: e.message });
