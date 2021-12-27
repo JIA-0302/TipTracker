@@ -1,85 +1,97 @@
-import { query } from "../index";
+import mongoDB from "server/mongodb";
+import { WorkSchedule } from "../models/workSchedule";
 
-export async function getWorkScheduleById(
-  userId: number,
-  scheduleId: number | string,
-  employerId = 1
-) {
-  return await query(
-    `select * from work_schedule_details
-        where schedule_id = ? and user_id = ? and employer_id = ?`,
-    [scheduleId, userId, employerId]
-  );
+const DEFAULT_EMPLOYER_ID = null;
+
+export async function getWorkScheduleById(scheduleId: string) {
+  await mongoDB();
+
+  return await WorkSchedule.findById(scheduleId).exec();
 }
 
 export async function getUpcomingWorkSchedule(
-  userId: number,
+  userId: string,
   shiftDate: string,
-  employerId = 1
+  employerId = DEFAULT_EMPLOYER_ID
 ) {
-  return await query(
-    `select * from work_schedule_details
-          where shift_date >= ? and user_id = ? and employer_id = ?
-          ORDER BY shift_date LIMIT 1`,
-    [shiftDate, userId, employerId]
-  );
+  await mongoDB();
+
+  return await WorkSchedule.findOne({
+    user_id: userId,
+    employer_id: employerId,
+    shift_date: { $gte: shiftDate },
+  })
+    .sort({ shift_date: -1 })
+    .exec();
 }
 
 export async function getWorkScheduleByDate(
-  userId: number,
+  userId: string,
   shiftDate: string,
-  employerId = 1
+  employerId = DEFAULT_EMPLOYER_ID
 ) {
-  return await query(
-    `select * from work_schedule_details
-            where shift_date = ? and user_id = ? and employer_id = ?`,
-    [shiftDate, userId, employerId]
-  );
+  await mongoDB();
+
+  return await WorkSchedule.findOne({
+    user_id: userId,
+    employer_id: employerId,
+    shift_date: shiftDate,
+  }).exec();
 }
 
 export async function addWorkSchedule(
-  userId: number,
+  userId: string,
   shiftDate: string,
   startTime: string,
   endTime: string,
-  employerId = 1
+  employerId = DEFAULT_EMPLOYER_ID
 ) {
-  const result = await query(
-    `insert into work_schedule_details 
-    (user_id, employer_id, shift_date, start_time, end_time) 
-    values (?, ?, ?, ?, ?)`,
-    [userId, employerId, shiftDate, startTime, endTime]
-  );
+  await mongoDB();
 
-  return result.insertId;
+  const data = new WorkSchedule({
+    user_id: userId,
+    employer_id: employerId,
+    shift_date: shiftDate,
+    start_time: startTime,
+    end_time: endTime,
+  });
+
+  const result = await data.save();
+
+  return result._id;
 }
 
 export async function updateWorkSchedule(
-  userId: number,
+  userId: string,
   shiftDate: string,
   startTime: string,
   endTime: string,
-  employerId = 1
+  employerId = DEFAULT_EMPLOYER_ID
 ) {
-  const result = await query(
-    `update work_schedule_details 
-        set start_time = ?, end_time = ?
-        where user_id = ? and employer_id = ? and shift_date = ?`,
-    [startTime, endTime, userId, employerId, shiftDate]
+  const existingSchedule = await getWorkScheduleByDate(
+    userId,
+    shiftDate,
+    employerId
   );
 
-  if (result.affectedRows === 0) {
+  try {
+    existingSchedule.start_time = startTime;
+    existingSchedule.end_time = endTime;
+
+    await existingSchedule.save();
+  } catch (err) {
     throw Error("Could not update the specified work schedule");
   }
 }
 
 export async function deleteWorkSchedule(
-  userId: number,
+  userId: string,
   shiftDate: string,
-  employerId = 1
+  employerId = DEFAULT_EMPLOYER_ID
 ) {
-  await query(
-    `delete from work_schedule_details where user_id = ? and employer_id = ? and shift_date = ? `,
-    [userId, employerId, shiftDate]
-  );
+  await WorkSchedule.deleteOne({
+    user_id: userId,
+    employer_id: employerId,
+    shift_date: shiftDate,
+  }).exec();
 }

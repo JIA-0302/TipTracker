@@ -18,7 +18,7 @@ export const getWorkSchedule = async (shiftDate: string) => {
     .then((response) => response.json())
     .then((json) => {
       const { data } = json;
-      if (data.schedule_id) {
+      if (data && data._id) {
         return {
           shift_date: getFormattedShiftDate(data["shift_date"]),
           start_time: getFormattedShiftTime(data["start_time"]),
@@ -48,7 +48,7 @@ export const getUpcomingWorkSchedule = async (shiftDate: string) => {
     .then((response) => response.json())
     .then((json) => {
       const { data } = json;
-      if (data.schedule_id) {
+      if (data && data._id) {
         const startTime = getFormattedShiftTime(data["start_time"]);
         const endTime = getFormattedShiftTime(data["end_time"]);
 

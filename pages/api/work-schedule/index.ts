@@ -49,7 +49,7 @@ const handler = async (req, res) => {
 
         res.status(200).json({
           success: true,
-          workScheduleDetail: { schedule_id: workScheduleId },
+          workScheduleDetail: { _id: workScheduleId },
         });
       } catch (e) {
         res.status(500).json({ message: e.message });
