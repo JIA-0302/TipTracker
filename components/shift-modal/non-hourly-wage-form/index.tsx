@@ -67,7 +67,7 @@ const NonHourlyWageForm: React.FunctionComponent<ShiftAddModalProps> = ({
       setLoading(true);
       const shiftDetail = await createShiftData(newShiftDetails);
       addShiftData({
-        [shiftDate]: { id: shiftDetail.shift_id, wageType: "NON_HOURLY" },
+        [shiftDate]: { id: shiftDetail._id, wageType: "NON_HOURLY" },
       });
       onButtonSelect();
     } catch (e) {

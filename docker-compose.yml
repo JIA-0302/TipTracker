@@ -20,5 +20,16 @@ services:
       - "3306"
     volumes:
       - mysql-db-vol:/var/lib/mysql
+  mongo:
+    container_name: tiptracker_mongo
+    image: mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
 volumes:
   mysql-db-vol:
+  mongodb:
+  mongodb_config:

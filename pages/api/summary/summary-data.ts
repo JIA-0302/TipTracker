@@ -1,4 +1,4 @@
-import { getAllShiftDetailsByUserIdWithinDateRange } from "server/mysql/actions/shiftData";
+import { getAllShiftDetailsByUserIdWithinDateRange } from "server/mongodb/actions/shiftData";
 import withUser from "utils/user-middleware";
 
 /**

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Providers from "next-auth/providers";
 import NextAuth, { InitOptions } from "next-auth";
-import { getUserByCredentials } from "server/mysql/actions/user";
+import { getUserByCredentials } from "server/mongodb/actions/user";
 
 const options: InitOptions = {
   providers: [
@@ -16,25 +16,22 @@ const options: InitOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const { email, password } = credentials;
-        const user = await getUserByCredentials(email, password);
+        try {
+          const { email, password } = credentials;
+          const user = await getUserByCredentials(email, password);
 
-        if (user) {
-          return user;
-        } else {
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
+        } catch (err) {
           return null;
         }
       },
     }),
   ],
-  database: {
-    type: "mysql",
-    host: process.env.DB_HOSTNAME,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-  },
+  database: process.env.MONGODB_URL,
   session: {
     jwt: true,
     maxAge: 1 * 24 * 60 * 60, // 1 day

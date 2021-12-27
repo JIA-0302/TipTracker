@@ -1,4 +1,4 @@
-import { getUpcomingWorkSchedule } from "server/mysql/actions/workSchedule";
+import { getUpcomingWorkSchedule } from "server/mongodb/actions/workSchedule";
 import withUser from "utils/user-middleware";
 import { validateShiftDate } from "utils/validations/shiftDetails";
 
@@ -13,15 +13,11 @@ const handler = async (req, res) => {
 
         const result = await getUpcomingWorkSchedule(userId, shiftDate);
 
-        if (!result || !Array.isArray(result)) {
-          throw Error("No specified work schedule could be found");
+        if (result) {
+          return res.status(200).json({ data: result });
         }
 
-        if (result.length == 0) {
-          res.status(200).json({ data: {} });
-        } else {
-          res.status(200).json({ data: result[0] });
-        }
+        throw Error("No specified work schedule could be found");
       } catch (e) {
         res.status(500).json({ message: e.message });
       }

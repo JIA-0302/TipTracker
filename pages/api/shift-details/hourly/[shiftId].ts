@@ -2,8 +2,8 @@ import {
   deleteShiftForUser,
   getShiftDetail,
   updateHourlyShiftData,
-} from "server/mysql/actions/shiftData";
-import { IHourlyShiftDetails } from "server/mysql/models/shiftData";
+} from "server/mongodb/actions/shiftData";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
 import withUser from "utils/user-middleware";
 import { parseHourlyShiftDetails } from "utils/validations/shiftDetails";
 
@@ -35,11 +35,11 @@ const handler = async (req, res) => {
           "HOURLY"
         );
 
-        if (!result || !Array.isArray(result) || result.length == 0) {
-          throw Error("No specified shift details could be found");
+        if (result) {
+          return res.status(200).json({ shiftDetail: result });
         }
 
-        res.status(200).json({ shiftDetail: result[0] });
+        throw Error("No specified shift details could be found");
       } catch (e) {
         res.status(500).json({ message: e.message });
       }
