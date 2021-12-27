@@ -2,9 +2,9 @@ import {
   getAllShiftDetailsByUserId,
   addHourlyShiftData,
   addNonHourlyShiftData,
-} from "server/mysql/actions/shiftData";
-import { IHourlyShiftDetails } from "server/mysql/models/hourlyShiftDetails";
-import { INonHourlyShiftDetails } from "server/mysql/models/nonHourlyShiftDetails";
+} from "server/mongodb/actions/shiftData";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
+import { INonHourlyShiftDetails } from "server/mongodb/models/nonHourlyShiftDetails";
 import {
   parseHourlyShiftDetails,
   parseNonHourlyShiftDetails,

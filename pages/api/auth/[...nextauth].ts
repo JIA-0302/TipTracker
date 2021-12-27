@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Providers from "next-auth/providers";
 import NextAuth, { InitOptions } from "next-auth";
-import { getUserByCredentials } from "server/mysql/actions/user";
+import { getUserByCredentials } from "server/mongodb/actions/user";
 
 const options: InitOptions = {
   providers: [

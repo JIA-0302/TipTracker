@@ -1,5 +1,5 @@
 import { getPasswordHash, matchesPasswordHash } from "server/auth";
-import { User } from "server/mysql/models/user";
+import { User } from "server/mongodb/models/user";
 import mongoDB from "server/mongodb";
 
 export async function getUserByCredentials(email: string, password: string) {

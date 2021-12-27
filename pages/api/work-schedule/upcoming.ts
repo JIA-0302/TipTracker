@@ -1,4 +1,4 @@
-import { getUpcomingWorkSchedule } from "server/mysql/actions/workSchedule";
+import { getUpcomingWorkSchedule } from "server/mongodb/actions/workSchedule";
 import withUser from "utils/user-middleware";
 import { validateShiftDate } from "utils/validations/shiftDetails";
 

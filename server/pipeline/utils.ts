@@ -1,7 +1,7 @@
 import { createHash } from "crypto";
 import { addMinutes, format, parse, getWeekOfMonth } from "date-fns";
-import { getEmployerById } from "server/mysql/actions/employers";
-import { IHourlyShiftDetails } from "server/mysql/models/hourlyShiftDetails";
+import { getEmployerById } from "server/mongodb/actions/employers";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
 
 // This will be used to uniquely identify shift data for ML to perform updates and deletes
 export function generateHashForShiftData(shiftId, employerId, userId) {

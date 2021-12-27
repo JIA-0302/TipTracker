@@ -1,5 +1,5 @@
-import { IHourlyShiftDetails } from "server/mysql/models/hourlyShiftDetails";
-import { INonHourlyShiftDetails } from "server/mysql/models/nonHourlyShiftDetails";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
+import { INonHourlyShiftDetails } from "server/mongodb/models/nonHourlyShiftDetails";
 import { parse, isSameDay } from "date-fns";
 
 export function parseHourlyShiftDetails(body): IHourlyShiftDetails {

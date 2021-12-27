@@ -1,5 +1,5 @@
 import withUser from "utils/user-middleware";
-import { getUserById, updateUserData } from "server/mysql/actions/user";
+import { getUserById, updateUserData } from "server/mongodb/actions/user";
 import { isValidEmail } from "server/auth";
 
 /**

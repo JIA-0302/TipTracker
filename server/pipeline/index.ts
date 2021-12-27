@@ -6,8 +6,8 @@ import {
   addShiftToQueue,
   deleteShiftInQueue,
   updateShiftInQueue,
-} from "server/mysql/actions/queue";
-import { IHourlyShiftDetails } from "server/mysql/models/hourlyShiftDetails";
+} from "server/mongodb/actions/queue";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
 import { generateHashForShiftData, getProcessedShiftData } from "./utils";
 
 export async function addNewShiftData(shiftData: IHourlyShiftDetails) {

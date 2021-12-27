@@ -1,6 +1,6 @@
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { isValidEmail, isValidPassword } from "server/auth";
-import { registerUser } from "server/mysql/actions/user";
+import { registerUser } from "server/mongodb/actions/user";
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,

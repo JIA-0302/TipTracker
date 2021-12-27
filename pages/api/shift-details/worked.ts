@@ -1,4 +1,4 @@
-import { getWorkedDaysForMonth } from "server/mysql/actions/shiftData";
+import { getWorkedDaysForMonth } from "server/mongodb/actions/shiftData";
 import withUser from "utils/user-middleware";
 
 interface SearchDate {

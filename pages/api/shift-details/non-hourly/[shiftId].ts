@@ -2,8 +2,8 @@ import {
   deleteShiftForUser,
   getShiftDetail,
   updateNonHourlyShiftData,
-} from "server/mysql/actions/shiftData";
-import { INonHourlyShiftDetails } from "server/mysql/models/nonHourlyShiftDetails";
+} from "server/mongodb/actions/shiftData";
+import { INonHourlyShiftDetails } from "server/mongodb/models/nonHourlyShiftDetails";
 import withUser from "utils/user-middleware";
 import { parseNonHourlyShiftDetails } from "utils/validations/shiftDetails";
 

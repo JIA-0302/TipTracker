@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/client";
-import { getUserByEmail } from "server/mysql/actions/user";
+import { getUserByEmail } from "server/mongodb/actions/user";
 
 /**
  * Attaches user to the request based on the session.

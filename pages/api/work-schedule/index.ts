@@ -3,7 +3,7 @@ import {
   deleteWorkSchedule,
   getWorkScheduleByDate,
   updateWorkSchedule,
-} from "server/mysql/actions/workSchedule";
+} from "server/mongodb/actions/workSchedule";
 import withUser from "utils/user-middleware";
 import {
   validateShiftDate,

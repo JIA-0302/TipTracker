@@ -3,9 +3,9 @@ import {
   findDeletedShiftData,
   getMissingShiftData,
   retrieveAllUnprocessedData,
-} from "server/mysql/actions/queue";
-import { getShiftDetail } from "server/mysql/actions/shiftData";
-import { IHourlyShiftDetails } from "server/mysql/models/hourlyShiftDetails";
+} from "server/mongodb/actions/queue";
+import { getShiftDetail } from "server/mongodb/actions/shiftData";
+import { IHourlyShiftDetails } from "server/mongodb/models/hourlyShiftDetails";
 import { addNewShiftData, deleteExistingShiftData } from ".";
 
 async function addMissingShiftDataToQueue() {
