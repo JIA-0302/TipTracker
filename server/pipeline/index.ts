@@ -21,7 +21,7 @@ export async function addNewShiftData(shiftData: IHourlyShiftDetails) {
     await addProcessedData(processedData);
 
     // Mark it was successfully processed
-    await updateShiftInQueue(id, employer_id, user_id, 1);
+    await updateShiftInQueue(id, employer_id, user_id, true);
   } catch (err) {
     // Skip on error, nightly validation will add data that wasn't processed
     console.error(err);
@@ -33,7 +33,7 @@ export async function updateExistingShiftData(
 ) {
   try {
     const { id, employer_id, user_id } = newShiftData;
-    await updateShiftInQueue(id, employer_id, user_id, 0);
+    await updateShiftInQueue(id, employer_id, user_id, false);
 
     const shiftDataHash = generateHashForShiftData(id, employer_id, user_id);
     await deleteFutureTrendData(shiftDataHash);
@@ -42,7 +42,7 @@ export async function updateExistingShiftData(
     await addProcessedData(newProcessedData);
 
     // Mark it was successfully processed
-    await updateShiftInQueue(id, employer_id, user_id, 1);
+    await updateShiftInQueue(id, employer_id, user_id, false);
   } catch (err) {
     // Skip on error, nightly validation will update data if not processed again
     console.error(err);
