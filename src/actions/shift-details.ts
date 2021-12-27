@@ -133,10 +133,11 @@ export const getWorkedDays = async (month, year) => {
     .then((response) => response.json())
     .then((data) => {
       const newShiftData: IWorkedShiftDay = {};
+
       if (data.hourlyShiftDetails) {
         data.hourlyShiftDetails.forEach((shift) => {
           newShiftData[getFormattedShiftDate(shift["shift_date"])] = {
-            id: shift.shift_id,
+            id: shift._id,
             wageType: "HOURLY",
           };
         });
@@ -144,7 +145,7 @@ export const getWorkedDays = async (month, year) => {
       if (data.nonHourlyShiftDetails) {
         data.nonHourlyShiftDetails.forEach((shift) => {
           newShiftData[getFormattedShiftDate(shift["shift_date"])] = {
-            id: shift.shift_id,
+            id: shift._id,
             wageType: "NON_HOURLY",
           };
         });

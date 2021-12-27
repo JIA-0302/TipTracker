@@ -3,7 +3,7 @@ import {
   getShiftDetail,
   updateNonHourlyShiftData,
 } from "server/mysql/actions/shiftData";
-import { INonHourlyShiftDetails } from "server/mysql/models/shiftData";
+import { INonHourlyShiftDetails } from "server/mysql/models/nonHourlyShiftDetails";
 import withUser from "utils/user-middleware";
 import { parseNonHourlyShiftDetails } from "utils/validations/shiftDetails";
 
@@ -35,11 +35,11 @@ const handler = async (req, res) => {
           "NON_HOURLY"
         );
 
-        if (!result || !Array.isArray(result) || result.length == 0) {
-          throw Error("No specified shift details could be found");
+        if (result) {
+          return res.status(200).json({ shiftDetail: result });
         }
 
-        res.status(200).json({ shiftDetail: result[0] });
+        throw Error("No specified shift details could be found");
       } catch (e) {
         res.status(500).json({ message: e.message });
       }

@@ -1,32 +1,37 @@
 import { format, endOfMonth } from "date-fns";
-import {
-  addNewShiftData,
-  deleteExistingShiftData,
-  updateExistingShiftData,
-} from "server/pipeline";
-import { query } from "../index";
+// import {
+//   addNewShiftData,
+//   deleteExistingShiftData,
+//   updateExistingShiftData,
+// } from "server/pipeline";
+import mongoDB from "server/mongodb";
 import {
   IHourlyShiftDetails,
+  HourlyShiftDetails,
+} from "../models/hourlyShiftDetails";
+import {
   INonHourlyShiftDetails,
-} from "../models/shiftData";
+  NonHourlyShiftDetails,
+} from "../models/nonHourlyShiftDetails";
 
 const SHIFT_DATE_FORMAT = "yyyy-MM-dd";
 
 export async function getAllShiftDetailsByUserIdWithinDateRange(
-  userId: number,
+  userId: string,
   start_date: string,
   end_date: string
 ) {
-  const hourlyShiftDetails = await query(
-    `select * from hourly_shift_details where user_id = ?
-                                          AND (shift_date >= ? AND shift_date <= ?)`,
-    [userId, start_date, end_date]
-  );
-  const nonHourlyShiftDetails = await query(
-    `select * from non_hourly_shift_details where user_id = ?
-                                     AND (shift_date >= ? AND shift_date <= ?)`,
-    [userId, start_date, end_date]
-  );
+  await mongoDB();
+
+  const hourlyShiftDetails = await HourlyShiftDetails.find({
+    user_id: userId,
+    shift_date: { $gte: start_date, $lte: end_date },
+  }).exec();
+
+  const nonHourlyShiftDetails = await NonHourlyShiftDetails.find({
+    user_id: userId,
+    shift_date: { $gte: start_date, $lte: end_date },
+  }).exec();
 
   return {
     hourlyShiftDetails,
@@ -34,15 +39,16 @@ export async function getAllShiftDetailsByUserIdWithinDateRange(
   };
 }
 
-export async function getAllShiftDetailsByUserId(userId: number) {
-  const hourlyShiftDetails = await query(
-    `select * from hourly_shift_details where user_id = ?`,
-    [userId]
-  );
-  const nonHourlyShiftDetails = await query(
-    `select * from non_hourly_shift_details where user_id = ?`,
-    [userId]
-  );
+export async function getAllShiftDetailsByUserId(userId: string) {
+  await mongoDB();
+
+  const hourlyShiftDetails = await HourlyShiftDetails.find({
+    user_id: userId,
+  }).exec();
+
+  const nonHourlyShiftDetails = await NonHourlyShiftDetails.find({
+    user_id: userId,
+  }).exec();
 
   return {
     hourlyShiftDetails,
@@ -59,60 +65,54 @@ export async function getAllShiftDetailsByUserId(userId: number) {
  * @param year
  */
 export async function getWorkedDaysForMonth(
-  userId: number,
+  userId: string,
   month: number,
   year: number
 ) {
+  await mongoDB();
+
   const startDate = new Date(year, month - 1); // January starts at 0
   const endDate = endOfMonth(startDate);
 
   const formattedStartDate = format(startDate, SHIFT_DATE_FORMAT);
   const formattedEndDate = format(endDate, SHIFT_DATE_FORMAT);
 
-  const hourlyShiftDetails = await query(
-    `select shift_id, shift_date from hourly_shift_details
-    where (shift_date between ? and ?) and user_id = ?`,
-    [formattedStartDate, formattedEndDate, userId]
+  return await getAllShiftDetailsByUserIdWithinDateRange(
+    userId,
+    formattedStartDate,
+    formattedEndDate
   );
-
-  const nonHourlyShiftDetails = await query(
-    `select shift_id, shift_date from non_hourly_shift_details
-    where (shift_date between ? and ?) and user_id = ?`,
-    [formattedStartDate, formattedEndDate, userId]
-  );
-
-  return {
-    hourlyShiftDetails,
-    nonHourlyShiftDetails,
-  };
 }
 
 export async function getShiftDetail(
-  userId: number,
-  shiftId: string | number,
+  userId: string,
+  shiftId: string,
   wageType: "HOURLY" | "NON_HOURLY"
 ) {
+  await mongoDB();
+
   switch (wageType) {
     case "HOURLY":
-      return await query(
-        `select * from hourly_shift_details where user_id = ? and shift_id = ?`,
-        [userId, shiftId]
-      );
+      return await HourlyShiftDetails.findOne({
+        _id: shiftId,
+        user_id: userId,
+      }).exec();
 
     case "NON_HOURLY":
-      return await query(
-        `select * from non_hourly_shift_details where user_id = ? and shift_id = ?`,
-        [userId, shiftId]
-      );
+      return await NonHourlyShiftDetails.findOne({
+        _id: shiftId,
+        user_id: userId,
+      }).exec();
   }
   return null;
 }
 
 export async function addHourlyShiftData(
-  userId: number,
-  shiftData: IHourlyShiftDetails,
-  employerId = 1
+  userId: string,
+  shiftData: IHourlyShiftDetails
 ) {
+  await mongoDB();
+
   const {
     start_time,
     end_time,
@@ -122,35 +122,33 @@ export async function addHourlyShiftData(
     cash_tips,
   } = shiftData;
 
-  const result = await query(
-    `insert into hourly_shift_details (user_id, employer_id, shift_date, start_time, end_time, hourly_wage, credit_card_tips, cash_tips)
-    values (?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      userId,
-      employerId,
-      shift_date,
-      start_time,
-      end_time,
-      hourly_wage,
-      credit_card_tips,
-      cash_tips,
-    ]
-  );
+  const data = new HourlyShiftDetails({
+    user_id: userId,
+    shift_date,
+    start_time,
+    end_time,
+    hourly_wage,
+    credit_card_tips,
+    cash_tips,
+  });
+
+  const savedData = await data.save();
 
   // Hook to process new data for ML
-  shiftData.shift_id = result.insertId;
-  shiftData.user_id = userId;
-  shiftData.employer_id = employerId;
-  addNewShiftData(shiftData);
+  // shiftData.id = result.insertId;
+  // shiftData.user_id = userId;
+  // shiftData.employer_id = 1;
+  // addNewShiftData(shiftData);
 
-  return result.insertId;
+  return savedData.id;
 }
 
 export async function addNonHourlyShiftData(
   userId: number,
-  shiftData: INonHourlyShiftDetails,
-  employerId = 1
+  shiftData: INonHourlyShiftDetails
 ) {
+  await mongoDB();
+
   const {
     shift_date,
     total_base_earning,
@@ -158,55 +156,52 @@ export async function addNonHourlyShiftData(
     cash_tips,
   } = shiftData;
 
-  const result = await query(
-    `insert into non_hourly_shift_details (user_id, employer_id, shift_date, total_base_earning, credit_card_tips, cash_tips)
-    values (?, ?, ?, ?, ?, ?)`,
-    [
-      userId,
-      employerId,
-      shift_date,
-      total_base_earning,
-      credit_card_tips,
-      cash_tips,
-    ]
-  );
+  const data = new NonHourlyShiftDetails({
+    user_id: userId,
+    shift_date,
+    total_base_earning,
+    credit_card_tips,
+    cash_tips,
+  });
 
-  return result.insertId;
+  const savedData = await data.save();
+
+  return savedData.id;
 }
 
 export async function deleteShiftForUser(
-  userId: number,
+  userId: string,
   shiftId: string,
   wageType: string
 ) {
+  await mongoDB();
+
   switch (wageType) {
     case "HOURLY":
       try {
         // Retrieve data to delete from ML
-        const existingShiftData = await getShiftDetail(
-          userId,
-          shiftId,
-          "HOURLY"
-        );
-        if (existingShiftData.length > 0) {
-          deleteExistingShiftData(existingShiftData[0] as IHourlyShiftDetails);
-        }
+        await getShiftDetail(userId, shiftId, "HOURLY");
+        // if (existingShiftData) {
+        //   deleteExistingShiftData(existingShiftData[0] as IHourlyShiftDetails);
+        // }
       } catch (err) {
         // Skip on error, nightly validation will remove inconsistent data
         console.error(err);
       }
 
-      await query(
-        `delete from hourly_shift_details where user_id = ? and shift_id = ?`,
-        [userId, shiftId]
-      );
+      await HourlyShiftDetails.deleteOne({
+        _id: shiftId,
+        user_id: userId,
+      }).exec();
+
       break;
 
     case "NON_HOURLY":
-      await query(
-        `delete from non_hourly_shift_details where user_id = ? and shift_id = ?`,
-        [userId, shiftId]
-      );
+      await NonHourlyShiftDetails.deleteOne({
+        _id: shiftId,
+        user_id: userId,
+      }).exec();
+
       break;
   }
 
@@ -214,11 +209,12 @@ export async function deleteShiftForUser(
 }
 
 export async function updateHourlyShiftData(
-  userId: number | string,
-  shiftId: string | number,
-  shiftData: IHourlyShiftDetails,
-  employerId = 1
+  userId: string,
+  shiftId: string,
+  shiftData: IHourlyShiftDetails
 ) {
+  await mongoDB();
+
   const {
     start_time,
     end_time,
@@ -228,40 +224,35 @@ export async function updateHourlyShiftData(
     cash_tips,
   } = shiftData;
 
-  const result = await query(
-    `update hourly_shift_details
-    set shift_date = ?, start_time = ?, end_time = ?, hourly_wage = ?, credit_card_tips = ?, cash_tips = ?
-    where user_id = ? and employer_id = ? and shift_id = ?`,
-    [
-      shift_date,
-      start_time,
-      end_time,
-      hourly_wage,
-      credit_card_tips,
-      cash_tips,
-      userId,
-      employerId,
-      shiftId,
-    ]
-  );
+  try {
+    const existingShiftData = await getShiftDetail(userId, shiftId, "HOURLY");
 
-  if (result.affectedRows === 0) {
+    existingShiftData.start_time = start_time;
+    existingShiftData.end_time = end_time;
+    existingShiftData.shift_date = shift_date;
+    existingShiftData.hourly_wage = hourly_wage;
+    existingShiftData.credit_card_tips = credit_card_tips;
+    existingShiftData.cash_tips = cash_tips;
+
+    await existingShiftData.save();
+  } catch (err) {
     throw Error("Could not update the specified shift");
   }
 
   // Hook to process update data for ML
-  shiftData.shift_id = shiftId as number;
-  shiftData.user_id = userId as number;
-  shiftData.employer_id = employerId;
-  updateExistingShiftData(shiftData);
+  // shiftData.shift_id = shiftId as number;
+  // shiftData.user_id = userId as number;
+  // shiftData.employer_id = 1;
+  // updateExistingShiftData(shiftData);
 }
 
 export async function updateNonHourlyShiftData(
-  userId: number | string,
-  shiftId: number | string,
-  shiftData: INonHourlyShiftDetails,
-  employerId = 1
+  userId: string,
+  shiftId: string,
+  shiftData: INonHourlyShiftDetails
 ) {
+  await mongoDB();
+
   const {
     shift_date,
     total_base_earning,
@@ -269,22 +260,20 @@ export async function updateNonHourlyShiftData(
     cash_tips,
   } = shiftData;
 
-  const result = await query(
-    `update non_hourly_shift_details
-    set shift_date = ?, total_base_earning = ?, credit_card_tips = ?, cash_tips = ?
-    where user_id = ? and employer_id = ? and shift_id = ?`,
-    [
-      shift_date,
-      total_base_earning,
-      credit_card_tips,
-      cash_tips,
+  try {
+    const existingShiftData = await getShiftDetail(
       userId,
-      employerId,
       shiftId,
-    ]
-  );
+      "NON_HOURLY"
+    );
 
-  if (result.affectedRows === 0) {
+    existingShiftData.shift_date = shift_date;
+    existingShiftData.total_base_earning = total_base_earning;
+    existingShiftData.credit_card_tips = credit_card_tips;
+    existingShiftData.cash_tips = cash_tips;
+
+    await existingShiftData.save();
+  } catch (err) {
     throw Error("Could not update the specified shift");
   }
 }

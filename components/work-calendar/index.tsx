@@ -31,7 +31,7 @@ const WorkCalendar = ({ onDateSelect }: WorkCalendarProps): JSX.Element => {
   useEffect(() => {
     const date = formatISO(currentDate, { representation: "date" });
     const year = date.substring(0, 4);
-    const month = date.substring(6, 7);
+    const month = date.substring(5, 7);
 
     setLoading(true);
     getWorkedDays(month, year)
